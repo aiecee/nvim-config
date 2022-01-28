@@ -105,6 +105,8 @@ lspsaga.setup()
 local nap = require('nvim-autopairs')
 nap.setup()
 
-local fidget = require('fidget')
-fidget.setup()
+-- local fidget = require('fidget')
+-- fidget.setup()
+local lsp_notify = require('nvim-lsp-notify')
+lsp_notify.setup({ debug = false })
 EOF

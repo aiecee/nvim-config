@@ -6,6 +6,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'catppuccin/nvim', {'as': 'catppuccin'}
 Plug 'gruvbox-community/gruvbox'
 
+" Notify
+Plug 'rcarriga/nvim-notify'
+
 " LSP
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
@@ -15,7 +18,8 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'tami5/lspsaga.nvim'
-Plug 'j-hui/fidget.nvim'
+Plug 'aiecee/nvim-lsp-notify'
+" Plug 'j-hui/fidget.nvim'
 
 " Snippets
 Plug 'hrsh7th/cmp-vsnip'
@@ -44,7 +48,13 @@ Plug 'kyazdani42/nvim-tree.lua'
 " Which key
 Plug 'folke/which-key.nvim'
 
+" Local plugins
+" Plug '~/Programming/vim-plugs/nvim-lsp-notify'
 call plug#end()
+
+lua<< EOF
+vim.notify = require('notify')
+EOF
 
 augroup fmt
 	autocmd!
