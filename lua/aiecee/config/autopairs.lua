@@ -1,2 +1,2 @@
-local nap = require('nvim-autopairs')
+local nap = require("nvim-autopairs")
 nap.setup()

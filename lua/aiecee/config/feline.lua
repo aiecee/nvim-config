@@ -1,4 +1,4 @@
-require('feline').setup({
-	preset = 'icon',
-	components = require('catppuccin.core.integrations.feline')
+require("feline").setup({
+	preset = "icon",
+	components = require("catppuccin.core.integrations.feline"),
 })

@@ -1,10 +1,10 @@
-local lsp_installer_servers = require('nvim-lsp-installer.servers')
+local lsp_installer_servers = require("nvim-lsp-installer.servers")
 local servers = {
-	'tsserver',
-	'angularls',
-	'html',
-	'cssls',
-	'sumneko_lua',
+	"tsserver",
+	"angularls",
+	"html",
+	"cssls",
+	"sumneko_lua",
 }
 
 for _, server_name in pairs(servers) do
@@ -13,28 +13,28 @@ for _, server_name in pairs(servers) do
 		server:on_ready(function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities.textDocument.completion.completionItem.snippetSupport = true
-			capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+			capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
 			local opts = {
-				capabilities = capabilities
+				capabilities = capabilities,
 			}
-			if server.name == 'sumneko_lua' then
+			if server.name == "sumneko_lua" then
 				opts.settings = {
 					Lua = {
 						runtime = {
-							version = 'LuaJIT',
-							path = vim.split(package.path, ';'),
+							version = "LuaJIT",
+							path = vim.split(package.path, ";"),
 						},
 						diagnostics = {
-							globals = { 'vim', 'require' },
+							globals = { "vim", "require" },
 						},
 						workspace = {
 							library = {
-								[vim.fn.expand('$VIMRUNTIME/lua')] = true,
-								[vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-							}
-						}
-					}
+								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+								[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+							},
+						},
+					},
 				}
 			end
 			server:setup(opts)
@@ -45,8 +45,6 @@ for _, server_name in pairs(servers) do
 	end
 end
 
-vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-	vim.lsp.diagnostic.on_publish_diagnostics, {
-		update_in_insert = true,
-	}
-)
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+	update_in_insert = true,
+})

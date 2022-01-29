@@ -1,7 +1,7 @@
-local catppuccin = require('catppuccin')
+local catppuccin = require("catppuccin")
 catppuccin.setup({
 	lsp_saga = true,
 	hop = true,
 })
 
-vim.cmd('colorscheme catppuccin')
+vim.cmd("colorscheme catppuccin")
