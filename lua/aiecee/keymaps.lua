@@ -15,6 +15,7 @@ wk.register({
 		t = { "<cmd>NvimTreeToggle<cr>", "toggle" },
 		f = { "<cmd>NvimTreeFocus<cr>", "focus" },
 		j = { "<cmd>NvimTreeFindFile<cr>", "jump to file" },
+		r = { "<cmd>NvimTreeRefresh<cr>", "refresh tree" },
 	},
 	b = {
 		name = "Buffers",
