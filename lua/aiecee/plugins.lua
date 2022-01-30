@@ -49,6 +49,12 @@ return packer.startup(function(use)
 	-- Notify
 	use("rcarriga/nvim-notify")
 
+	-- Telescope
+	use({
+		"nvim-telescope/telescope.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+	})
+
 	-- LSP
 	use({
 		"williamboman/nvim-lsp-installer",
@@ -61,6 +67,11 @@ return packer.startup(function(use)
 	use("hrsh7th/nvim-cmp")
 	use("tami5/lspsaga.nvim")
 	use("aiecee/nvim-lsp-notify")
+	use({
+		"jose-elias-alvarez/null-ls.nvim",
+		requires = { "nvim-lua/plenary.nvim" },
+		disable = true,
+	})
 
 	-- Snippets
 	use("hrsh7th/cmp-vsnip")
@@ -71,12 +82,6 @@ return packer.startup(function(use)
 	-- Code Helpers
 	use("windwp/nvim-autopairs")
 	use("sbdchd/neoformat")
-
-	-- Telescope
-	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-	})
 
 	-- Nvim-tree
 	use({
