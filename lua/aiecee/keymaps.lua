@@ -39,8 +39,8 @@ wk.register({
 		d = {
 			name = "Diagnostics",
 			b = { "<cmd>Telescope diagnostics<cr>", "buffer diagnostics" },
-			l = { "<cmd>Lspsaga show_line_diagnostics<cr>", "line diagnostics" },
-			c = { "<cmd>Lspsaga show_cursor_diagnostics<cr>", "cursor diagnostics" },
+			l = { "<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<cr>", "line diagnostics" },
+			c = { "<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<cr>", "cursor diagnostics" },
 		},
 		--f = { "<cmd>lua vim.lsp.buf.formatting_sync(nil, 2000)<cr>", "format" },
 		f = { "<cmd>Neoformat<cr>", "format" },
