@@ -1,5 +1,6 @@
 local wk = require("which-key")
 
+-- Normal Mode
 wk.register({
 	["-"] = { "<cmd>Telescope commands<cr>", "commands" },
 	f = {
@@ -77,7 +78,7 @@ wk.register({
 		q = { "<cmd>wincmd q<cr>", "quit window" },
 		x = { "<cmd>wincmd x<cr>", "swap windows" },
 	},
-	h = {
+	m = {
 		name = "Hop",
 		w = { "<cmd>HopWord<cr>", "word" },
 		l = { "<cmd>HopLine<cr>", "line" },
@@ -86,3 +87,13 @@ wk.register({
 }, {
 	prefix = "<leader>",
 })
+
+-- Visual Mode
+wk.register({
+	m = {
+		name = "Hop",
+		w = { "<cmd>HopWord<cr>", "word" },
+		l = { "<cmd>HopLine<cr>", "line" },
+		p = { "<cmd>HopPattern<cr>", "pattern" },
+	},
+}, { mode = "v" })
