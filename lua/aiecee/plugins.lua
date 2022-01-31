@@ -66,12 +66,20 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
 	use("tami5/lspsaga.nvim")
-	use("aiecee/nvim-lsp-notify")
+	use({ "aiecee/nvim-lsp-notify", disable = true })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
 		disable = true,
 	})
+
+	-- Treesitter
+	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+	use("nvim-treesitter/nvim-treesitter-refactor")
+	use("folke/twilight.nvim")
+
+	-- Zen Mode
+	use("folke/zen-mode.nvim")
 
 	-- Snippets
 	use("hrsh7th/cmp-vsnip")

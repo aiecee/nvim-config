@@ -84,6 +84,11 @@ wk.register({
 		l = { "<cmd>HopLine<cr>", "line" },
 		p = { "<cmd>HopPattern<cr>", "pattern" },
 	},
+	z = {
+		name = "Zen Mode",
+		t = { "<cmd>Twilight<cr>", "toggle twilight" },
+		z = { "<cmd>ZenMode<cr>", "toggle zen mode" },
+	},
 }, {
 	prefix = "<leader>",
 })
