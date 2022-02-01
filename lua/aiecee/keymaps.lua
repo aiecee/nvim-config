@@ -4,10 +4,7 @@ local wk = require("which-key")
 wk.register({
 	["-"] = { "<cmd>Telescope commands<cr>", "commands" },
 	f = {
-		name = "Files",
-		f = { "<cmd>Telescope find_files<cr>", "find file" },
-		g = { "<cmd>Telescope live_grep<cr>", "grep file" },
-		r = { "<cmd>Telescope oldfiles<cr>", "recently opened" },
+		name = "File",
 		s = { "<cmd>w<cr>", "save" },
 		a = { "<cmd>wa<cr>", "save all" },
 	},
@@ -78,16 +75,32 @@ wk.register({
 		q = { "<cmd>wincmd q<cr>", "quit window" },
 		x = { "<cmd>wincmd x<cr>", "swap windows" },
 	},
-	m = {
-		name = "Hop",
-		w = { "<cmd>HopWord<cr>", "word" },
-		l = { "<cmd>HopLine<cr>", "line" },
-		p = { "<cmd>HopPattern<cr>", "pattern" },
-	},
 	z = {
 		name = "Zen Mode",
 		t = { "<cmd>Twilight<cr>", "toggle twilight" },
 		z = { "<cmd>ZenMode<cr>", "toggle zen mode" },
+	},
+	n = {
+		name = "Navigation",
+		b = {
+			name = "Buffer",
+			w = { "<cmd>HopWord<cr>", "word" },
+			l = { "<cmd>HopLine<cr>", "line" },
+			p = { "<cmd>HopPattern<cr>", "pattern" },
+		},
+		f = {
+			name = "Files",
+			f = { "<cmd>Telescope find_files<cr>", "find file" },
+			g = { "<cmd>Telescope live_grep<cr>", "grep file" },
+			r = { "<cmd>Telescope oldfiles<cr>", "recently opened" },
+		},
+		m = {
+			name = "Marks",
+			a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "add file" },
+			n = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "next" },
+			p = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "previous" },
+			l = { "<cmd>Telescope harpoon marks<cr>", "list" },
+		},
 	},
 }, {
 	prefix = "<leader>",
@@ -95,10 +108,13 @@ wk.register({
 
 -- Visual Mode
 wk.register({
-	m = {
-		name = "Hop",
-		w = { "<cmd>HopWord<cr>", "word" },
-		l = { "<cmd>HopLine<cr>", "line" },
-		p = { "<cmd>HopPattern<cr>", "pattern" },
+	n = {
+		name = "Navigation",
+		b = {
+			name = "Buffer",
+			w = { "<cmd>HopWord<cr>", "word" },
+			l = { "<cmd>HopLine<cr>", "line" },
+			p = { "<cmd>HopPattern<cr>", "pattern" },
+		},
 	},
 }, { mode = "v" })
