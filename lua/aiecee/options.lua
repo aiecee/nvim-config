@@ -25,7 +25,7 @@ local options = {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = "Lilex NF:h14",
+	guifont = "Hack NF:h14",
 }
 
 for key, value in pairs(options) do
