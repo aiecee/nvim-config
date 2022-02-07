@@ -111,6 +111,9 @@ return packer.startup(function(use)
 	-- Hop
 	use("phaazon/hop.nvim")
 
+	-- Indent Blankline
+	use("lukas-reineke/indent-blankline.nvim")
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end

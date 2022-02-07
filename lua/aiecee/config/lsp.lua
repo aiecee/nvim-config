@@ -1,5 +1,8 @@
 local lsp_installer_servers = require("nvim-lsp-installer.servers")
+local lspsaga = require("lspsaga")
+-- local null_ls = require("null-ls")
 
+-- LSP
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
@@ -57,3 +60,30 @@ end
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
 	update_in_insert = true,
 })
+
+-- Lspsaga
+lspsaga.setup()
+
+-- Null-ls
+-- null_ls.setup({
+-- 	sources = {
+-- Prettier
+-- 	null_ls.builtins.formatting.prettier,
+-- ESLint
+-- null_ls.builtins.formatting.eslint,
+-- null_ls.builtins.diagnostics.eslint,
+-- null_ls.builtins.code_actions.eslint,
+-- Stylua
+-- null_ls.builtins.formatting.stylua,
+-- },
+-- on_attach = function(client)
+-- if client.resolved_capabilities.document_formatting then
+-- vim.cmd([[
+-- augroup lsp_formatting
+-- autocmd! * <buffer>
+-- autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 2000)
+-- augroup END
+-- ]])
+-- end
+-- end,
+-- })
