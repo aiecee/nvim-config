@@ -11,6 +11,7 @@ local servers = {
 	"cssls",
 	"sumneko_lua",
 	"pyright",
+	"rust_analyzer",
 }
 local server_options = {
 	["tsserver"] = { capabilities = capabilities },
@@ -38,6 +39,7 @@ local server_options = {
 		},
 	},
 	["pyright"] = { capabilities = capabilities },
+	["rust_analyzer"] = { capabilities = capabilities },
 }
 
 for _, server_name in pairs(servers) do
