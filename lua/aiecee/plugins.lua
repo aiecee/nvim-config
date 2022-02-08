@@ -74,6 +74,7 @@ return packer.startup(function(use)
 		requires = { "nvim-lua/plenary.nvim" },
 		disable = true,
 	})
+	use("onsails/lspkind-nvim")
 
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
