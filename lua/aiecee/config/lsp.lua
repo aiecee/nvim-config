@@ -46,6 +46,12 @@ local server_options = {
 	["rust_analyzer"] = { capabilities = capabilities },
 }
 
+local rust_tools_opts = {
+	runnbales  ={
+		use_telescope = true
+	}
+}
+
 for _, server_name in pairs(servers) do
 	local available, server = lsp_installer_servers.get_server(server_name)
 	if available then
@@ -53,6 +59,7 @@ for _, server_name in pairs(servers) do
 			if server.name == "rust_analyzer" then
 				rust_tools.setup({
 					server = vim.tbl_deep_extend("force", server:get_default_options(), server_options[server.name]),
+					tools = rust_tools_opts
 				})
 				server:attach_buffers()
 			else

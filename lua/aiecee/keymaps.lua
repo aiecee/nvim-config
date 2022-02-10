@@ -1,5 +1,16 @@
 local wk = require("which-key")
 
+local function map(mode, lhs, rhs, opts)
+	local options = { noremap = true}	
+	if opts then
+		options = vim.tbl_extend("force", options, opts)
+	end
+	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+end
+
+map("i", "<C-h>", ":HopLine<cr>")
+map("n", "<C-h>", ":HopLine<cr>")
+
 -- Normal Mode
 wk.register({
 	["-"] = { "<cmd>Telescope commands<cr>", "commands" },
@@ -91,6 +102,7 @@ wk.register({
 		f = {
 			name = "Files",
 			f = { "<cmd>Telescope find_files<cr>", "find file" },
+			b = { "<cmd>Telescope file_browser<cr>", "file browser" },
 			g = { "<cmd>Telescope live_grep<cr>", "grep file" },
 			r = { "<cmd>Telescope oldfiles<cr>", "recently opened" },
 		},

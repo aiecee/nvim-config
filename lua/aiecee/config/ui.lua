@@ -1,5 +1,17 @@
 local tree = require("nvim-tree")
 local feline = require("feline")
+local telescope = require("telescope")
+
+-- Telescope
+telescope.setup({
+	defaults = {
+		mappings = {
+			i = {
+				["<C-h>"] = require("telescope").extensions.hop.hop
+			}
+		}
+	}
+})
 
 -- Nvim tree
 tree.setup({
