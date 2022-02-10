@@ -1,5 +1,6 @@
 local lsp_installer_servers = require("nvim-lsp-installer.servers")
 local lspsaga = require("lspsaga")
+local rust_tools = require("rust-tools")
 -- local null_ls = require("null-ls")
 
 -- LSP
@@ -49,7 +50,14 @@ for _, server_name in pairs(servers) do
 	local available, server = lsp_installer_servers.get_server(server_name)
 	if available then
 		server:on_ready(function()
-			server:setup(server_options[server.name])
+			if server.name == "rust_analyzer" then
+				rust_tools.setup({
+					server = vim.tbl_deep_extend("force", server:get_default_options(), server_options[server.name]),
+				})
+				server:attach_buffers()
+			else
+				server:setup(server_options[server.name])
+			end
 		end)
 	end
 	if not server:is_installed() then

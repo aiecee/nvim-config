@@ -76,6 +76,9 @@ return packer.startup(function(use)
 	})
 	use("onsails/lspkind-nvim")
 
+	-- Rust tools
+	use("simrat39/rust-tools.nvim")
+
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
 	use("nvim-treesitter/nvim-treesitter-refactor")
