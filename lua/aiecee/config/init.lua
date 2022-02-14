@@ -1,7 +1,6 @@
 require("aiecee.config.code")
 require("aiecee.config.completion")
 require("aiecee.config.lsp")
-require("aiecee.config.navigation")
 require("aiecee.config.ui")
 require("aiecee.config.which-key")
 require("aiecee.config.zen")

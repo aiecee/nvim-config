@@ -1,7 +1,7 @@
 local wk = require("which-key")
 
 local function map(mode, lhs, rhs, opts)
-	local options = { noremap = true}	
+	local options = { noremap = true }
 	if opts then
 		options = vim.tbl_extend("force", options, opts)
 	end
@@ -10,6 +10,7 @@ end
 
 map("i", "<C-h>", ":HopLine<cr>")
 map("n", "<C-h>", ":HopLine<cr>")
+map("v", "<C-h>", ":HopLine<cr>")
 
 -- Normal Mode
 wk.register({
@@ -18,6 +19,10 @@ wk.register({
 		name = "File",
 		s = { "<cmd>w<cr>", "save" },
 		a = { "<cmd>wa<cr>", "save all" },
+		f = { "<cmd>Telescope find_files<cr>", "find file" },
+		b = { "<cmd>Telescope file_browser<cr>", "file browser" },
+		g = { "<cmd>Telescope live_grep<cr>", "grep file" },
+		r = { "<cmd>Telescope oldfiles<cr>", "recently opened" },
 	},
 	t = {
 		name = "Tree",
@@ -91,28 +96,18 @@ wk.register({
 		t = { "<cmd>Twilight<cr>", "toggle twilight" },
 		z = { "<cmd>ZenMode<cr>", "toggle zen mode" },
 	},
-	n = {
-		name = "Navigation",
-		b = {
-			name = "Buffer",
-			w = { "<cmd>HopWord<cr>", "word" },
-			l = { "<cmd>HopLine<cr>", "line" },
-			p = { "<cmd>HopPattern<cr>", "pattern" },
-		},
-		f = {
-			name = "Files",
-			f = { "<cmd>Telescope find_files<cr>", "find file" },
-			b = { "<cmd>Telescope file_browser<cr>", "file browser" },
-			g = { "<cmd>Telescope live_grep<cr>", "grep file" },
-			r = { "<cmd>Telescope oldfiles<cr>", "recently opened" },
-		},
-		m = {
-			name = "Marks",
-			a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "add file" },
-			n = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "next" },
-			p = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "previous" },
-			l = { "<cmd>Telescope harpoon marks<cr>", "list" },
-		},
+	m = {
+		name = "Marks",
+		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "add file" },
+		n = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "next" },
+		p = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "previous" },
+		l = { "<cmd>Telescope harpoon marks theme=dropdown<cr>", "list" }, -- theme needs to be set here, can't do it in config
+	},
+	h = {
+		name = "Hop",
+		w = { "<cmd>HopWord<cr>", "word" },
+		l = { "<cmd>HopLine<cr>", "line" },
+		p = { "<cmd>HopPattern<cr>", "pattern" },
 	},
 }, {
 	prefix = "<leader>",
