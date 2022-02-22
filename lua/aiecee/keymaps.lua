@@ -21,7 +21,6 @@ wk.register({
 		a = { "<cmd>wa<cr>", "save all" },
 		f = { "<cmd>Telescope find_files<cr>", "find file" },
 		b = { "<cmd>Telescope file_browser<cr>", "file browser" },
-		g = { "<cmd>Telescope live_grep<cr>", "grep file" },
 		r = { "<cmd>Telescope oldfiles<cr>", "recently opened" },
 	},
 	t = {
@@ -76,7 +75,8 @@ wk.register({
 	s = {
 		name = "Search",
 		f = { "<cmd>Telescope current_buffer_fuzzy_find<cr>", "current file" },
-		w = { "<cmd>Telescope grep_string<cr>", "current working dir" },
+		c = { "<cmd>Telescope grep_string<cr>", "word under cursor" },
+		w = { "<cmd>Telescope live_grep<cr>", "current working dir" },
 	},
 	w = {
 		name = "Window",

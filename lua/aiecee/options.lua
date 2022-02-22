@@ -26,6 +26,9 @@ local options = {
 	autoread = true,
 	termguicolors = true,
 	guifont = "Hack NF:h13",
+	foldmethod = "expr",
+	foldexpr = "nvim_treesitter#foldexpr()",
+	foldlevelstart = 99,
 }
 
 for key, value in pairs(options) do
