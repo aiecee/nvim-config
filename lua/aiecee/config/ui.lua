@@ -1,9 +1,40 @@
-local tree = require("nvim-tree")
 local feline = require("feline")
 local telescope = require("telescope")
 local telescope_themes = require("telescope.themes")
 local hop = require("hop")
 local harpoon = require("harpoon")
+local neo_tree = require("neo-tree")
+
+-- Neo-tree
+neo_tree.setup({
+	filesystem = {
+		use_lubuv_file_watcher = true,
+		components = {
+			harpoon_index = function(config, node, state)
+				local marked = require("harpoon.mark")
+				local path = node:get_id()
+				local success, index = pcall(marked.get_index_of, path)
+				if success and index and index > 0 then
+					return {
+						text = string.format(" h-%d", index),
+						highlight = config.highlight or "NeoTreeDirectoryIcon",
+					}
+				else
+					return {}
+				end
+			end,
+		},
+		renderers = {
+			file = {
+				{ "icon" },
+				{ "name", use_git_status_colors = true },
+				{ "harpoon_index" },
+				{ "diagnostics", highlight = "NeoTreeDimText" },
+				{ "git_status", highlight = "NeoTreeDimText" },
+			},
+		},
+	},
+})
 
 -- Harpoon
 harpoon.setup()
@@ -51,23 +82,6 @@ telescope.load_extension("harpoon")
 telescope.load_extension("ui-select")
 telescope.load_extension("hop")
 telescope.load_extension("file_browser")
-
--- Nvim tree
-tree.setup({
-	hijack_cursor = true,
-	update_focused_file = {
-		enable = true,
-	},
-	diagnostics = {
-		enable = true,
-		show_on_dirs = true,
-	},
-	view = {
-		width = "20%",
-		auto_resize = true,
-		side = "right",
-	},
-})
 
 -- Notify
 vim.notify = require("notify")

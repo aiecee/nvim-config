@@ -8,6 +8,10 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 
+local sumneko_runtime_paths = vim.split(package.path, ";")
+table.insert(sumneko_runtime_paths, "lua/?.lua")
+table.insert(sumneko_runtime_paths, "lua/?/init.lua")
+
 local servers = {
 	"tsserver",
 	"angularls",
@@ -16,6 +20,7 @@ local servers = {
 	"sumneko_lua",
 	"pyright",
 	"rust_analyzer",
+	"gopls",
 }
 local server_options = {
 	["tsserver"] = { capabilities = capabilities },
@@ -28,14 +33,15 @@ local server_options = {
 			Lua = {
 				runtime = {
 					version = "LuaJIT",
-					path = vim.split(package.path, ";"),
+					path = sumneko_runtime_paths,
 				},
 				diagnostics = {
-					globals = { "vim", "require" },
+					globals = { "vim" },
 				},
 				workspace = {
 					library = {
 						[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+						[vim.fn.expand("$VIMRUNTIME/lua/vim")] = true,
 						[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
 					},
 				},
@@ -44,12 +50,13 @@ local server_options = {
 	},
 	["pyright"] = { capabilities = capabilities },
 	["rust_analyzer"] = { capabilities = capabilities },
+	["gopls"] = { capabilities = capabilities },
 }
 
 local rust_tools_opts = {
-	runnbales  ={
-		use_telescope = true
-	}
+	runnbales = {
+		use_telescope = true,
+	},
 }
 
 for _, server_name in pairs(servers) do
@@ -59,7 +66,7 @@ for _, server_name in pairs(servers) do
 			if server.name == "rust_analyzer" then
 				rust_tools.setup({
 					server = vim.tbl_deep_extend("force", server:get_default_options(), server_options[server.name]),
-					tools = rust_tools_opts
+					tools = rust_tools_opts,
 				})
 				server:attach_buffers()
 			else

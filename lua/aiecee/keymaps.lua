@@ -8,13 +8,22 @@ local function map(mode, lhs, rhs, opts)
 	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
-map("i", "<C-h>", ":HopLine<cr>")
-map("n", "<C-h>", ":HopLine<cr>")
-map("v", "<C-h>", ":HopLine<cr>")
+map("i", "<C-h>l", "<cmd>HopLine<cr>")
+map("i", "<C-h>w", "<cmd>HopWord<cr>")
+map("i", "<C-h>p", "<cmd>HopPattern<cr>")
+map("i", "<C-h>c", "<cmd>HopChar2<cr>")
+map("n", "<C-h>l", "<cmd>HopLine<cr>")
+map("n", "<C-h>w", "<cmd>HopWord<cr>")
+map("n", "<C-h>p", "<cmd>HopPattern<cr>")
+map("n", "<C-h>c", "<cmd>HopChar2<cr>")
+map("v", "<C-h>l", "<cmd>HopLine<cr>")
+map("v", "<C-h>w", "<cmd>HopWord<cr>")
+map("v", "<C-h>p", "<cmd>HopPattern<cr>")
+map("v", "<C-h>c", "<cmd>HopChar2<cr>")
 
 -- Normal Mode
 wk.register({
-	["-"] = { "<cmd>Telescope commands<cr>", "commands" },
+	["-"] = { "<cmd>Telescope comimands<cr>", "commands" },
 	f = {
 		name = "File",
 		s = { "<cmd>w<cr>", "save" },
@@ -25,10 +34,8 @@ wk.register({
 	},
 	t = {
 		name = "Tree",
-		t = { "<cmd>NvimTreeToggle<cr>", "toggle" },
-		f = { "<cmd>NvimTreeFocus<cr>", "focus" },
-		j = { "<cmd>NvimTreeFindFile<cr>", "jump to file" },
-		r = { "<cmd>NvimTreeRefresh<cr>", "refresh tree" },
+		t = { "<cmd>NeoTreeShowToggle<cr>", "toggle" },
+		f = { "<cmd>NeoTreeFocus<cr>", "focus" },
 	},
 	b = {
 		name = "Buffers",
@@ -69,7 +76,7 @@ wk.register({
 			b = { "<cmd>Telescope git_bcommits<cr>", "buffer commits" },
 		},
 		b = { "<cmd>Telescope git_branches<cr>", "branches" },
-		s = { "<cmd>Telescope git_status<cr>", "status" },
+		s = { "<cmd>NeoTreeFloat git_status<cr>", "status" },
 		f = { "<cmd>Telescope git_files<cr>", "files" },
 	},
 	s = {
@@ -108,20 +115,13 @@ wk.register({
 		w = { "<cmd>HopWord<cr>", "word" },
 		l = { "<cmd>HopLine<cr>", "line" },
 		p = { "<cmd>HopPattern<cr>", "pattern" },
+		c = { "<cmd>HopChar2<cr>", "char2" },
+	},
+	S = {
+		name = "Sessions",
+		l = { "<cmd>lua require('persistence').load()<cr>", "load" },
+		s = { "<cmd>lua require('persistence').save()<cr>", "save" },
 	},
 }, {
 	prefix = "<leader>",
 })
-
--- Visual Mode
-wk.register({
-	n = {
-		name = "Navigation",
-		b = {
-			name = "Buffer",
-			w = { "<cmd>HopWord<cr>", "word" },
-			l = { "<cmd>HopLine<cr>", "line" },
-			p = { "<cmd>HopPattern<cr>", "pattern" },
-		},
-	},
-}, { mode = "v" })

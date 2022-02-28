@@ -100,10 +100,11 @@ return packer.startup(function(use)
 	use("windwp/nvim-autopairs")
 	use("sbdchd/neoformat")
 
-	-- Nvim-tree
+	-- Neo-tree
 	use({
-		"kyazdani42/nvim-tree.lua",
-		requires = { "kyazdani42/nvim-web-devicons" },
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v1.x",
+		requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons", "MunifTanjim/nui.nvim" },
 	})
 
 	-- Feline
