@@ -34,8 +34,9 @@ wk.register({
 	},
 	t = {
 		name = "Tree",
-		t = { "<cmd>NeoTreeShowToggle<cr>", "toggle" },
-		f = { "<cmd>NeoTreeFocus<cr>", "focus" },
+		t = { "<cmd>NvimTreeToggle<cr>", "toggle" },
+		f = { "<cmd>NvimTreeFocus<cr>", "focus" },
+		r = { "<cmd>NvimTreeRefresh<cr>", "refresh" },
 	},
 	b = {
 		name = "Buffers",
