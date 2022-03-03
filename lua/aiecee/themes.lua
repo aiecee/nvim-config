@@ -12,6 +12,13 @@ catppuccin.setup({
 	},
 })
 
-catppuccin.remap({ NeoTreeDimText = { fg = colors.gray1 }, NeoTreeGitAdded = { fg = colors.green } })
+catppuccin.remap({
+	NeoTreeDimText = { fg = colors.gray1 },
+	NeoTreeGitAdded = { fg = colors.green },
+	LspDiagnosticsSignError = { fg = colors.red },
+	LspDiagnosticsSignWarning = { fg = colors.yellow },
+	LspDiagnosticsSignInformation = { fg = colors.sky },
+	LspDiagnosticsSignHint = { fg = colors.rosewater },
+})
 
 vim.cmd("colorscheme catppuccin")

@@ -6,9 +6,14 @@ local harpoon = require("harpoon")
 local neo_tree = require("neo-tree")
 
 -- Neo-tree
+vim.fn.sign_define("LspDiagnosticsSignError", { text = "", texthl = "LspDiagnosticsSignError" })
+vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "", texthl = "LspDiagnosticsSignWarning" })
+vim.fn.sign_define("LspDiagnosticsSignInformation", { text = " ", texthl = "LspDiagnosticsSignInformation" })
+vim.fn.sign_define("LspDiagnosticsSignHint", { text = "", texthl = "LspDiagnosticsSignHint" })
 neo_tree.setup({
 	filesystem = {
 		use_lubuv_file_watcher = true,
+		follow_current_file = true,
 		components = {
 			harpoon_index = function(config, node, state)
 				local marked = require("harpoon.mark")
@@ -28,8 +33,8 @@ neo_tree.setup({
 			file = {
 				{ "icon" },
 				{ "name", use_git_status_colors = true },
+				{ "diagnostics" },
 				{ "harpoon_index" },
-				{ "diagnostics", highlight = "NeoTreeDimText" },
 				{ "git_status", highlight = "NeoTreeDimText" },
 			},
 		},
@@ -59,13 +64,13 @@ telescope.setup({
 			theme = "dropdown",
 		},
 		lsp_definitions = {
-			theme = "cursor",
+			theme = "dropdown",
 		},
 		lsp_implementations = {
-			theme = "cursor",
+			theme = "dropdown",
 		},
 		lsp_references = {
-			theme = "cursor",
+			theme = "dropdown",
 		},
 		diagnostics = {
 			theme = "dropdown",
