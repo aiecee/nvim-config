@@ -5,6 +5,9 @@ catppuccin.setup({
 		lsp_saga = true,
 		hop = true,
 		which_key = true,
+		nvimtree = {
+			enable = true,
+		},
 	},
 })
 

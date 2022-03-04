@@ -1,7 +1,8 @@
 local global_options = {
 	mapleader = " ",
 	neovide_remember_window_size = true,
-	nivm_tree_highlight_opened_files = 1,
+	nvim_tree_highlight_opened_files = 1,
+	nvim_tree_git_hl = 1,
 }
 
 for key, value in pairs(global_options) do
