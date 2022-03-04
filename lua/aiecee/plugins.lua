@@ -118,6 +118,10 @@ return packer.startup(function(use)
 	-- Indent Blankline
 	use("lukas-reineke/indent-blankline.nvim")
 
+	-- Comments
+	use("numToStr/Comment.nvim")
+	use("folke/todo-comments.nvim")
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end

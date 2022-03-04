@@ -65,6 +65,7 @@ telescope.load_extension("harpoon")
 telescope.load_extension("ui-select")
 telescope.load_extension("hop")
 telescope.load_extension("file_browser")
+telescope.load_extension("todo-comments")
 
 -- Notify
 vim.notify = require("notify")

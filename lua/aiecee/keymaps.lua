@@ -8,6 +8,7 @@ local function map(mode, lhs, rhs, opts)
 	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
+-- Hop
 map("i", "<C-h>l", "<cmd>HopLine<cr>")
 map("i", "<C-h>w", "<cmd>HopWord<cr>")
 map("i", "<C-h>p", "<cmd>HopPattern<cr>")
@@ -20,6 +21,12 @@ map("v", "<C-h>l", "<cmd>HopLine<cr>")
 map("v", "<C-h>w", "<cmd>HopWord<cr>")
 map("v", "<C-h>p", "<cmd>HopPattern<cr>")
 map("v", "<C-h>c", "<cmd>HopChar2<cr>")
+
+-- Comments
+map("n", "<C-k>l", "<cmd>lua require('Comment.api').toggle_current_linewise()<cr>")
+map("n", "<C-k>b", "<cmd>lua require('Comment.api').toggle_current_blockwise()<cr>")
+map("v", "<C-k>l", "<esc><cmd>lua require('Comment.api').toggle_linewise_op(vim.fn.visualmode())<cr>")
+map("v", "<C-k>b", "<esc><cmd>lua require('Comment.api').toggle_blockwise_op(vim.fn.visualmode())<cr>")
 
 -- Normal Mode
 wk.register({
@@ -68,6 +75,7 @@ wk.register({
 		R = { "<cmd>lua require('lspsaga.rename').rename()<cr>", "rename" },
 		h = { "<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>", "hover" },
 		s = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<cr>", "signature help" },
+		t = { "<cmd>TodoTelescope<cr>", "todos" },
 	},
 	g = {
 		name = "Git",
@@ -117,11 +125,6 @@ wk.register({
 		l = { "<cmd>HopLine<cr>", "line" },
 		p = { "<cmd>HopPattern<cr>", "pattern" },
 		c = { "<cmd>HopChar2<cr>", "char2" },
-	},
-	S = {
-		name = "Sessions",
-		l = { "<cmd>lua require('persistence').load()<cr>", "load" },
-		s = { "<cmd>lua require('persistence').save()<cr>", "save" },
 	},
 }, {
 	prefix = "<leader>",

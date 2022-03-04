@@ -2,6 +2,8 @@ local autopairs = require("nvim-autopairs")
 local treesitter_install = require("nvim-treesitter.install")
 local treesitter_config = require("nvim-treesitter.configs")
 local indent_blankline = require("indent_blankline")
+local comment = require("Comment")
+local todo_comments = require("todo-comments")
 
 -- Autopairs
 autopairs.setup()
@@ -38,4 +40,17 @@ treesitter_config.setup({
 indent_blankline.setup({
 	show_current_context = true,
 	show_current_context_start = true,
+})
+
+-- Comment
+comment.setup()
+
+-- todo-comments
+todo_comments.setup({
+	highlight = {
+		pattern = [[.*<(KEYWORDS)\s*]],
+	},
+	search = {
+		pattern = [[\b(KEYWORDS)\b]],
+	},
 })
