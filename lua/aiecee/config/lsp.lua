@@ -21,6 +21,7 @@ local servers = {
 	"pyright",
 	"rust_analyzer",
 	"gopls",
+	"tailwindcss",
 }
 local server_options = {
 	["tsserver"] = { capabilities = capabilities },
@@ -51,6 +52,7 @@ local server_options = {
 	["pyright"] = { capabilities = capabilities },
 	["rust_analyzer"] = { capabilities = capabilities },
 	["gopls"] = { capabilities = capabilities },
+	["tailwindcss"] = { capabilities = capabilities },
 }
 
 local rust_tools_opts = {
