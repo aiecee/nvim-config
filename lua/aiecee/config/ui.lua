@@ -3,25 +3,13 @@ local telescope = require("telescope")
 local telescope_themes = require("telescope.themes")
 local hop = require("hop")
 local harpoon = require("harpoon")
-local nvim_tree = require("nvim-tree")
+local neo_tree = require("neo-tree")
 
--- Nvim-tree
-nvim_tree.setup({
-	hijack_cursor = true,
-	diagnostics = {
-		enable = true,
-	},
-	update_focused_file = {
-		enable = true,
-	},
-	view = {
-		width = 45,
-		side = "right",
-	},
-	actions = {
-		open_file = {
-			resize_window = true,
-		},
+-- neo-tree
+neo_tree.setup({
+	popup_border_style = "rounded",
+	filesystem = {
+		use_libuv_file_watcher = true,
 	},
 })
 

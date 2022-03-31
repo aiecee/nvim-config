@@ -27,10 +27,11 @@ local options = {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = "Hasklug NF:h13",
+	guifont = "FiraCode Nerd Font Mono:h11",
 	foldmethod = "expr",
 	foldexpr = "nvim_treesitter#foldexpr()",
 	foldlevelstart = 99,
+	fileformat = "unix",
 }
 
 for key, value in pairs(options) do

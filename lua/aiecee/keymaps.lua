@@ -41,9 +41,8 @@ wk.register({
 	},
 	t = {
 		name = "Tree",
-		t = { "<cmd>NvimTreeToggle<cr>", "toggle" },
-		f = { "<cmd>NvimTreeFocus<cr>", "focus" },
-		r = { "<cmd>NvimTreeRefresh<cr>", "refresh" },
+		t = { "<cmd>Neotree toggle<cr>", "toggle" },
+		f = { "<cmd>Neotree focus<cr>", "focus" },
 	},
 	b = {
 		name = "Buffers",
@@ -69,13 +68,14 @@ wk.register({
 			l = { "<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<cr>", "line diagnostics" },
 			c = { "<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<cr>", "cursor diagnostics" },
 		},
-		--f = { "<cmd>lua vim.lsp.buf.formatting_sync(nil, 2000)<cr>", "format" },
-		f = { "<cmd>Neoformat<cr>", "format" },
+		f = { "<cmd>lua vim.lsp.buf.formatting_sync(nil, 2000)<cr>", "format" },
+		-- f = { "<cmd>Neoformat<cr>", "format" },
 		a = { "<cmd>lua require('lspsaga.codeaction').code_action()<cr>", "code actions" },
 		R = { "<cmd>lua require('lspsaga.rename').rename()<cr>", "rename" },
 		h = { "<cmd>lua require('lspsaga.hover').render_hover_doc()<cr>", "hover" },
 		s = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<cr>", "signature help" },
 		t = { "<cmd>TodoTelescope<cr>", "todos" },
+		u = { "<cmd>set ff=unix<cr>", "to unix" },
 	},
 	g = {
 		name = "Git",

@@ -61,10 +61,11 @@ return packer.startup(function(use)
 	use({ "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } })
 
 	-- LSP
-	use({
-		"williamboman/nvim-lsp-installer",
-		requires = { "neovim/nvim-lspconfig" },
-	})
+	-- use({
+	-- 	"williamboman/nvim-lsp-installer",
+	-- 	requires = { "neovim/nvim-lspconfig" },
+	-- })
+	use("neovim/nvim-lspconfig")
 	use("hrsh7th/cmp-nvim-lsp")
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
@@ -75,7 +76,6 @@ return packer.startup(function(use)
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
-		disable = true,
 	})
 	use("onsails/lspkind-nvim")
 
@@ -98,10 +98,18 @@ return packer.startup(function(use)
 
 	-- Code Helpers
 	use("windwp/nvim-autopairs")
-	use("sbdchd/neoformat")
+	-- use("sbdchd/neoformat")
+	-- use("mhartington/formatter.nvim")
 
 	-- Nvim-Tree
-	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
+	-- use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
+
+	-- neo-tree
+	use("MunifTanjim/nui.nvim")
+	use("nvim-neo-tree/neo-tree.nvim", {
+		branch = "v2.x",
+		requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
+	})
 
 	-- Feline
 	use({

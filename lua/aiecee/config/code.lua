@@ -8,21 +8,13 @@ local todo_comments = require("todo-comments")
 -- Autopairs
 autopairs.setup()
 
--- Neoformat
-vim.cmd([[
-	augroup lsp_formatting
-		autocmd! * <buffer>
-		autocmd BufWritePre * undojoin | Neoformat
-	augroup END
-]])
-
 -- Treesitter
 treesitter_install.compilers = { "clang", "gcc" }
 treesitter_config.setup({
 	highlight = {
 		enable = true,
 	},
-	incremenatl_selection = {
+	incremental_selection = {
 		enable = true,
 	},
 	indent = {
