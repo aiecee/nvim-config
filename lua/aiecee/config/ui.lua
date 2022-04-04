@@ -11,6 +11,12 @@ neo_tree.setup({
 	filesystem = {
 		use_libuv_file_watcher = true,
 	},
+	window = {
+		mappings = {
+			["T"] = "toggle_node",
+			["<space>"] = "",
+		},
+	},
 })
 
 -- Harpoon
