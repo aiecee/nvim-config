@@ -8,9 +8,9 @@ local neo_tree = require("neo-tree")
 -- neo-tree
 neo_tree.setup({
 	popup_border_style = "rounded",
-	filesystem = {
-		use_libuv_file_watcher = true,
-	},
+	-- filesystem = {
+	-- 	use_libuv_file_watcher = true,
+	-- },
 	window = {
 		mappings = {
 			["T"] = "toggle_node",

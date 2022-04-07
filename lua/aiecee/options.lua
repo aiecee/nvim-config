@@ -1,3 +1,5 @@
+local utils = require("aiecee.utils")
+
 local global_options = {
 	mapleader = " ",
 	neovide_remember_window_size = true,
@@ -27,7 +29,7 @@ local options = {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = "FiraCode Nerd Font Mono:h11",
+	guifont = utils.is_windows() and "FiraCode NF:h13" or "FiraCode Nerd Font Mono:h11",
 	foldmethod = "expr",
 	foldexpr = "nvim_treesitter#foldexpr()",
 	foldlevelstart = 99,

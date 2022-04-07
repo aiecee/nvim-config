@@ -1,3 +1,5 @@
+local utils = require("aiecee.utils")
+
 -- Automatically install packer
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
 if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
@@ -71,6 +73,16 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
+	if utils.is_windows() then
+		use({
+			"tzachar/cmp-tabnine",
+			after = "nvim-cmp",
+			run = "powershell ./install.ps1",
+			requires = "hrsh7th/nvim-cmp",
+		})
+	else
+		use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
+	end
 	use("tami5/lspsaga.nvim")
 	use({ "aiecee/nvim-lsp-notify", disable = true })
 	use({

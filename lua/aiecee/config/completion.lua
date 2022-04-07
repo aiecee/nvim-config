@@ -9,6 +9,7 @@ end
 cmp.setup({
 	sources = cmp.config.sources({
 		{ name = "nvim_lsp" },
+		{ name = "cmp_tabnine" },
 		{ name = "buffer" },
 		{ name = "vsnip" },
 		{ name = "path" },
@@ -21,6 +22,7 @@ cmp.setup({
 				buffer = "[Buf]",
 				vsnip = "[Snp]",
 				path = "[Pth]",
+				cmp_tabnine = "[Tab]",
 			},
 		}),
 	},
