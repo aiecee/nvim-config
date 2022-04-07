@@ -87,6 +87,7 @@ wk.register({
 		b = { "<cmd>Telescope git_branches<cr>", "branches" },
 		s = { "<cmd>NeoTreeFloat git_status<cr>", "status" },
 		f = { "<cmd>Telescope git_files<cr>", "files" },
+		g = { "<cmd>Neogit<cr>", "neogit" },
 	},
 	s = {
 		name = "Search",

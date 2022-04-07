@@ -142,6 +142,9 @@ return packer.startup(function(use)
 	use("numToStr/Comment.nvim")
 	use("folke/todo-comments.nvim")
 
+	-- neogit
+	use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim" })
+
 	if PACKER_BOOTSTRAP then
 		require("packer").sync()
 	end
