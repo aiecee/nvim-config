@@ -29,11 +29,12 @@ local options = {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = utils.is_windows() and "FiraCode NF:h13" or "FiraCode Nerd Font Mono:h11",
+	guifont = utils.is_windows() and "FiraCode NF:h11" or "FiraCode Nerd Font Mono:h11",
 	foldmethod = "expr",
 	foldexpr = "nvim_treesitter#foldexpr()",
 	foldlevelstart = 99,
 	fileformat = "unix",
+	laststatus = 3,
 }
 
 for key, value in pairs(options) do
