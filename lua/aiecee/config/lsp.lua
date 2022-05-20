@@ -14,21 +14,22 @@ lsp_config.angularls.setup({ capabilities = capabilities })
 lsp_config.cssls.setup({ capabilities = capabilities })
 lsp_config.pyright.setup({ capabilities = capabilities })
 lsp_config.tailwindcss.setup({ capabilities = capabilities })
+lsp_config.gopls.setup({ capabilities = capabilities })
 
 local no_formatting_capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 no_formatting_capabilities.textDocument.formatting = false
 no_formatting_capabilities.textDocument.range_formatting = false
 lsp_config.tsserver.setup({
 	on_attach = function(client, bufnr)
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
+		client.server_capabilities.document_formatting = false
+		client.server_capabilities.document_range_formatting = false
 	end,
 	capabilities = no_formatting_capabilities,
 })
 lsp_config.html.setup({
 	on_attach = function(client, bufnr)
-		client.resolved_capabilities.document_formatting = false
-		client.resolved_capabilities.document_range_formatting = false
+		client.server_capabilities.document_formatting = false
+		client.server_capabilities.document_range_formatting = false
 	end,
 	capabilities = no_formatting_capabilities,
 })
@@ -72,7 +73,7 @@ null_ls.setup({
 		null_ls.builtins.formatting.stylua,
 	},
 	on_attach = function(client)
-		if client.resolved_capabilities.document_formatting then
+		if client.server_capabilities.document_formatting then
 			vim.cmd([[
 			augroup lsp_formatting
 				autocmd! * <buffer>

@@ -35,6 +35,7 @@ local options = {
 	foldlevelstart = 99,
 	fileformat = "unix",
 	laststatus = 3,
+	clipboard = "unnamedplus",
 }
 
 for key, value in pairs(options) do
