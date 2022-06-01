@@ -62,6 +62,8 @@ return packer.startup(function(use)
 
 	use({ "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } })
 
+	use({"ThePrimeagen/git-worktree.nvim"})
+
 	-- LSP
 	-- use({
 	-- 	"williamboman/nvim-lsp-installer",

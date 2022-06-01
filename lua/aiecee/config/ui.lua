@@ -8,9 +8,9 @@ local neo_tree = require("neo-tree")
 -- neo-tree
 neo_tree.setup({
 	popup_border_style = "rounded",
-	-- filesystem = {
-	-- 	use_libuv_file_watcher = true,
-	-- },
+	filesystem = {
+		follow_current_file = true,
+	},
 	window = {
 		mappings = {
 			["T"] = "toggle_node",
@@ -66,6 +66,7 @@ telescope.load_extension("ui-select")
 telescope.load_extension("hop")
 telescope.load_extension("file_browser")
 telescope.load_extension("todo-comments")
+telescope.load_extension("git_worktree")
 
 -- Notify
 vim.notify = require("notify")

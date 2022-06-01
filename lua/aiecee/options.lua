@@ -5,6 +5,7 @@ local global_options = {
 	neovide_remember_window_size = true,
 	nvim_tree_highlight_opened_files = 1,
 	nvim_tree_git_hl = 1,
+  catppuccin_flavour = "frappe",
 }
 
 for key, value in pairs(global_options) do
@@ -19,6 +20,7 @@ local options = {
 	errorbells = false,
 	tabstop = 2,
 	softtabstop = 2,
+	expandtab = true,
 	shiftwidth = 2,
 	wrap = false,
 	swapfile = false,

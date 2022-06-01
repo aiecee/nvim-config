@@ -10,7 +10,6 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 -- lsp's: angularls, cssls, pyright, tsserver, html, sumneko_lua, tailwindcss
 
 -- lsp-config
-lsp_config.angularls.setup({ capabilities = capabilities })
 lsp_config.cssls.setup({ capabilities = capabilities })
 lsp_config.pyright.setup({ capabilities = capabilities })
 lsp_config.tailwindcss.setup({ capabilities = capabilities })
