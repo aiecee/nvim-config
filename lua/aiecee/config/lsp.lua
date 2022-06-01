@@ -70,6 +70,10 @@ null_ls.setup({
 		null_ls.builtins.formatting.prettier,
 		-- Stylua
 		null_ls.builtins.formatting.stylua,
+    -- eslint_d
+    null_ls.builtins.code_actions.eslint_d,
+    null_ls.builtins.diagnostics.eslint_d,
+    null_ls.builtins.formatting.eslint_d,
 	},
 	on_attach = function(client)
 		if client.server_capabilities.document_formatting then
