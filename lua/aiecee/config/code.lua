@@ -4,7 +4,7 @@ local treesitter_config = require("nvim-treesitter.configs")
 local indent_blankline = require("indent_blankline")
 local comment = require("Comment")
 local todo_comments = require("todo-comments")
-local neogit = require("neogit")
+-- local neogit = require("neogit")
 
 -- Autopairs
 autopairs.setup()
@@ -49,4 +49,4 @@ todo_comments.setup({
 })
 
 -- noegit
-neogit.setup({})
+-- neogit.setup({})

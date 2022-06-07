@@ -14,6 +14,10 @@ lsp_config.cssls.setup({ capabilities = capabilities })
 lsp_config.pyright.setup({ capabilities = capabilities })
 lsp_config.tailwindcss.setup({ capabilities = capabilities })
 lsp_config.gopls.setup({ capabilities = capabilities })
+lsp_config.theme_check.setup({
+  cmd = { "theme-check-liquid-server"},
+  capabilities = capabilities
+})
 
 local no_formatting_capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 no_formatting_capabilities.textDocument.formatting = false

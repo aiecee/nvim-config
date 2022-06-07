@@ -87,7 +87,7 @@ wk.register({
 		b = { "<cmd>Telescope git_branches<cr>", "branches" },
 		s = { "<cmd>NeoTreeFloat git_status<cr>", "status" },
 		f = { "<cmd>Telescope git_files<cr>", "files" },
-		g = { "<cmd>Neogit<cr>", "neogit" },
+		g = { "<cmd>lua require('aiecee.config.fterm').toggle_git()<cr>", "lazygit" },
 		w = {
 			name = "Worktrees",
 			w = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", "worktrees" },
