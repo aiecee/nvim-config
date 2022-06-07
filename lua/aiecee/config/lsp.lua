@@ -15,79 +15,85 @@ lsp_config.pyright.setup({ capabilities = capabilities })
 lsp_config.tailwindcss.setup({ capabilities = capabilities })
 lsp_config.gopls.setup({ capabilities = capabilities })
 lsp_config.theme_check.setup({
-  cmd = { "theme-check-liquid-server"},
+  cmd = { "theme-check-liquid-server" },
   capabilities = capabilities
 })
 
 local no_formatting_capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 no_formatting_capabilities.textDocument.formatting = false
 no_formatting_capabilities.textDocument.range_formatting = false
+
+local no_formatting_on_attach = function(client, bufnr)
+  client.server_capabilities.document_formatting = false
+  client.server_capabilities.documentFormattingProvider = false
+  client.server_capabilities.document_range_formatting = false
+end
+
 lsp_config.tsserver.setup({
-	on_attach = function(client, bufnr)
-		client.server_capabilities.document_formatting = false
-		client.server_capabilities.document_range_formatting = false
-	end,
-	capabilities = no_formatting_capabilities,
+  on_attach = no_formatting_on_attach,
+  capabilities = no_formatting_capabilities,
 })
 lsp_config.html.setup({
-	on_attach = function(client, bufnr)
-		client.server_capabilities.document_formatting = false
-		client.server_capabilities.document_range_formatting = false
-	end,
-	capabilities = no_formatting_capabilities,
+  on_attach = no_formatting_on_attach,
+  capabilities = no_formatting_capabilities,
 })
 
 local sumneko_runtime_paths = vim.split(package.path, ";")
 table.insert(sumneko_runtime_paths, "lua/?.lua")
 table.insert(sumneko_runtime_paths, "lua/?/init.lua")
 lsp_config.sumneko_lua.setup({
-	settings = {
-		Lua = {
-			runtime = {
-				version = "LuaJIT",
-				path = sumneko_runtime_paths,
-			},
-			diagnostics = {
-				globals = { "vim" },
-			},
-			workspace = {
-				library = vim.api.nvim_get_runtime_file("", true),
-			},
-			telemetry = {
-				enable = false,
-			},
-		},
-	},
+  settings = {
+    Lua = {
+      runtime = {
+        version = "LuaJIT",
+        path = sumneko_runtime_paths,
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+      workspace = {
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+  capabilities = no_formatting_capabilities,
+  on_attach = no_formatting_on_attach,
 })
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-	update_in_insert = true,
+  update_in_insert = true,
 })
 
 -- Lspsaga
 lspsaga.setup()
 
 -- Null-ls
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
-	sources = {
-		-- Prettier
-		null_ls.builtins.formatting.prettier,
-		-- Stylua
-		null_ls.builtins.formatting.stylua,
+  sources = {
+    -- Prettier
+    null_ls.builtins.formatting.prettier,
+    -- Stylua
+    null_ls.builtins.formatting.stylua,
     -- eslint_d
     null_ls.builtins.code_actions.eslint_d,
     null_ls.builtins.diagnostics.eslint_d,
     null_ls.builtins.formatting.eslint_d,
-	},
-	on_attach = function(client)
-		if client.server_capabilities.document_formatting then
-			vim.cmd([[
-			augroup lsp_formatting
-				autocmd! * <buffer>
-				autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync(nil, 5000)
-			augroup END
-		]])
-		end
-	end,
-	root_dir = lsp_config.util.root_pattern("package.json", ".null-ls-root", "Makefile", ".git"),
+  },
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.formatting_seq_sync(nil, 5000, { "null-ls" })
+        end,
+      })
+    end
+  end,
+  root_dir = lsp_config.util.root_pattern("package.json", ".null-ls-root", "Makefile", ".git"),
 })
