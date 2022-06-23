@@ -1,5 +1,6 @@
 local cmp = require("cmp")
 local lspkind = require("lspkind")
+local under_comparator = require("cmp-under-comparator")
 
 local has_words_before = function()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -53,6 +54,18 @@ cmp.setup({
 			end
 		end, { "i", "s" }),
 	},
+  sorting = {
+    comparators = {
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.score,
+      under_comparator.under,
+      cmp.config.compare.kind,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
+  },
 })
 
 cmp.setup.cmdline("/", {

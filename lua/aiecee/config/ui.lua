@@ -7,16 +7,17 @@ local neo_tree = require("neo-tree")
 
 -- neo-tree
 neo_tree.setup({
-	popup_border_style = "rounded",
-	filesystem = {
-		follow_current_file = true,
-	},
-	window = {
-		mappings = {
-			["T"] = "toggle_node",
-			["<space>"] = "",
-		},
-	},
+  popup_border_style = "rounded",
+  filesystem = {
+    follow_current_file = true,
+  },
+  window = {
+    mappings = {
+      ["T"] = "toggle_node",
+      ["<space>"] = "",
+    },
+    position = "right",
+  },
 })
 
 -- Harpoon
@@ -27,38 +28,38 @@ hop.setup()
 
 -- Telescope
 telescope.setup({
-	defaults = {
-		mappings = {
-			i = {
-				["<C-h>"] = require("telescope").extensions.hop.hop,
-			},
-		},
-	},
-	pickers = {
-		find_files = {
-			theme = "dropdown",
-		},
-		buffers = {
-			theme = "dropdown",
-		},
-		lsp_definitions = {
-			theme = "dropdown",
-		},
-		lsp_implementations = {
-			theme = "dropdown",
-		},
-		lsp_references = {
-			theme = "dropdown",
-		},
-		diagnostics = {
-			theme = "dropdown",
-		},
-	},
-	extensions = {
-		["ui-select"] = {
-			telescope_themes.get_dropdown(),
-		},
-	},
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-h>"] = require("telescope").extensions.hop.hop,
+      },
+    },
+  },
+  pickers = {
+    find_files = {
+      theme = "dropdown",
+    },
+    buffers = {
+      theme = "dropdown",
+    },
+    lsp_definitions = {
+      theme = "dropdown",
+    },
+    lsp_implementations = {
+      theme = "dropdown",
+    },
+    lsp_references = {
+      theme = "dropdown",
+    },
+    diagnostics = {
+      theme = "dropdown",
+    },
+  },
+  extensions = {
+    ["ui-select"] = {
+      telescope_themes.get_dropdown(),
+    },
+  },
 })
 
 telescope.load_extension("harpoon")
@@ -73,6 +74,6 @@ vim.notify = require("notify")
 
 -- Feline
 feline.setup({
-	preset = "icon",
-	components = require("catppuccin.core.integrations.feline"),
+  preset = "icon",
+  components = require("catppuccin.core.integrations.feline"),
 })

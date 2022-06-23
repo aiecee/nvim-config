@@ -15,7 +15,7 @@ lsp_config.pyright.setup({ capabilities = capabilities })
 lsp_config.tailwindcss.setup({ capabilities = capabilities })
 lsp_config.gopls.setup({ capabilities = capabilities })
 lsp_config.theme_check.setup({
-  cmd = { "theme-check-liquid-server" },
+  cmd = { "theme-check-language-server" },
   capabilities = capabilities
 })
 
@@ -75,7 +75,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
   sources = {
     -- Prettier
-    null_ls.builtins.formatting.prettier,
+    null_ls.builtins.formatting.prettierd,
     -- Stylua
     null_ls.builtins.formatting.stylua,
     -- eslint_d
