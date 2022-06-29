@@ -76,7 +76,6 @@ wk.register({
       name = "Diagnostics",
       b = { "<cmd>Telescope diagnostics<cr>", "buffer diagnostics" },
       l = { "<cmd>lua require('lspsaga.diagnostic').show_line_diagnostics()<cr>", "line diagnostics" },
-      c = { "<cmd>lua require('lspsaga.diagnostic').show_cursor_diagnostics()<cr>", "cursor diagnostics" },
     },
     f = { "<cmd>lua vim.lsp.buf.formatting_sync(nil, 5000)<cr>", "format" },
     a = { "<cmd>lua require('lspsaga.codeaction').code_action()<cr>", "code actions" },
@@ -85,6 +84,7 @@ wk.register({
     s = { "<cmd>lua require('lspsaga.signaturehelp').signature_help()<cr>", "signature help" },
     t = { "<cmd>TodoTelescope<cr>", "todos" },
     u = { "<cmd>set ff=unix<cr>", "to unix" },
+    o = { "<cmd>SymbolsOutline<cr>", "toggle symbols"},
 
   },
   g = {

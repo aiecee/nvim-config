@@ -1,5 +1,5 @@
 local lspsaga = require("lspsaga")
--- local rust_tools = require("rust-tools")
+local rust_tools = require("rust-tools")
 local null_ls = require("null-ls")
 local lsp_config = require("lspconfig")
 
@@ -10,12 +10,12 @@ capabilities = require("cmp_nvim_lsp").update_capabilities(capabilities)
 -- lsp's: angularls, cssls, pyright, tsserver, html, sumneko_lua, tailwindcss
 
 -- lsp-config
+lsp_config.rust_analyzer.setup({ capabilities = capabilities })
 lsp_config.cssls.setup({ capabilities = capabilities })
 lsp_config.pyright.setup({ capabilities = capabilities })
 lsp_config.tailwindcss.setup({ capabilities = capabilities })
 lsp_config.gopls.setup({ capabilities = capabilities })
 lsp_config.theme_check.setup({
-  cmd = { "theme-check-language-server" },
   capabilities = capabilities
 })
 
@@ -68,7 +68,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagn
 })
 
 -- Lspsaga
-lspsaga.setup()
+lspsaga.init_lsp_saga()
 
 -- Null-ls
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -97,3 +97,6 @@ null_ls.setup({
   end,
   root_dir = lsp_config.util.root_pattern("package.json", ".null-ls-root", "Makefile", ".git"),
 })
+
+-- rust_tools
+rust_tools.setup({})

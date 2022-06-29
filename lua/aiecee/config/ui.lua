@@ -16,7 +16,7 @@ neo_tree.setup({
       ["T"] = "toggle_node",
       ["<space>"] = "",
     },
-    position = "right",
+    position = "float",
   },
 })
 

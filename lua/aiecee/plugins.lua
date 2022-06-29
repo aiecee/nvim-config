@@ -80,7 +80,7 @@ return packer.startup(function(use)
   else
     use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
   end
-  use("tami5/lspsaga.nvim")
+  use("glepnir/lspsaga.nvim")
   use({ "aiecee/nvim-lsp-notify", disable = true })
   use({
     "jose-elias-alvarez/null-ls.nvim",
@@ -91,6 +91,9 @@ return packer.startup(function(use)
 
   -- Rust tools
   use("simrat39/rust-tools.nvim")
+
+  -- Symbols Outline
+  use("simrat39/symbols-outline.nvim")
 
   -- Treesitter
   use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })

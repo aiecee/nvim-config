@@ -1,26 +1,28 @@
 local fterm = require("FTerm")
 
-local lazygit_term = fterm:new({
-  ft = "fterm_lazygit",
-  cmd = "lazygit",
-  dimensions = {
-    width = 0.9,
-    height = 0.9,
-  },
-})
+function create_lazygit_term()
+  return fterm:new({
+    ft = "fterm_lazygit",
+    cmd = "lazygit",
+    dimensions = {
+      width = 0.9,
+      height = 0.9,
+    },
+  })
+end
 
 local M = {}
 
 function M.open_git()
-  lazygit_term:open()
+  create_lazygit_term():open()
 end
 
 function M.close_git()
-  lazygit_term:close()
+  create_lazygit_term():close()
 end
 
 function M.toggle_git()
-  lazygit_term:toggle()
+  create_lazygit_term():toggle()
 end
 
 return M
