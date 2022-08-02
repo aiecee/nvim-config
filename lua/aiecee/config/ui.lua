@@ -1,4 +1,5 @@
 local feline = require("feline")
+local ctp_feline = require("catppuccin.groups.integrations.feline")
 local telescope = require("telescope")
 local telescope_themes = require("telescope.themes")
 local hop = require("hop")
@@ -7,17 +8,17 @@ local neo_tree = require("neo-tree")
 
 -- neo-tree
 neo_tree.setup({
-  popup_border_style = "rounded",
-  filesystem = {
-    follow_current_file = true,
-  },
-  window = {
-    mappings = {
-      ["T"] = "toggle_node",
-      ["<space>"] = "",
-    },
-    position = "float",
-  },
+	popup_border_style = "rounded",
+	filesystem = {
+		follow_current_file = true,
+	},
+	window = {
+		mappings = {
+			["T"] = "toggle_node",
+			["<space>"] = "",
+		},
+		position = "float",
+	},
 })
 
 -- Harpoon
@@ -28,38 +29,38 @@ hop.setup()
 
 -- Telescope
 telescope.setup({
-  defaults = {
-    mappings = {
-      i = {
-        ["<C-h>"] = require("telescope").extensions.hop.hop,
-      },
-    },
-  },
-  pickers = {
-    find_files = {
-      theme = "dropdown",
-    },
-    buffers = {
-      theme = "dropdown",
-    },
-    lsp_definitions = {
-      theme = "dropdown",
-    },
-    lsp_implementations = {
-      theme = "dropdown",
-    },
-    lsp_references = {
-      theme = "dropdown",
-    },
-    diagnostics = {
-      theme = "dropdown",
-    },
-  },
-  extensions = {
-    ["ui-select"] = {
-      telescope_themes.get_dropdown(),
-    },
-  },
+	defaults = {
+		mappings = {
+			i = {
+				["<C-h>"] = require("telescope").extensions.hop.hop,
+			},
+		},
+	},
+	pickers = {
+		find_files = {
+			theme = "dropdown",
+		},
+		buffers = {
+			theme = "dropdown",
+		},
+		lsp_definitions = {
+			theme = "dropdown",
+		},
+		lsp_implementations = {
+			theme = "dropdown",
+		},
+		lsp_references = {
+			theme = "dropdown",
+		},
+		diagnostics = {
+			theme = "dropdown",
+		},
+	},
+	extensions = {
+		["ui-select"] = {
+			telescope_themes.get_dropdown(),
+		},
+	},
 })
 
 telescope.load_extension("harpoon")
@@ -73,7 +74,8 @@ telescope.load_extension("git_worktree")
 vim.notify = require("notify")
 
 -- Feline
+ctp_feline.setup({})
 feline.setup({
-  preset = "icon",
-  components = require("catppuccin.core.integrations.feline"),
+	preset = "icon",
+	components = ctp_feline.get(),
 })
