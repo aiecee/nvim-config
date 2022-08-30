@@ -111,6 +111,7 @@ return packer.startup(function(use)
 
 	-- Code Helpers
 	use("windwp/nvim-autopairs")
+	use("windwp/nvim-ts-autotag")
 
 	-- neo-tree
 	use("MunifTanjim/nui.nvim")

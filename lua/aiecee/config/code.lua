@@ -1,4 +1,5 @@
 local autopairs = require("nvim-autopairs")
+local autotag = require("nvim-ts-autotag")
 local treesitter_install = require("nvim-treesitter.install")
 local treesitter_config = require("nvim-treesitter.configs")
 local indent_blankline = require("indent_blankline")
@@ -26,8 +27,14 @@ treesitter_config.setup({
 			enable = true,
 			clear_cursor_on_move = true,
 		},
+		highlight_current_scope = {
+			enable = false,
+		},
 	},
 })
+
+-- autotag
+autotag.setup()
 
 -- Indent-blankline
 indent_blankline.setup({
