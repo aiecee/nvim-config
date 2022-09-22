@@ -1,4 +1,5 @@
-local utils = require("aiecee.utils")
+local utils = require("aiecee.utils.options")
+local system = require("aiecee.utils.system")
 
 local global_options = {
 	mapleader = " ",
@@ -11,9 +12,7 @@ local global_options = {
 	},
 }
 
-for key, value in pairs(global_options) do
-	vim.g[key] = value
-end
+utils.set_globals(global_options)
 
 local options = {
 	completeopt = { "menu", "menuone", "noselect" },
@@ -34,7 +33,7 @@ local options = {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = utils.is_windows() and "FiraCode NF:h11" or "VictorMono Nerd Font Mono:h11",
+	guifont = system.is_windows() and "FiraCode NF:h11" or "VictorMono Nerd Font Mono:h11",
 	foldmethod = "expr",
 	foldexpr = "nvim_treesitter#foldexpr()",
 	foldlevelstart = 99,
@@ -44,6 +43,4 @@ local options = {
 	updatetime = 750,
 }
 
-for key, value in pairs(options) do
-	vim.opt[key] = value
-end
+utils.set_opts(options)

@@ -1,4 +1,4 @@
-local utils = require("aiecee.utils")
+local system = require("aiecee.utils.system")
 
 -- Automatically install packer
 local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
@@ -70,7 +70,7 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
 	use("hrsh7th/nvim-cmp")
-	if utils.is_windows() then
+	if system.is_windows() then
 		use({
 			"tzachar/cmp-tabnine",
 			after = "nvim-cmp",
