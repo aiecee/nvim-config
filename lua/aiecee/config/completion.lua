@@ -15,7 +15,13 @@ cmp.setup({
 		{ name = "buffer" },
 		{ name = "vsnip" },
 		{ name = "path" },
+		{ name = "nvim_lsp_signature_help" },
+		{ name = "rg" },
 	}),
+	window = {
+		completion = cmp.config.window.bordered(),
+		documentation = cmp.config.window.bordered(),
+	},
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
 		format = function(entry, vim_item)
@@ -25,10 +31,11 @@ cmp.setup({
 				with_text = true,
 				menu = {
 					nvim_lsp = "[Lsp]",
+					cmp_tabnine = "[Tab]",
 					buffer = "[Buf]",
 					vsnip = "[Snp]",
 					path = "[Pth]",
-					cmp_tabnine = "[Tab]",
+					rg = "[Rip]",
 				},
 			})(entry, vim_item)
 			local strings = vim.split(kind.kind, "%s", { trimempty = true })
@@ -85,12 +92,14 @@ cmp.setup({
 })
 
 cmp.setup.cmdline("/", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "buffer" },
 	}),
 })
 
 cmp.setup.cmdline(":", {
+	mapping = cmp.mapping.preset.cmdline(),
 	sources = cmp.config.sources({
 		{ name = "path" },
 		{ name = "cmdline" },

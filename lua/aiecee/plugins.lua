@@ -69,6 +69,8 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-buffer")
 	use("hrsh7th/cmp-path")
 	use("hrsh7th/cmp-cmdline")
+	use("hrsh7th/cmp-nvim-lsp-signature-help")
+	use("lukas-reineke/cmp-rg")
 	use("hrsh7th/nvim-cmp")
 	if system.is_windows() then
 		use({
@@ -81,7 +83,6 @@ return packer.startup(function(use)
 		use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
 	end
 	use("glepnir/lspsaga.nvim")
-	use({ "aiecee/nvim-lsp-notify", disable = true })
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
