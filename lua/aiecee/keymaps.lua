@@ -103,6 +103,11 @@ wk.register({
 		c = { "<cmd>Telescope grep_string<cr>", "word under cursor" },
 		w = { "<cmd>Telescope live_grep<cr>", "current working dir" },
 	},
+	S = {
+		name = "Sessions",
+		c = { "<cmd>lua require('persistence').load()<cr>", "load" },
+		l = { "<cmd>lua require('persistence').load({last = true})<cr>", "load last" },
+	},
 	w = {
 		name = "Window",
 		["="] = { "<cmd>wincmd =<cr>", "format windows" },
