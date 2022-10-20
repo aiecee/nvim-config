@@ -9,7 +9,7 @@ function M.setup()
 	null_ls.setup({
 		sources = {
 			-- Prettier
-			builtins.formatting.prettier_d_slim,
+			builtins.formatting.prettier_d_slim.with({ extra_filetypes = { "kotlin" } }),
 			-- Stylua
 			builtins.formatting.stylua,
 			-- eslint_d
@@ -24,12 +24,19 @@ function M.setup()
 					group = augroup,
 					buffer = bufnr,
 					callback = function()
-						vim.lsp.buf.formatting_seq_sync(nil, 5000, { "null-ls" })
+						vim.lsp.buf.format(nil, 5000, { "null-ls" })
 					end,
 				})
 			end
 		end,
-		root_dir = lsp_config.util.root_pattern("package.json", ".null-ls-root", "Makefile", ".git"),
+		root_dir = lsp_config.util.root_pattern(
+			"package.json",
+			".null-ls-root",
+			"Makefile",
+			".git",
+			"settings.gradle",
+			".gradle"
+		),
 	})
 end
 

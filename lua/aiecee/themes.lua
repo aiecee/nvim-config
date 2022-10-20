@@ -1,14 +1,17 @@
 local catppuccin = require("catppuccin")
 
 catppuccin.setup({
-  integrations = {
-    lsp_saga = true,
-    hop = true,
-    which_key = true,
-    neotree = {
-      enable = true,
-    },
-  },
+	dim_inactive = {
+		enabled = true,
+	},
+	integrations = {
+		lsp_saga = true,
+		hop = true,
+		which_key = true,
+		neotree = {
+			enable = true,
+		},
+	},
 })
 
-vim.cmd("colorscheme catppuccin")
+vim.api.nvim_command("colorscheme catppuccin")
