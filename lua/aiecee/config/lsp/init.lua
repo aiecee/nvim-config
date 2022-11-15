@@ -11,6 +11,7 @@ local python = require("aiecee.config.lsp.python")
 local rust = require("aiecee.config.lsp.rust")
 local tailwind = require("aiecee.config.lsp.tailwind")
 local typescript = require("aiecee.config.lsp.typescript")
+local php = require("aiecee.config.lsp.php")
 local null = require("aiecee.config.lsp.null")
 
 local M = {}
@@ -27,6 +28,7 @@ function M.setup()
 	rust.setup()
 	tailwind.setup()
 	typescript.setup()
+	php.setup()
 
 	null.setup()
 

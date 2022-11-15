@@ -150,7 +150,9 @@ return packer.startup(function(use)
 		event = "BufReadPre",
 		module = "persistence",
 		config = function()
-			require("persistence").setup()
+			require("persistence").setup({
+				dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
+			})
 		end,
 	})
 
