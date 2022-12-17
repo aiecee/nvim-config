@@ -72,16 +72,6 @@ return packer.startup(function(use)
 	use("hrsh7th/cmp-nvim-lsp-signature-help")
 	use("lukas-reineke/cmp-rg")
 	use("hrsh7th/nvim-cmp")
-	if system.is_windows() then
-		use({
-			"tzachar/cmp-tabnine",
-			after = "nvim-cmp",
-			run = "powershell ./install.ps1",
-			requires = "hrsh7th/nvim-cmp",
-		})
-	else
-		use({ "tzachar/cmp-tabnine", run = "./install.sh", requires = "hrsh7th/nvim-cmp" })
-	end
 	use("glepnir/lspsaga.nvim")
 	use({
 		"jose-elias-alvarez/null-ls.nvim",
@@ -92,9 +82,6 @@ return packer.startup(function(use)
 
 	-- Rust tools
 	use("simrat39/rust-tools.nvim")
-
-	-- Symbols Outline
-	use("simrat39/symbols-outline.nvim")
 
 	-- Treesitter
 	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })

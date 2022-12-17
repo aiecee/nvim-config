@@ -9,18 +9,18 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Hop
-map("i", "<C-h>l", "<cmd>HopLine<cr>")
-map("i", "<C-h>w", "<cmd>HopWord<cr>")
-map("i", "<C-h>p", "<cmd>HopPattern<cr>")
-map("i", "<C-h>c", "<cmd>HopChar2<cr>")
-map("n", "<C-h>l", "<cmd>HopLine<cr>")
-map("n", "<C-h>w", "<cmd>HopWord<cr>")
-map("n", "<C-h>p", "<cmd>HopPattern<cr>")
-map("n", "<C-h>c", "<cmd>HopChar2<cr>")
-map("v", "<C-h>l", "<cmd>HopLine<cr>")
-map("v", "<C-h>w", "<cmd>HopWord<cr>")
-map("v", "<C-h>p", "<cmd>HopPattern<cr>")
-map("v", "<C-h>c", "<cmd>HopChar2<cr>")
+map("i", "ghl", "<cmd>HopLine<cr>")
+map("i", "ghw", "<cmd>HopWord<cr>")
+map("i", "ghp", "<cmd>HopPattern<cr>")
+map("i", "ghc", "<cmd>HopChar2<cr>")
+map("n", "ghl", "<cmd>HopLine<cr>")
+map("n", "ghw", "<cmd>HopWord<cr>")
+map("n", "ghp", "<cmd>HopPattern<cr>")
+map("n", "ghc", "<cmd>HopChar2<cr>")
+map("v", "ghl", "<cmd>HopLine<cr>")
+map("v", "ghw", "<cmd>HopWord<cr>")
+map("v", "ghp", "<cmd>HopPattern<cr>")
+map("v", "ghc", "<cmd>HopChar2<cr>")
 
 -- Quickfix
 map("n", "<C-q>t", "<cmd>cw<cr>")
@@ -34,7 +34,7 @@ map("i", "<C-q>c", "<cmd>cexpr []<cr>")
 
 -- Normal Mode
 wk.register({
-	["-"] = { "<cmd>Telescope comimands<cr>", "commands" },
+	["-"] = { "<cmd>Telescope commands<cr>", "commands" },
 	f = {
 		name = "File",
 		s = { "<cmd>w<cr>", "save" },
@@ -78,7 +78,6 @@ wk.register({
 		s = { "<cmd>Lspsaga signature_help<cr>", "signature help" },
 		t = { "<cmd>TodoTelescope<cr>", "todos" },
 		u = { "<cmd>set ff=unix<cr>", "to unix" },
-		o = { "<cmd>SymbolsOutline<cr>", "toggle symbols" },
 	},
 	g = {
 		name = "Git",

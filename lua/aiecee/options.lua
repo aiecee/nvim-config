@@ -7,9 +7,6 @@ local global_options = {
 	nvim_tree_highlight_opened_files = 1,
 	nvim_tree_git_hl = 1,
 	catppuccin_flavour = "macchiato",
-	symbols_outline = {
-		auto_close = true,
-	},
 }
 
 utils.set_globals(global_options)
