@@ -13,6 +13,20 @@ autopairs.setup()
 -- Treesitter
 treesitter_install.compilers = { "clang", "gcc" }
 treesitter_config.setup({
+	ensure_installed = {
+		"lua",
+		"typescript",
+		"javascript",
+		"rust",
+		"go",
+		"markdown",
+		"json",
+		"css",
+		"scss",
+		"html",
+		"python",
+		"bash",
+	},
 	highlight = {
 		enable = true,
 	},

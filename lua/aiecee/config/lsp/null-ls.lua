@@ -1,15 +1,21 @@
 local lsp_config = require("lspconfig")
+local mason_null_ls = require("mason-null-ls")
 local null_ls = require("null-ls")
 local builtins = null_ls.builtins
 
 local M = {}
 
 function M.setup()
-	local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+	mason_null_ls.setup({
+		ensure_installed = { "eslint_d", "prettierd", "stylua" },
+		automatic_installation = false,
+		automatic_setup = true,
+	})
+
+	local augroup = vim.api.nvim_create_augroup("lsp_formatting", {})
 	null_ls.setup({
 		sources = {
-			-- Prettier
-			builtins.formatting.prettier_d_slim.with({ extra_filetypes = { "kotlin" } }),
+			builtins.formatting.prettierd,
 			-- Stylua
 			builtins.formatting.stylua,
 			-- eslint_d
@@ -24,7 +30,13 @@ function M.setup()
 					group = augroup,
 					buffer = bufnr,
 					callback = function()
-						vim.lsp.buf.format(nil, 5000, { "null-ls" })
+						vim.lsp.buf.format({
+							formatting_options = nil,
+							timeout_ms = 5000,
+							filter = function(cli)
+								return cli.name == "null-ls"
+							end,
+						})
 					end,
 				})
 			end

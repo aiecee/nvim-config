@@ -1,149 +1,172 @@
-local system = require("aiecee.utils.system")
+local api = vim.api
+local fn = vim.fn
 
--- Automatically install packer
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-	PACKER_BOOTSTRAP = vim.fn.system({
-		"git",
-		"clone",
-		"--depth",
-		"1",
-		"https://github.com/wbthomason/packer.nvim",
-		install_path,
-	})
-	print("Installing packer... close and reopen Neovim...")
-	vim.cmd([[packadd packer.nvim]])
-	return
+local function ensure_packer_installed()
+	local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
+	if fn.glob(install_path) ~= "" then
+		return false
+	end
+
+	api.nvim_echo({ { "Installing Packer", "Type" } }, true, {})
+
+	local packer_repo = "https://github.com/wbthomason/packer.nvim"
+	local command = { "git", "clone", "--depth", "1", packer_repo, install_path }
+	fn.system(command)
+	vim.cmd.packadd("packer.nvim")
+	return true
 end
 
--- Autocommand that reloads neovim whenever you save the plugins.lua file
-vim.cmd([[
-	augroup packer_user_config
-		autocmd!
-		autocmd BufWritePost plugins.lua source <afile> | PackerSync
-	augroup end
-]])
+local is_installed = ensure_packer_installed()
 
 -- Use a protected call so we don't error out on first Use
-local ok, packer = pcall(require, "packer")
-if not ok then
+local packer_exists, packer = pcall(require, "packer")
+if not packer_exists then
 	return
 end
+
+local packer_util = require("packer.util")
 
 --Have packer use a popup window
 packer.init({
 	display = {
 		open_fn = function()
-			return require("packer.util").float({ border = "rounded" })
+			return packer_util.float({ border = "rounded" })
 		end,
 	},
 })
 
 -- Install plugins
-return packer.startup(function(use)
-	-- Packer
-	use("wbthomason/packer.nvim")
+packer.startup({
+	function(use)
+		-- Packer
+		use("wbthomason/packer.nvim")
 
-	-- Themes
-	use({ "catppuccin/nvim", as = "catppuccin" })
+		-- Themes
+		use({ "catppuccin/nvim", as = "catppuccin" })
 
-	-- Notify
-	use("rcarriga/nvim-notify")
+		-- Notify
+		use("rcarriga/nvim-notify")
 
-	-- Telescope
-	use({
-		"nvim-telescope/telescope.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-	})
-	use("nvim-telescope/telescope-ui-select.nvim")
-	use("nvim-telescope/telescope-hop.nvim")
-	use("nvim-telescope/telescope-file-browser.nvim")
+		-- Telescope
+		use({
+			"nvim-telescope/telescope.nvim",
+			requires = {
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope-ui-select.nvim",
+				"nvim-telescope/telescope-hop.nvim",
+				"nvim-telescope/telescope-file-browser.nvim",
+			},
+		})
 
-	use({ "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } })
+		-- LSP, config and plugins
+		use({
+			"neovim/nvim-lspconfig",
+			requires = {
+				"williamboman/mason.nvim",
+				"williamboman/mason-lspconfig.nvim",
+				"jose-elias-alvarez/null-ls.nvim",
+				"jayp0521/mason-null-ls.nvim",
+				"simrat39/rust-tools.nvim",
+				"folke/neodev.nvim",
+			},
+		})
 
-	use({ "ThePrimeagen/git-worktree.nvim" })
+		-- Completion
+		use({
+			"hrsh7th/nvim-cmp",
+			requires = {
+				"hrsh7th/cmp-nvim-lsp",
+				"hrsh7th/cmp-buffer",
+				"hrsh7th/cmp-path",
+				"hrsh7th/cmp-cmdline",
+				"hrsh7th/cmp-nvim-lsp-signature-help",
+				"lukas-reineke/cmp-rg",
+				"hrsh7th/cmp-vsnip",
+				"hrsh7th/vim-vsnip",
+				"hrsh7th/vim-vsnip-integ",
+				"rafamadriz/friendly-snippets",
+				"onsails/lspkind-nvim",
+				"lukas-reineke/cmp-under-comparator",
+			},
+		})
 
-	-- LSP
-	use("neovim/nvim-lspconfig")
-	use("hrsh7th/cmp-nvim-lsp")
-	use("hrsh7th/cmp-buffer")
-	use("hrsh7th/cmp-path")
-	use("hrsh7th/cmp-cmdline")
-	use("hrsh7th/cmp-nvim-lsp-signature-help")
-	use("lukas-reineke/cmp-rg")
-	use("hrsh7th/nvim-cmp")
-	use("glepnir/lspsaga.nvim")
-	use({
-		"jose-elias-alvarez/null-ls.nvim",
-		requires = { "nvim-lua/plenary.nvim" },
-	})
-	use("onsails/lspkind-nvim")
-	use("lukas-reineke/cmp-under-comparator")
+		-- Treesitter
+		use({
+			"nvim-treesitter/nvim-treesitter",
+			run = function()
+				pcall(require("nvim-treesitter.install").update({ with_sync = true }))
+			end,
+		})
+		use({ "nvim-treesitter/nvim-treesitter-refactor", after = "nvim-treesitter" })
+		use({ "nvim-treesitter/nvim-treesitter-context", after = "nvim-treesitter" })
+		use("windwp/nvim-ts-autotag")
 
-	-- Rust tools
-	use("simrat39/rust-tools.nvim")
+		-- NeoTree
+		use({
+			"nvim-neo-tree/neo-tree.nvim",
+			branch = "v2.x",
+			requires = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
+		})
 
-	-- Treesitter
-	use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-	use("nvim-treesitter/nvim-treesitter-refactor")
-	use("folke/twilight.nvim")
+		-- Git
+		use("lewis6991/gitsigns.nvim")
+		use({ "ThePrimeagen/git-worktree.nvim" })
 
-	-- Zen Mode
-	use("folke/zen-mode.nvim")
+		use({ "ThePrimeagen/harpoon", requires = { "nvim-lua/plenary.nvim" } })
 
-	-- Snippets
-	use("hrsh7th/cmp-vsnip")
-	use("hrsh7th/vim-vsnip")
-	use("hrsh7th/vim-vsnip-integ")
-	use("rafamadriz/friendly-snippets")
+		-- Code Helpers
+		use("windwp/nvim-autopairs")
+		use("numToStr/Comment.nvim")
+		use("folke/todo-comments.nvim")
+		use("lukas-reineke/indent-blankline.nvim")
 
-	-- Code Helpers
-	use("windwp/nvim-autopairs")
-	use("windwp/nvim-ts-autotag")
+		-- Feline
+		use({
+			"feline-nvim/feline.nvim",
+			requires = { "kyazdani42/nvim-web-devicons" },
+		})
 
-	-- neo-tree
-	use("MunifTanjim/nui.nvim")
-	use("nvim-neo-tree/neo-tree.nvim", {
-		branch = "v2.x",
-		requires = { "nvim-lua/plenary.nvim", "kyazdani42/nvim-web-devicons" },
-	})
+		-- Which-key
+		use("folke/which-key.nvim")
 
-	-- Feline
-	use({
-		"feline-nvim/feline.nvim",
-		requires = { "kyazdani42/nvim-web-devicons" },
-	})
+		-- Hop
+		use("phaazon/hop.nvim")
 
-	-- Which-key
-	use("folke/which-key.nvim")
+		use({
+			"folke/persistence.nvim",
+			event = "BufReadPre",
+			module = "persistence",
+			config = function()
+				require("persistence").setup({
+					dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
+				})
+			end,
+		})
+	end,
+	config = {
+		max_jobs = 16,
+		compile_path = packer_util.join_paths(fn.stdpath("data"), "site", "lua", "packer_compiled.lua"),
+	},
+})
 
-	-- Hop
-	use("phaazon/hop.nvim")
-
-	-- Indent Blankline
-	use("lukas-reineke/indent-blankline.nvim")
-
-	-- Comments
-	use("numToStr/Comment.nvim")
-	use("folke/todo-comments.nvim")
-
-	-- FTerm
-	use("numToStr/FTerm.nvim")
-
-	use("lewis6991/gitsigns.nvim")
-
-	use({
-		"folke/persistence.nvim",
-		event = "BufReadPre",
-		module = "persistence",
-		config = function()
-			require("persistence").setup({
-				dir = vim.fn.expand(vim.fn.stdpath("data") .. "/sessions/"),
-			})
-		end,
-	})
-
-	if PACKER_BOOTSTRAP then
-		require("packer").sync()
+if is_installed then
+	vim.cmd("PackerSync")
+else
+	local status, _ = pcall(require, "packer_compiled")
+	if not status then
+		local msg = "File packer_compiled.lua not found: run PackerSync to fix!"
+		vim.notify(msg, vim.log.levels.ERROR, { title = "nvim-config" })
 	end
-end)
+end
+
+api.nvim_create_autocmd({ "BufWritePost" }, {
+	pattern = "*/plugins.lua",
+	group = api.nvim_create_augroup("packer_auto_compile", { clear = true }),
+	callback = function(ctx)
+		local cmd = "source " .. ctx.file
+		vim.cmd(cmd)
+		vim.cmd("PackerCompile")
+		vim.cmd("PackerSync")
+		vim.notify("Sync and compile done!", vim.log.levels.INFO, { title = "nvim-config" })
+	end,
+})

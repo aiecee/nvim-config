@@ -1,4 +1,4 @@
 return {
-	name = "html",
+	name = "cssls",
 	settings = {},
 }
