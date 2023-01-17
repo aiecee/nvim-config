@@ -1,5 +1,0 @@
-require("aiecee.config.code")
-require("aiecee.config.completion")
-require("aiecee.config.lsp").setup()
-require("aiecee.config.ui")
-require("aiecee.config.which-key")

@@ -9,10 +9,6 @@ local function map(mode, lhs, rhs, opts)
 end
 
 -- Hop
-map("i", "ghl", "<cmd>HopLine<cr>")
-map("i", "ghw", "<cmd>HopWord<cr>")
-map("i", "ghp", "<cmd>HopPattern<cr>")
-map("i", "ghc", "<cmd>HopChar2<cr>")
 map("n", "ghl", "<cmd>HopLine<cr>")
 map("n", "ghw", "<cmd>HopWord<cr>")
 map("n", "ghp", "<cmd>HopPattern<cr>")
