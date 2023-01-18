@@ -1,4 +1,4 @@
 return {
-	"phaazon/hop.nvim",
+	{ "phaazon/hop.nvim", config = true },
 	{ "ThePrimeagen/harpoon", dependencies = { "nvim-lua/plenary.nvim" } },
 }

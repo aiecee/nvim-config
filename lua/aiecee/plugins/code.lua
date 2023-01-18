@@ -1,6 +1,6 @@
 return {
 	{ "windwp/nvim-autopairs", config = true },
-	"numToStr/Comment.nvim",
+	{ "numToStr/Comment.nvim", config = true },
 	{
 		"folke/todo-comments.nvim",
 		opts = {
