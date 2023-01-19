@@ -1,4 +1,5 @@
 return {
-	name = "cssls",
+	lsp_name = "cssls",
+	mason_name = "cssls",
 	settings = {},
 }

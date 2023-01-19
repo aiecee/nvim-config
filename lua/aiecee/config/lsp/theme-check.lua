@@ -1,6 +1,5 @@
-local M = {}
-
-M.name = "theme_check"
-M.settings = {}
-
-return M
+return {
+	lsp_name = "theme_check",
+	mason_name = "theme_check",
+	settings = {},
+}

@@ -9,15 +9,16 @@ return {
 			local gopls = require("aiecee.config.lsp.gopls")
 			local html = require("aiecee.config.lsp.html")
 			local jsonls = require("aiecee.config.lsp.jsonls")
-			local pyright = require("aiecee.config.lsp.pyright")
+			local pylsp = require("aiecee.config.lsp.pylsp")
+			-- local pyright = require("aiecee.config.lsp.pyright")
 			local rust_analyzer = require("aiecee.config.lsp.rust-analyzer")
 			local sumneko_lua = require("aiecee.config.lsp.sumneko-lua")
 			local tailwindcss = require("aiecee.config.lsp.tailwindcss")
-			local theme_check = require("aiecee.config.lsp.theme-check")
+			-- local theme_check = require("aiecee.config.lsp.theme-check")
 			local tsserver = require("aiecee.config.lsp.tsserver")
 
 			local function add_server(table, server)
-				table[server.name] = server.settings
+				table[server.mason_name] = server.settings
 			end
 
 			local servers = {}
@@ -25,7 +26,8 @@ return {
 			add_server(servers, gopls)
 			add_server(servers, html)
 			add_server(servers, jsonls)
-			add_server(servers, pyright)
+			add_server(servers, pylsp)
+			-- add_server(servers, pyright)
 			add_server(servers, rust_analyzer)
 			add_server(servers, sumneko_lua)
 			add_server(servers, tailwindcss)
@@ -44,7 +46,9 @@ return {
 			capabilities = cmp_lsp.default_capabilities(capabilities)
 
 			mason_lspconfig.setup({
-				ensure_installed = vim.tbl_keys(servers),
+				ensure_installed = vim.tbl_map(function(val)
+					return val.mason_name
+				end, servers),
 			})
 
 			mason_lspconfig.setup_handlers({

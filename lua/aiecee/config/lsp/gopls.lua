@@ -1,4 +1,5 @@
 return {
-	name = "gopls",
+	lsp_name = "gopls",
+	mason_name = "gopls",
 	settings = {},
 }

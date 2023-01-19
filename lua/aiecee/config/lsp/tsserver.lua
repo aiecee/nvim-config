@@ -1,4 +1,5 @@
 return {
-	name = "tsserver",
+	lsp_name = "tsserver",
+	mason_name = "tsserver",
 	settings = {},
 }

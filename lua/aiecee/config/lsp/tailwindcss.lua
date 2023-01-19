@@ -1,4 +1,5 @@
 return {
-	name = "tailwindcss",
+	lsp_name = "tailwindcss",
+	mason_name = "tailwindcss",
 	settings = {},
 }

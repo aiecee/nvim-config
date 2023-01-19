@@ -1,4 +1,0 @@
-return {
-	name = "pyright",
-	settings = {},
-}

@@ -1,4 +1,5 @@
 return {
-	name = "html",
+	lsp_name = "html",
+	mason_name = "html",
 	settings = {},
 }

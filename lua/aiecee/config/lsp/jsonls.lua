@@ -1,4 +1,5 @@
 return {
-	name = "jsonls",
+	lsp_name = "jsonls",
+	mason_name = "jsonls",
 	settings = {},
 }
