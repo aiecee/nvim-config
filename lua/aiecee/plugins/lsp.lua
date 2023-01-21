@@ -48,7 +48,6 @@ return {
 				ensure_installed = vim.tbl_map(function(val)
 					return val.mason_name
 				end, servers),
-				automatic_installation = true,
 			})
 
 			mason_lspconfig.setup_handlers({
