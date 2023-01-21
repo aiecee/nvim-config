@@ -40,7 +40,6 @@ return {
 			local mason_lspconfig = require("mason-lspconfig")
 			local lsp_config = require("lspconfig")
 			local cmp_lsp = require("cmp_nvim_lsp")
-			local rust_tools = require("rust-tools")
 
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = cmp_lsp.default_capabilities(capabilities)
@@ -49,6 +48,7 @@ return {
 				ensure_installed = vim.tbl_map(function(val)
 					return val.mason_name
 				end, servers),
+				automatic_installation = true,
 			})
 
 			mason_lspconfig.setup_handlers({
@@ -59,8 +59,6 @@ return {
 					})
 				end,
 			})
-
-			rust_tools.setup({})
 
 			vim.lsp.handlers["textDocument/publishDiagnostics"] =
 				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
