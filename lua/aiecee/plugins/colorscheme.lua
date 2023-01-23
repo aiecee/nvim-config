@@ -15,6 +15,10 @@ return {
 				which_key = true,
 				neotree = true,
 				mason = true,
+				dap = {
+					enabled = true,
+					enabled_ui = true,
+				},
 			},
 		},
 		config = function(_, opts)

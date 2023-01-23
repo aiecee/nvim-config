@@ -31,6 +31,14 @@ map("i", "<C-q>c", "<cmd>cexpr []<cr>")
 -- Normal Mode
 wk.register({
 	["-"] = { "<cmd>Telescope commands<cr>", "commands" },
+	d = {
+		name = "Debug",
+		b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "toggle breakpoint" },
+		c = { "<cmd>lua require('dap').continue()<cr>", "continue" },
+		o = { "<cmd>lua require('dap').step_over()<cr>", "step over" },
+		i = { "<cmd>lua require('dap').step_into()<cr>", "step_into" },
+		t = { "<cmd>lua require('dap').terminate()<cr>", "terminate" },
+	},
 	f = {
 		name = "File",
 		s = { "<cmd>w<cr>", "save" },

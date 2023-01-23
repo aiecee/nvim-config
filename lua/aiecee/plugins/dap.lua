@@ -30,6 +30,12 @@ return {
 			dap.listeners.before.event_exited["dapui_config"] = function()
 				dap_ui.close({})
 			end
+			local sign = vim.fn.sign_define
+
+			sign("DapBreakpoint", { text = "●", texthl = "DapBreakpoint", linehl = "", numhl = "" })
+			sign("DapBreakpointCondition", { text = "●", texthl = "DapBreakpointCondition", linehl = "", numhl = "" })
+			sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 		end,
 	},
+	{ "theHamsta/nvim-dap-virtual-text", dependencies = { "mfussenegger/nvim-dap" }, config = true },
 }
