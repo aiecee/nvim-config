@@ -37,5 +37,10 @@ return {
 			sign("DapLogPoint", { text = "◆", texthl = "DapLogPoint", linehl = "", numhl = "" })
 		end,
 	},
-	{ "theHamsta/nvim-dap-virtual-text", dependencies = { "mfussenegger/nvim-dap" }, config = true },
+	{
+		"theHamsta/nvim-dap-virtual-text",
+		dependencies = { "mfussenegger/nvim-dap" },
+		opts = { only_first_definition = false },
+		config = true,
+	},
 }
