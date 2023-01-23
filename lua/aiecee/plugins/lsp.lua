@@ -1,16 +1,14 @@
 return {
-	{ "williamboman/mason.nvim", opts = {}, config = true },
+	{ "williamboman/mason.nvim", opts = { border = "rounded" }, config = true },
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp", "simrat39/rust-tools.nvim" },
-		event = "BufReadPre",
 		opts = function()
 			local cssls = require("aiecee.config.lsp.cssls")
 			local gopls = require("aiecee.config.lsp.gopls")
 			local html = require("aiecee.config.lsp.html")
 			local jsonls = require("aiecee.config.lsp.jsonls")
 			local pylsp = require("aiecee.config.lsp.pylsp")
-			-- local pyright = require("aiecee.config.lsp.pyright")
 			local rust_analyzer = require("aiecee.config.lsp.rust-analyzer")
 			local sumneko_lua = require("aiecee.config.lsp.sumneko-lua")
 			local tailwindcss = require("aiecee.config.lsp.tailwindcss")
@@ -18,7 +16,10 @@ return {
 			local tsserver = require("aiecee.config.lsp.tsserver")
 
 			local function add_server(table, server)
-				table[server.mason_name] = server.settings
+				table[server.mason_name] = {
+					name = server.name,
+					settings = server.settings,
+				}
 			end
 
 			local servers = {}
@@ -27,13 +28,11 @@ return {
 			add_server(servers, html)
 			add_server(servers, jsonls)
 			add_server(servers, pylsp)
-			-- add_server(servers, pyright)
 			add_server(servers, rust_analyzer)
 			add_server(servers, sumneko_lua)
 			add_server(servers, tailwindcss)
 			-- add_server(servers, theme_check)
 			add_server(servers, tsserver)
-
 			return servers
 		end,
 		config = function(_, servers)
@@ -45,16 +44,14 @@ return {
 			capabilities = cmp_lsp.default_capabilities(capabilities)
 
 			mason_lspconfig.setup({
-				ensure_installed = vim.tbl_map(function(val)
-					return val.mason_name
-				end, servers),
+				ensure_installed = vim.tbl_keys(servers),
 			})
 
 			mason_lspconfig.setup_handlers({
 				function(server_name)
 					lsp_config[server_name].setup({
 						capabilities = capabilities,
-						settings = servers[server_name],
+						settings = servers[server_name].settings,
 					})
 				end,
 			})
@@ -76,6 +73,7 @@ return {
 			local augroup = vim.api.nvim_create_augroup("lsp_formatting", {})
 			return {
 				sources = {
+					-- prettierd
 					builtins.formatting.prettierd,
 					-- Stylua
 					builtins.formatting.stylua,
@@ -83,6 +81,12 @@ return {
 					builtins.code_actions.eslint_d,
 					builtins.diagnostics.eslint_d,
 					builtins.formatting.eslint_d,
+					-- black
+					builtins.formatting.black,
+					-- pylint
+					builtins.diagnostics.pylint,
+					-- rustfmt
+					builtins.formatting.rustfmt,
 				},
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then
@@ -109,10 +113,14 @@ return {
 	{
 		"jayp0521/mason-null-ls.nvim",
 		opts = {
-			ensure_installed = { "eslint_d", "prettierd", "stylua" },
+			ensure_installed = { "eslint_d", "prettierd", "stylua", "black", "pylint" },
 			automatic_installation = false,
 			automatic_setup = true,
 		},
-		config = true,
+		config = function(_, opts)
+			local mason_null_ls = require("mason-null-ls")
+			mason_null_ls.setup(opts)
+			mason_null_ls.setup_handlers()
+		end,
 	},
 }

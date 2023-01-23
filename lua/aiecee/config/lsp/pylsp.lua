@@ -1,5 +1,5 @@
 return {
-	lsp_name = "pylsp",
-	mason_name = "python-lsp-server",
+	lsp_name = "python-lsp-server",
+	mason_name = "pylsp",
 	settings = {},
 }
