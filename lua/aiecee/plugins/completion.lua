@@ -19,7 +19,6 @@ return {
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local under_comparator = require("cmp-under-comparator")
-			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 			cmp.setup({
 				sources = cmp.config.sources({
@@ -110,8 +109,6 @@ return {
 					{ name = "cmdline" },
 				}),
 			})
-
-			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 		end,
 	},
 }

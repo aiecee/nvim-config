@@ -11,7 +11,6 @@ return {
 			},
 			integrations = {
 				lsp_saga = true,
-				hop = true,
 				which_key = true,
 				neotree = true,
 				mason = true,
@@ -19,6 +18,7 @@ return {
 					enabled = true,
 					enabled_ui = true,
 				},
+				mini = true,
 			},
 		},
 		config = function(_, opts)

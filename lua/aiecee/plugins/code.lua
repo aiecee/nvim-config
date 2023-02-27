@@ -1,6 +1,5 @@
 return {
-	{ "windwp/nvim-autopairs", config = true },
-	{ "numToStr/Comment.nvim", config = true },
+	{ "folke/trouble.nvim", config = true },
 	{
 		"folke/todo-comments.nvim",
 		opts = {
@@ -13,15 +12,15 @@ return {
 		},
 		config = true,
 	},
-	{
-		"lukas-reineke/indent-blankline.nvim",
-		opts = {
-			filetype_exclude = { "dashboard" },
-			show_current_context = true,
-			show_current_context_start = true,
-		},
-		config = true,
-	},
+	-- {
+	-- 	"lukas-reineke/indent-blankline.nvim",
+	-- 	opts = {
+	-- 		filetype_exclude = { "dashboard" },
+	-- 		show_current_context = true,
+	-- 		show_current_context_start = true,
+	-- 	},
+	-- 	config = true,
+	-- },
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {

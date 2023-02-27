@@ -19,18 +19,6 @@ return {
 		config = true,
 	},
 	{
-		"feline-nvim/feline.nvim",
-		dependencies = { "kyazdani42/nvim-web-devicons" },
-		opts = function()
-			local ctp_feline = require("catppuccin.groups.integrations.feline")
-			return {
-
-				preset = "icon",
-				components = ctp_feline.get(),
-			}
-		end,
-	},
-	{
 		"rcarriga/nvim-notify",
 		config = function()
 			vim.notify = require("notify")

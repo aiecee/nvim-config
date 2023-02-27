@@ -8,16 +8,6 @@ local function map(mode, lhs, rhs, opts)
 	vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- Hop
-map("n", "ghl", "<cmd>HopLine<cr>")
-map("n", "ghw", "<cmd>HopWord<cr>")
-map("n", "ghp", "<cmd>HopPattern<cr>")
-map("n", "ghc", "<cmd>HopChar2<cr>")
-map("v", "ghl", "<cmd>HopLine<cr>")
-map("v", "ghw", "<cmd>HopWord<cr>")
-map("v", "ghp", "<cmd>HopPattern<cr>")
-map("v", "ghc", "<cmd>HopChar2<cr>")
-
 -- Quickfix
 map("n", "<C-q>t", "<cmd>cw<cr>")
 map("i", "<C-q>t", "<cmd>cw<cr>")
@@ -124,13 +114,6 @@ wk.register({
 		n = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "next" },
 		p = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "previous" },
 		l = { "<cmd>Telescope harpoon marks theme=dropdown<cr>", "list" }, -- theme needs to be set here, can't do it in config
-	},
-	h = {
-		name = "Hop",
-		w = { "<cmd>HopWord<cr>", "word" },
-		l = { "<cmd>HopLine<cr>", "line" },
-		p = { "<cmd>HopPattern<cr>", "pattern" },
-		c = { "<cmd>HopChar2<cr>", "char2" },
 	},
 	q = {
 		name = "Quickfix",
