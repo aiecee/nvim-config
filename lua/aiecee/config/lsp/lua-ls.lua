@@ -1,3 +1,5 @@
+local on_attach = require("aiecee.config.lsp.on-attach")
+
 local sumneko_runtime_paths = vim.split(package.path, ";", {})
 table.insert(sumneko_runtime_paths, "lua/?.lua")
 table.insert(sumneko_runtime_paths, "lua/?/init.lua")
@@ -23,4 +25,5 @@ return {
 			},
 		},
 	},
+	on_attach = on_attach.on_attach_code,
 }

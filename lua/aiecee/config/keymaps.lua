@@ -21,14 +21,6 @@ map("i", "<C-q>c", "<cmd>cexpr []<cr>")
 -- Normal Mode
 wk.register({
 	["-"] = { "<cmd>Telescope commands<cr>", "commands" },
-	d = {
-		name = "Debug",
-		b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "toggle breakpoint" },
-		c = { "<cmd>lua require('dap').continue()<cr>", "continue" },
-		o = { "<cmd>lua require('dap').step_over()<cr>", "step over" },
-		i = { "<cmd>lua require('dap').step_into()<cr>", "step_into" },
-		t = { "<cmd>lua require('dap').terminate()<cr>", "terminate" },
-	},
 	f = {
 		name = "File",
 		s = { "<cmd>w<cr>", "save" },
@@ -54,19 +46,6 @@ wk.register({
 		q = { "<cmd>q<cr>", "quit" },
 		s = { "<cmd>wq<cr>", "save and quit" },
 		x = { "<cmd>qa<cr>", "exit" },
-	},
-	c = {
-		name = "Code",
-		b = { "<cmd>Telescope lsp_definitions<cr>", "go to definition" },
-		i = { "<cmd>Telescope lsp_implementations<cr>", "go to implementations" },
-		r = { "<cmd>Telescope lsp_references<cr>", "all references" },
-		d = { "<cmd>Telescope diagnostics<cr>", "diagnostics" },
-		f = { "<cmd>lua vim.lsp.buf.format({ timeout_ms = 5000 })<cr>", "format" },
-		a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "code actions" },
-		R = { "<cmd>lua vim.lsp.buf.rename()<cr>", "rename" },
-		h = { "<cmd>lua vim.lsp.buf.hover()<cr>", "hover" },
-		t = { "<cmd>TodoTelescope<cr>", "todos" },
-		u = { "<cmd>set ff=unix<cr>", "to unix" },
 	},
 	g = {
 		name = "Git",

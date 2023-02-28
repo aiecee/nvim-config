@@ -19,6 +19,7 @@ return {
 				table[server.mason_name] = {
 					name = server.name,
 					settings = server.settings,
+					on_attach = server.on_attach,
 				}
 			end
 
@@ -49,9 +50,11 @@ return {
 
 			mason_lspconfig.setup_handlers({
 				function(server_name)
+					local server_config = servers[server_name]
 					lsp_config[server_name].setup({
 						capabilities = capabilities,
-						settings = servers[server_name].settings,
+						settings = server_config.settings,
+						on_attach = server_config.on_attach,
 					})
 				end,
 			})
