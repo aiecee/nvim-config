@@ -3,12 +3,14 @@ local wk = require("which-key")
 local M = {}
 
 local function setup_code_keymap(bufnr)
-	print("Hello")
 	vim.keymap.set("n", "ga", vim.lsp.buf.code_action, { desc = "[LSP] code actions" })
 	vim.keymap.set("n", "gr", "<cmd>Telescope lsp_references<cr>", { desc = "[LSP] references" })
 	vim.keymap.set("n", "gb", "<cmd>Telescope lsp_definitions<cr>", { desc = "[LSP] definitions" })
 	vim.keymap.set("n", "gR", vim.lsp.buf.rename, { desc = "[LSP] rename" })
 	vim.keymap.set("n", "gh", vim.lsp.buf.hover, { desc = "[LSP] hover" })
+	vim.keymap.set("n", "gd", function()
+		vim.diagnostic.open_float({ border = "rounded" })
+	end, { desc = "[LSP] diagnostics" })
 	wk.register({
 		c = {
 			name = "Code",

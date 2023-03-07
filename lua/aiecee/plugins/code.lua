@@ -12,15 +12,6 @@ return {
 		},
 		config = true,
 	},
-	-- {
-	-- 	"lukas-reineke/indent-blankline.nvim",
-	-- 	opts = {
-	-- 		filetype_exclude = { "dashboard" },
-	-- 		show_current_context = true,
-	-- 		show_current_context_start = true,
-	-- 	},
-	-- 	config = true,
-	-- },
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {

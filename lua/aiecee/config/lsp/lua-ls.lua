@@ -5,7 +5,6 @@ table.insert(sumneko_runtime_paths, "lua/?.lua")
 table.insert(sumneko_runtime_paths, "lua/?/init.lua")
 
 return {
-	lsp_name = "sumneko_lua",
 	mason_name = "lua_ls",
 	settings = {
 		Lua = {

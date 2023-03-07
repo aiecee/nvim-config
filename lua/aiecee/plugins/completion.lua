@@ -14,14 +14,20 @@ return {
 			"rafamadriz/friendly-snippets",
 			"onsails/lspkind-nvim",
 			"lukas-reineke/cmp-under-comparator",
+			"zbirenbaum/copilot.lua",
+			"zbirenbaum/copilot-cmp",
 		},
+		event = "InsertEnter",
 		config = function()
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			local under_comparator = require("cmp-under-comparator")
+			local copilot_cmp = require("copilot_cmp")
+			copilot_cmp.setup()
 
 			cmp.setup({
 				sources = cmp.config.sources({
+					{ name = "copilot" },
 					{ name = "nvim_lsp" },
 					{ name = "buffer" },
 					{ name = "vsnip" },
@@ -46,6 +52,7 @@ return {
 								vsnip = "[Snp]",
 								path = "[Pth]",
 								rg = "[Rip]",
+								copilot = "[Cop]",
 							},
 						})(entry, vim_item)
 						local strings = vim.split(kind.kind, "%s", { trimempty = true })
@@ -60,8 +67,8 @@ return {
 				},
 				mapping = {
 					["<cr>"] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Insert,
-						select = true,
+						behavior = cmp.ConfirmBehavior.Replace,
+						select = false,
 					}),
 					["<tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
@@ -83,6 +90,7 @@ return {
 				},
 				sorting = {
 					comparators = {
+						require("copilot_cmp.comparators").prioritize,
 						cmp.config.compare.offset,
 						cmp.config.compare.exact,
 						cmp.config.compare.score,
