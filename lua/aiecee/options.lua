@@ -1,5 +1,4 @@
 local utils = require("aiecee.utils.options")
-local system = require("aiecee.utils.system")
 
 local global_options = {
 	mapleader = " ",
@@ -30,7 +29,7 @@ local options = {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = system.is_windows() and "FiraCode NF:h11" or "VictorMono Nerd Font Mono:h11",
+	guifont = "VictorMono Nerd Font Mono:h11",
 	foldmethod = "expr",
 	foldexpr = "nvim_treesitter#foldexpr()",
 	foldlevelstart = 99,

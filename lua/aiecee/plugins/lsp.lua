@@ -12,7 +12,7 @@ return {
 			local rust_analyzer = require("aiecee.config.lsp.rust-analyzer")
 			local lua_ls = require("aiecee.config.lsp.lua-ls")
 			local tailwindcss = require("aiecee.config.lsp.tailwindcss")
-			-- local theme_check = require("aiecee.config.lsp.theme-check")
+			local theme_check = require("aiecee.config.lsp.theme-check")
 			local tsserver = require("aiecee.config.lsp.tsserver")
 
 			local function add_server(table, server)
@@ -32,7 +32,7 @@ return {
 			add_server(servers, rust_analyzer)
 			add_server(servers, lua_ls)
 			add_server(servers, tailwindcss)
-			-- add_server(servers, theme_check)
+			add_server(servers, theme_check)
 			add_server(servers, tsserver)
 			return servers
 		end,
