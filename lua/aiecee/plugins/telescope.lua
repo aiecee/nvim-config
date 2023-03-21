@@ -5,13 +5,21 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope-ui-select.nvim",
 		"nvim-telescope/telescope-file-browser.nvim",
+		"folke/trouble.nvim",
 	},
 	priority = 1,
 	config = function()
 		local telescope = require("telescope")
 		local telescope_themes = require("telescope.themes")
+		local trouble = require("trouble.providers.telescope")
 
 		telescope.setup({
+			defaults = {
+				mappings = {
+					i = { ["<c-t>"] = trouble.open_with_trouble },
+					n = { ["<c-t>"] = trouble.open_with_trouble },
+				},
+			},
 			pickers = {
 				find_files = {
 					theme = "dropdown",

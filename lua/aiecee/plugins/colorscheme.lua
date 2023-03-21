@@ -10,7 +10,6 @@ return {
 				enabled = true,
 			},
 			integrations = {
-				lsp_saga = true,
 				which_key = true,
 				neotree = true,
 				mason = true,

@@ -1,5 +1,13 @@
 return {
-	{ "folke/trouble.nvim", config = true },
+	{
+		"folke/trouble.nvim",
+		keys = {
+			{ "gq", "<cmd>TroubleToggle quickfix<cr>", desc = "quickfix" },
+			{ "gw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
+			{ "gt", "<cmd>TroubleToggle<cr>", desc = "trouble" },
+		},
+		config = true,
+	},
 	{
 		"folke/todo-comments.nvim",
 		opts = {

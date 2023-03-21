@@ -23,7 +23,11 @@ return {
 			local lspkind = require("lspkind")
 			local under_comparator = require("cmp-under-comparator")
 			local copilot_cmp = require("copilot_cmp")
-			copilot_cmp.setup()
+			copilot_cmp.setup({
+				formatters = {
+					insert_text = require("copilot_cmp.format").remove_existing,
+				},
+			})
 
 			cmp.setup({
 				sources = cmp.config.sources({
@@ -38,6 +42,9 @@ return {
 				window = {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
+				},
+				experimental = {
+					ghost_text = true,
 				},
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
@@ -89,6 +96,7 @@ return {
 					end, { "i", "s" }),
 				},
 				sorting = {
+					priority_weight = 2,
 					comparators = {
 						require("copilot_cmp.comparators").prioritize,
 						cmp.config.compare.offset,
