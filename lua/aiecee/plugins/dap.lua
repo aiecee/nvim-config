@@ -5,11 +5,11 @@ return {
 		opts = {
 			ensure_installed = { "codelldb", "python", "node2", "chrome" },
 			automatic_setup = true,
+			handlers = {},
 		},
 		config = function(_, opts)
 			local mason_dap = require("mason-nvim-dap")
 			mason_dap.setup(opts)
-			mason_dap.setup_handlers()
 		end,
 	},
 	{
@@ -21,6 +21,7 @@ return {
 			dap_ui.setup()
 
 			local dap = require("dap")
+
 			dap.listeners.after.event_initialized["dapui_config"] = function()
 				dap_ui.open({})
 			end

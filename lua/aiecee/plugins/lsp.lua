@@ -116,14 +116,13 @@ return {
 	{
 		"jayp0521/mason-null-ls.nvim",
 		opts = {
-			ensure_installed = { "eslint_d", "prettierd", "stylua", "black", "pylint" },
+			ensure_installed = { "eslint_d", "prettierd", "stylua", "black", "pylint", "rustfmt" },
 			automatic_installation = false,
 			automatic_setup = true,
 		},
 		config = function(_, opts)
 			local mason_null_ls = require("mason-null-ls")
 			mason_null_ls.setup(opts)
-			mason_null_ls.setup_handlers()
 		end,
 	},
 }

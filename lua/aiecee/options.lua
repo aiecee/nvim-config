@@ -11,7 +11,8 @@ local global_options = {
 utils.set_globals(global_options)
 
 local options = {
-	completeopt = { "menu", "menuone", "noselect" },
+	shell = "zsh",
+	completeopt = { "menu", "menuone", "preview", "noselect" },
 	number = true,
 	relativenumber = true,
 	scrolloff = 10,
@@ -37,6 +38,7 @@ local options = {
 	laststatus = 3,
 	clipboard = "unnamedplus",
 	updatetime = 750,
+	title = true,
 }
 
 utils.set_opts(options)

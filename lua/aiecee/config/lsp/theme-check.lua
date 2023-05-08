@@ -1,3 +1,4 @@
+local nvim_lsp = require("lspconfig")
 local on_attach = require("aiecee.config.lsp.on-attach")
 
 return {
