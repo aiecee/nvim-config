@@ -7,15 +7,19 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-cmdline",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"lukas-reineke/cmp-rg",
+			"hrsh7th/cmp-nvim-lsp-document-symbol",
+			"hrsh7th/cmp-nvim-lua",
 			"hrsh7th/cmp-vsnip",
 			"hrsh7th/vim-vsnip",
 			"hrsh7th/vim-vsnip-integ",
+			"lukas-reineke/cmp-rg",
 			"rafamadriz/friendly-snippets",
 			"onsails/lspkind-nvim",
 			"lukas-reineke/cmp-under-comparator",
 			"zbirenbaum/copilot.lua",
 			"zbirenbaum/copilot-cmp",
+			"amarakon/nvim-cmp-buffer-lines",
+			"David-Kunz/cmp-npm",
 		},
 		event = "InsertEnter",
 		config = function()
@@ -23,6 +27,12 @@ return {
 			local lspkind = require("lspkind")
 			local under_comparator = require("cmp-under-comparator")
 			local copilot_cmp = require("copilot_cmp")
+			local npm_cmp = require("cmp-npm")
+
+			npm_cmp.setup({
+				only_semantic_versions = true,
+			})
+
 			copilot_cmp.setup({
 				formatters = {
 					insert_text = require("copilot_cmp.format").remove_existing,
@@ -33,11 +43,14 @@ return {
 				sources = cmp.config.sources({
 					{ name = "copilot" },
 					{ name = "nvim_lsp" },
+					{ name = "nvim_lsp_document_symbol" },
+					{ name = "nvim_lsp_signature_help" },
 					{ name = "buffer" },
 					{ name = "vsnip" },
 					{ name = "path" },
-					{ name = "nvim_lsp_signature_help" },
 					{ name = "rg" },
+					{ name = "npm", keyword_length = 4 },
+					{ name = "nvim_lua" },
 				}),
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -48,24 +61,23 @@ return {
 				},
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
-					format = function(entry, vim_item)
-						local kind = lspkind.cmp_format({
-							mode = "symbol_text",
-							maxwidth = 50,
-							with_text = true,
-							menu = {
-								nvim_lsp = "[Lsp]",
-								buffer = "[Buf]",
-								vsnip = "[Snp]",
-								path = "[Pth]",
-								rg = "[Rip]",
-								copilot = "[Cop]",
-							},
-						})(entry, vim_item)
-						local strings = vim.split(kind.kind, "%s", { trimempty = true })
-						kind.kind = " " .. strings[1] .. " "
-						return kind
-					end,
+					format = lspkind.cmp_format({
+						mode = "symbol_text",
+						maxwidth = 40,
+						ellipsis_char = "...",
+						symbol_map = {
+							Copilot = "",
+						},
+						menu = {
+							nvim_lsp = "[Lsp]",
+							buffer = "[Buf]",
+							vsnip = "[Snp]",
+							path = "[Pth]",
+							rg = "[Rip]",
+							copilot = "[Cop]",
+							npm = "[Npm]",
+						},
+					}),
 				},
 				snippet = {
 					expand = function(args)
@@ -79,14 +91,14 @@ return {
 					}),
 					["<tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							cmp.select_next_item()
+							cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
 						else
 							fallback()
 						end
 					end, { "i", "s" }),
 					["<S-tab>"] = cmp.mapping(function(fallback)
 						if cmp.visible() then
-							cmp.select_prev_item()
+							cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
 						else
 							fallback()
 						end
@@ -123,6 +135,7 @@ return {
 				sources = cmp.config.sources({
 					{ name = "path" },
 					{ name = "cmdline" },
+					{ name = "buffer" },
 				}),
 			})
 		end,
