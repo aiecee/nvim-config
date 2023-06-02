@@ -24,6 +24,7 @@ return {
 					"python",
 					"bash",
 					"liquid",
+					"kotlin",
 				},
 				highlight = {
 					enable = true,
