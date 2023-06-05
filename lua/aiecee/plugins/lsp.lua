@@ -94,6 +94,9 @@ return {
 					builtins.formatting.rustfmt,
 					-- tsc
 					builtins.diagnostics.tsc,
+					-- kotlin
+					builtins.diagnostics.ktlint,
+					builtins.formatting.ktlint,
 				},
 				on_attach = function(client, bufnr)
 					if client.supports_method("textDocument/formatting") then
@@ -120,7 +123,7 @@ return {
 	{
 		"jayp0521/mason-null-ls.nvim",
 		opts = {
-			ensure_installed = { "eslint_d", "prettierd", "stylua", "black", "pylint", "rustfmt", "tsc" },
+			ensure_installed = { "eslint_d", "prettierd", "stylua", "black", "pylint", "rustfmt", "tsc", "ktlint" },
 			automatic_installation = false,
 			automatic_setup = true,
 		},
