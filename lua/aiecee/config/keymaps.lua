@@ -102,6 +102,13 @@ wk.register({
 		c = { "<cmd>cexpr []<cr>", "clear" },
 		l = { "<cmd>Telescope quickfix<cr>", "list" },
 	},
+	d = {
+		name = "Debug",
+		c = { "<cmd>lua require('dap').continue()<cr>", "continue" },
+		t = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "toggle breakpoint" },
+		o = { "<cmd>lua require('dap').step_over()<cr>", "step over" },
+		i = { "<cmd>lua require('dap').step_into()<cr>", "step into" },
+	},
 }, {
 	prefix = "<leader>",
 })

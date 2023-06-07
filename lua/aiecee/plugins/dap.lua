@@ -3,13 +3,84 @@ return {
 		"jay-babu/mason-nvim-dap.nvim",
 		dependencies = { "williamboman/mason.nvim" },
 		opts = {
-			ensure_installed = { "codelldb", "python", "node2", "chrome" },
+			ensure_installed = { "codelldb", "python" },
 			automatic_setup = true,
-			handlers = {},
 		},
-		config = function(_, opts)
-			local mason_dap = require("mason-nvim-dap")
-			mason_dap.setup(opts)
+		config = true,
+	},
+	{
+		"mfussenegger/nvim-dap",
+		dependencies = {
+			"mxsdev/nvim-dap-vscode-js",
+			{
+				"microsoft/vscode-js-debug",
+				version = "1.x",
+				build = "npm i && npm run compile vsDebugServerBundle && mv dist out",
+			},
+		},
+		config = function()
+			local dap = require("dap")
+			local dap_vscode = require("dap-vscode-js")
+			dap_vscode.setup({
+				debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+				adapters = { "pwa-node", "pwa-chrome" },
+			})
+
+			local node_config = {
+				{
+					type = "pwa-node",
+					request = "attach",
+					processId = require("dap.utils").pick_process,
+					name = "Attach debugger to existing `node --inspect` process",
+					sourceMaps = true,
+					resolveSourceMapLocations = {
+						"${workspaceFolder}/**",
+						"!**/node_modules/**",
+					},
+					cwd = "${workspaceFolder}/src",
+					skipFiles = { "${workspaceFolder}/node_modules/**/*.js" },
+				},
+				{
+					type = "pwa-node",
+					request = "launch",
+					name = "Launch file in new node process",
+					program = "${file}",
+					cwd = "${workspaceFolder}",
+				},
+			}
+			local chrome_config = {
+				{
+					type = "pwa-chrome",
+					name = "Launch Chrome to debug client (3000)",
+					request = "launch",
+					url = "http://localhost:3000",
+					sourceMaps = true,
+					protocol = "inspector",
+					port = 9222,
+					webRoot = "${workspaceFolder}/src",
+					skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },
+				},
+				{
+					type = "pwa-chrome",
+					name = "Launch Chrome to debug client (4200)",
+					request = "launch",
+					url = "http://localhost:4200",
+					sourceMaps = true,
+					protocol = "inspector",
+					port = 9222,
+					webRoot = "${workspaceFolder}/src",
+					skipFiles = { "**/node_modules/**/*", "**/@vite/*", "**/src/client/*", "**/src/*" },
+				},
+			}
+
+			local merged_config = {}
+			vim.list_extend(merged_config, node_config)
+			vim.list_extend(merged_config, chrome_config)
+
+			dap.configurations["javascriptreact"] = chrome_config
+			dap.configurations["typescriptreact"] = chrome_config
+			dap.configurations["javascript"] = merged_config
+			dap.configurations["typescript"] = merged_config
 		end,
 	},
 	{
