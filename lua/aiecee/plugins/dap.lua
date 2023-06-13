@@ -3,14 +3,16 @@ return {
 		"jay-babu/mason-nvim-dap.nvim",
 		dependencies = { "williamboman/mason.nvim" },
 		opts = {
-			ensure_installed = { "codelldb", "python" },
+			ensure_installed = { "codelldb", "python", "kotlin" },
 			automatic_setup = true,
+			handlers = {},
 		},
 		config = true,
 	},
 	{
 		"mfussenegger/nvim-dap",
 		dependencies = {
+			"Mgenuit/nvim-dap-kotlin",
 			"mxsdev/nvim-dap-vscode-js",
 			{
 				"microsoft/vscode-js-debug",
@@ -20,7 +22,11 @@ return {
 		},
 		config = function()
 			local dap = require("dap")
+			local kotlin_dap = require("dap-kotlin")
 			local dap_vscode = require("dap-vscode-js")
+
+			kotlin_dap.setup({})
+
 			local debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"
 			dap_vscode.setup({
 				debugger_path = debugger_path,
