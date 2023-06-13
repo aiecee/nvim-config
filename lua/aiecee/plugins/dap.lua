@@ -21,8 +21,9 @@ return {
 		config = function()
 			local dap = require("dap")
 			local dap_vscode = require("dap-vscode-js")
+			local debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug"
 			dap_vscode.setup({
-				debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
+				debugger_path = debugger_path,
 				adapters = { "pwa-node", "pwa-chrome" },
 			})
 
