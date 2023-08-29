@@ -7,14 +7,16 @@ return {
 			local cssls = require("aiecee.config.lsp.cssls")
 			local gopls = require("aiecee.config.lsp.gopls")
 			local html = require("aiecee.config.lsp.html")
+			local jedi = require("aiecee.config.lsp.jedi")
 			local jsonls = require("aiecee.config.lsp.jsonls")
 			local kotlin = require("aiecee.config.lsp.kotlin")
-			local pylsp = require("aiecee.config.lsp.pylsp")
+			-- local pylsp = require("aiecee.config.lsp.pylsp")
 			local rust_analyzer = require("aiecee.config.lsp.rust-analyzer")
 			local lua_ls = require("aiecee.config.lsp.lua-ls")
 			local tailwindcss = require("aiecee.config.lsp.tailwindcss")
 			local theme_check = require("aiecee.config.lsp.theme-check")
 			local tsserver = require("aiecee.config.lsp.tsserver")
+			local volar = require("aiecee.config.lsp.vue")
 
 			local function add_server(table, server)
 				table[server.mason_name] = {
@@ -28,14 +30,16 @@ return {
 			add_server(servers, cssls)
 			add_server(servers, gopls)
 			add_server(servers, html)
+			add_server(servers, jedi)
 			add_server(servers, jsonls)
 			add_server(servers, kotlin)
-			add_server(servers, pylsp)
+			-- add_server(servers, pylsp)
 			add_server(servers, rust_analyzer)
 			add_server(servers, lua_ls)
 			add_server(servers, tailwindcss)
 			add_server(servers, theme_check)
 			add_server(servers, tsserver)
+			add_server(servers, volar)
 			return servers
 		end,
 		config = function(_, servers)
@@ -53,6 +57,10 @@ return {
 			mason_lspconfig.setup_handlers({
 				function(server_name)
 					local server_config = servers[server_name]
+					if server_config == nil then
+						return
+					end
+
 					lsp_config[server_name].setup({
 						capabilities = capabilities,
 						settings = server_config.settings,
@@ -99,6 +107,12 @@ return {
 					builtins.formatting.ktlint,
 				},
 				on_attach = function(client, bufnr)
+					local filepath = vim.api.nvim_buf_get_name(bufnr)
+					local file_extension = vim.fn.fnamemodify(filepath, ":e")
+					if file_extension == "kts" then
+						return
+					end
+
 					if client.supports_method("textDocument/formatting") then
 						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 						vim.api.nvim_create_autocmd("BufWritePre", {

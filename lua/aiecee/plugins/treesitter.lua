@@ -25,6 +25,8 @@ return {
 					"bash",
 					"liquid",
 					"kotlin",
+					"vue",
+					"yaml",
 				},
 				highlight = {
 					enable = true,

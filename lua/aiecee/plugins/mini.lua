@@ -27,12 +27,33 @@ return {
 					line_down = "<C-j>",
 				},
 			},
+			clues = {
+				triggers = {
+					-- Leader triggers
+					{ mode = "n", keys = "<Leader>" },
+					{ mode = "x", keys = "<Leader>" },
+
+					-- Built-in completion
+					{ mode = "i", keys = "<C-x>" },
+
+					-- `g` key
+					{ mode = "n", keys = "g" },
+					{ mode = "x", keys = "g" },
+				},
+				window = {
+					delay = 0,
+					config = {
+						border = "rounded",
+					},
+				},
+			},
 		},
 		config = function(_, opts)
 			require("mini.ai").setup()
 			require("mini.animate").setup()
 			require("mini.bracketed").setup()
 			require("mini.comment").setup()
+			-- require("mini.clue").setup(opts.clues)
 			require("mini.cursorword").setup()
 			require("mini.indentscope").setup(opts.indentscope)
 			require("mini.jump").setup()
