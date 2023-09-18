@@ -1,10 +1,11 @@
 return {
-	{ "williamboman/mason.nvim", opts = { border = "rounded" }, config = true },
+	{ "williamboman/mason.nvim", opts = { ui = { border = "rounded" } }, config = true },
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp", "simrat39/rust-tools.nvim" },
 		opts = function()
 			local cssls = require("aiecee.config.lsp.cssls")
+			local eslint = require("aiecee.config.lsp.eslint")
 			local gopls = require("aiecee.config.lsp.gopls")
 			local html = require("aiecee.config.lsp.html")
 			local jedi = require("aiecee.config.lsp.jedi")
@@ -28,6 +29,7 @@ return {
 
 			local servers = {}
 			add_server(servers, cssls)
+			add_server(servers, eslint)
 			add_server(servers, gopls)
 			add_server(servers, html)
 			add_server(servers, jedi)
@@ -90,10 +92,6 @@ return {
 					builtins.formatting.prettierd,
 					-- Stylua
 					builtins.formatting.stylua,
-					-- eslint_d
-					builtins.code_actions.eslint_d,
-					builtins.diagnostics.eslint_d,
-					builtins.formatting.eslint_d,
 					-- black
 					builtins.formatting.black,
 					-- pylint
@@ -137,7 +135,7 @@ return {
 	{
 		"jayp0521/mason-null-ls.nvim",
 		opts = {
-			ensure_installed = { "eslint_d", "prettierd", "stylua", "black", "pylint", "rustfmt", "tsc", "ktlint" },
+			ensure_installed = { "prettierd", "stylua", "black", "pylint", "rustfmt", "tsc", "ktlint" },
 			automatic_installation = false,
 			automatic_setup = true,
 		},
