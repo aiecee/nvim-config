@@ -22,11 +22,10 @@ map("i", "<C-q>c", "<cmd>cexpr []<cr>")
 wk.register({
 	["-"] = { "<cmd>Telescope commands<cr>", "commands" },
 	f = {
-		name = "File",
+		name = "file",
 		s = { "<cmd>w<cr>", "save" },
 		a = { "<cmd>wa<cr>", "save all" },
 		f = { "<cmd>Telescope find_files<cr>", "find file" },
-		b = { "<cmd>Telescope file_browser<cr>", "file browser" },
 		r = { "<cmd>Telescope oldfiles<cr>", "recently opened" },
 	},
 	t = {
@@ -56,7 +55,6 @@ wk.register({
 		},
 		b = { "<cmd>Telescope git_branches<cr>", "branches" },
 		s = { "<cmd>NeoTreeFloat git_status<cr>", "status" },
-		f = { "<cmd>Telescope git_files<cr>", "files" },
 		w = {
 			name = "Worktrees",
 			w = { "<cmd>lua require('telescope').extensions.git_worktree.git_worktrees()<cr>", "worktrees" },
