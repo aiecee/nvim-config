@@ -87,9 +87,9 @@ wk.register({
 	},
 	m = {
 		name = "Marks",
-		a = { "<cmd>lua require('harpoon.mark').add_file()<cr>", "add file" },
-		n = { "<cmd>lua require('harpoon.ui').nav_next()<cr>", "next" },
-		p = { "<cmd>lua require('harpoon.ui').nav_prev()<cr>", "previous" },
+		a = { "<cmd>lua require('harpoon'):list():append()<cr>", "add file" },
+		n = { "<cmd>lua require('harpoon'):list():next()<cr>", "next" },
+		p = { "<cmd>lua require('harpoon'):list():prev()<cr>", "previous" },
 		l = { "<cmd>Telescope harpoon marks theme=dropdown<cr>", "list" }, -- theme needs to be set here, can't do it in config
 	},
 	q = {
