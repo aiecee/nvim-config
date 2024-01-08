@@ -51,6 +51,5 @@ return {
 		telescope.load_extension("ui-select")
 		telescope.load_extension("file_browser")
 		telescope.load_extension("todo-comments")
-		telescope.load_extension("git_worktree")
 	end,
 }
