@@ -27,5 +27,4 @@ return {
 		},
 		config = true,
 	},
-	"ThePrimeagen/git-worktree.nvim",
 }

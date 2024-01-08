@@ -2,17 +2,12 @@ return {
 	{ "williamboman/mason.nvim", opts = { ui = { border = "rounded" } }, config = true },
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp", "simrat39/rust-tools.nvim" },
+		dependencies = { "neovim/nvim-lspconfig", "hrsh7th/cmp-nvim-lsp" },
 		opts = function()
 			local cssls = require("aiecee.config.lsp.cssls")
 			local eslint = require("aiecee.config.lsp.eslint")
-			local gopls = require("aiecee.config.lsp.gopls")
 			local html = require("aiecee.config.lsp.html")
-			local jedi = require("aiecee.config.lsp.jedi")
 			local jsonls = require("aiecee.config.lsp.jsonls")
-			local kotlin = require("aiecee.config.lsp.kotlin")
-			-- local pylsp = require("aiecee.config.lsp.pylsp")
-			local rust_analyzer = require("aiecee.config.lsp.rust-analyzer")
 			local lua_ls = require("aiecee.config.lsp.lua-ls")
 			local tailwindcss = require("aiecee.config.lsp.tailwindcss")
 			local theme_check = require("aiecee.config.lsp.theme-check")
@@ -30,13 +25,8 @@ return {
 			local servers = {}
 			add_server(servers, cssls)
 			add_server(servers, eslint)
-			add_server(servers, gopls)
 			add_server(servers, html)
-			add_server(servers, jedi)
 			add_server(servers, jsonls)
-			add_server(servers, kotlin)
-			-- add_server(servers, pylsp)
-			add_server(servers, rust_analyzer)
 			add_server(servers, lua_ls)
 			add_server(servers, tailwindcss)
 			add_server(servers, theme_check)

@@ -19,7 +19,6 @@ return {
 			"zbirenbaum/copilot.lua",
 			"zbirenbaum/copilot-cmp",
 			"amarakon/nvim-cmp-buffer-lines",
-			"David-Kunz/cmp-npm",
 		},
 		event = "InsertEnter",
 		config = function()
@@ -49,7 +48,6 @@ return {
 					{ name = "vsnip" },
 					{ name = "path" },
 					{ name = "rg" },
-					{ name = "npm", keyword_length = 4 },
 					{ name = "nvim_lua" },
 				}),
 				window = {

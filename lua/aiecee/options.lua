@@ -5,7 +5,6 @@ local global_options = {
 	neovide_remember_window_size = true,
 	nvim_tree_highlight_opened_files = 1,
 	nvim_tree_git_hl = 1,
-	catppuccin_flavour = "macchiato",
 }
 
 utils.set_globals(global_options)

@@ -13,7 +13,7 @@ function M.setup()
 		defaults = {
 			lazy = true,
 		},
-		install = { missing = true, colorscheme = { "catppuccin" } },
+		install = { missing = true },
 		ui = {
 			border = "single",
 		},
