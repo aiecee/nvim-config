@@ -26,11 +26,6 @@ return {
 			local lspkind = require("lspkind")
 			local under_comparator = require("cmp-under-comparator")
 			local copilot_cmp = require("copilot_cmp")
-			local npm_cmp = require("cmp-npm")
-
-			npm_cmp.setup({
-				only_semantic_versions = true,
-			})
 
 			copilot_cmp.setup({
 				formatters = {
