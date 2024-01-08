@@ -28,42 +28,12 @@ local function setup_code_keymap(bufnr)
 	}, { prefix = "<leader>", buffer = bufnr })
 end
 
-local function setup_dap_keymap(bufnr)
-	vim.keymap.set("n", "gt", function()
-		require("dap").toggle_breakpoint()
-	end, { desc = "[DAP] toggle breakpoint" })
-	vim.keymap.set("n", "go", function()
-		require("dap").step_over()
-	end, { desc = "[DAP] step over" })
-	vim.keymap.set("n", "gs", function()
-		require("dap").continue()
-	end, { desc = "[DAP] continue" })
-	vim.keymap.set("n", "gt", function()
-		require("dap").terminate()
-	end, { desc = "[DAP] terminate" })
-	wk.register({
-		d = {
-			name = "Debug",
-			b = { "<cmd>lua require('dap').toggle_breakpoint()<cr>", "toggle breakpoint" },
-			c = { "<cmd>lua require('dap').continue()<cr>", "continue" },
-			o = { "<cmd>lua require('dap').step_over()<cr>", "step over" },
-			i = { "<cmd>lua require('dap').step_into()<cr>", "step_into" },
-			t = { "<cmd>lua require('dap').terminate()<cr>", "terminate" },
-		},
-	}, { prefix = "<leader>", buffer = bufnr })
-end
-
 function M.on_attach_code(_, bufnr)
 	setup_code_keymap(bufnr)
 end
 
-function M.on_attach_dap(_, bufnr)
-	setup_dap_keymap(bufnr)
-end
-
 function M.on_attach(_, bufnr)
 	setup_code_keymap(bufnr)
-	setup_dap_keymap(bufnr)
 end
 
 return M
