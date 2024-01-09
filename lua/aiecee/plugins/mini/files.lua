@@ -16,6 +16,7 @@ local map_split = function(buf_id, lhs, direction)
 		end)
 
 		mini_files.set_target_window(new_target_window)
+		mini_files.go_in()
 	end
 
 	vim.keymap.set("n", lhs, rhs, { buffer = buf_id, desc = "Split " .. direction })
@@ -25,8 +26,8 @@ vim.api.nvim_create_autocmd("User", {
 	pattern = "MiniFilesBufferCreate",
 	callback = function(args)
 		local buf_id = args.data.buf_id
-		map_split(buf_id, "gs", "belowright horizontal")
-		map_split(buf_id, "gv", "belowright vertical")
+		map_split(buf_id, "gv", "belowright horizontal")
+		map_split(buf_id, "gs", "belowright vertical")
 	end,
 })
 
