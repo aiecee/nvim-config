@@ -42,25 +42,10 @@ return {
 					},
 				},
 			},
-			extra_parsers = {
-				liquid = {
-					install_info = {
-						url = "https://github.com/Shopify/tree-sitter-liquid",
-						files = { "src/parser.c" },
-						branch = "main",
-						requires_generate_from_grammar = true,
-					},
-					filetype = "liquid",
-				},
-			},
 		},
 		config = function(_, opts)
 			local install = require("nvim-treesitter.install")
 			local config = require("nvim-treesitter.configs")
-			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-			for k, v in pairs(opts.extra_parsers) do
-				parser_config[k] = v
-			end
 			install.compilers = opts.compilers
 			config.setup(opts.settings)
 			install.update({ with_sync = true })

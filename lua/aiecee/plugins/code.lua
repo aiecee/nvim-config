@@ -1,22 +1,13 @@
 return {
 	{
 		"folke/trouble.nvim",
-		keys = {
-			{ "gq", "<cmd>TroubleToggle quickfix<cr>", desc = "quickfix" },
-			{ "gw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "workspace diagnostics" },
-			{ "gt", "<cmd>TroubleToggle<cr>", desc = "trouble" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
 		},
-		config = true,
-	},
-	{
-		"folke/todo-comments.nvim",
-		opts = {
-			highlight = {
-				pattern = [[.*<(KEYWORDS)\s*]],
-			},
-			search = {
-				pattern = [[\b(KEYWORDS)\b]],
-			},
+		keys = {
+			{ "gq", "<cmd>Trouble quickfix toggle<cr>", desc = "quickfix" },
+			{ "gw", "<cmd>Trouble diagnostics toggle<cr>", desc = "workspace diagnostics" },
+			{ "gt", "<cmd>Trouble toggle<cr>", desc = "trouble" },
 		},
 		config = true,
 	},

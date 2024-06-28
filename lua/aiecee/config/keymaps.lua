@@ -2,7 +2,6 @@
 
 local map_table = require("aiecee.utils.keymaps")
 local mini_files = require("mini.files")
-local persistence = require("persistence")
 local harpoon = require("harpoon")
 local global_mappings = {
 	n = {
@@ -20,17 +19,8 @@ local global_mappings = {
 		{ "<Leader>gcc", "<cmd>Telescope git_commits<cr>", "commits" },
 		{ "<Leader>gcb", "<cmd>Telescope git_bcommits<cr>", "buffer commits" },
 		{ "<Leader>gb", "<cmd>Telescope git_branches<cr>", "branches" },
-		-- sessions
-		{ "<Leader>Sc", persistence.load, "load" },
-		{
-			"<Leader>Sl",
-			function()
-				persistence.load({ last = true })
-			end,
-			"load last",
-		},
 		-- windows
-		{ "<Leader>=", "<cmd>wincmd =<cr>", "format" },
+		{ "<Leader>w=", "<cmd>wincmd =<cr>", "format" },
 		{ "<Leader>wh", "<cmd>wincmd h<cr>", "go left" },
 		{ "<Leader>wj", "<cmd>wincmd j<cr>", "go down" },
 		{ "<Leader>wk", "<cmd>wincmd k<cr>", "go up" },

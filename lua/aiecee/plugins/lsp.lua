@@ -72,7 +72,7 @@ return {
 		end,
 	},
 	{
-		"jose-elias-alvarez/null-ls.nvim",
+		"nvimtools/none-ls.nvim",
 		opts = function()
 			local builtins = require("null-ls").builtins
 			local augroup = vim.api.nvim_create_augroup("lsp_formatting", {})
@@ -86,13 +86,6 @@ return {
 					builtins.formatting.black,
 					-- pylint
 					builtins.diagnostics.pylint,
-					-- rustfmt
-					builtins.formatting.rustfmt,
-					-- tsc
-					builtins.diagnostics.tsc,
-					-- kotlin
-					builtins.diagnostics.ktlint,
-					builtins.formatting.ktlint,
 				},
 				on_attach = function(client, bufnr)
 					local filepath = vim.api.nvim_buf_get_name(bufnr)
@@ -125,7 +118,7 @@ return {
 	{
 		"jayp0521/mason-null-ls.nvim",
 		opts = {
-			ensure_installed = { "prettierd", "stylua", "black", "pylint", "rustfmt", "tsc", "ktlint" },
+			ensure_installed = { "prettierd", "stylua", "black", "pylint", "tsc" },
 			automatic_installation = false,
 			automatic_setup = true,
 		},

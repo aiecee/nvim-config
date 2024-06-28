@@ -2,9 +2,6 @@ local utils = require("aiecee.utils.options")
 
 local global_options = {
 	mapleader = " ",
-	neovide_remember_window_size = true,
-	nvim_tree_highlight_opened_files = 1,
-	nvim_tree_git_hl = 1,
 }
 
 utils.set_globals(global_options)
@@ -29,7 +26,7 @@ local options = {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = "Hasklug Nerd Font Mono:h12",
+	guifont = "VictorMono Nerd Font Mono:h12",
 	foldmethod = "expr",
 	foldexpr = "nvim_treesitter#foldexpr()",
 	foldlevelstart = 99,

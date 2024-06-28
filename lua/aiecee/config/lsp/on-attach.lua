@@ -36,6 +36,9 @@ local function setup_code_keymap(bufnr)
 			{ "<Leader>ch", vim.lsp.buf.hover, "hover", { buffer = bufnr } },
 			{ "<Leader>ct", "<cmd>TodoTelescope<cr>", "todos", { buffer = bufnr } },
 		},
+		i = {
+			{ "C-s", vim.lsp.buf.signature_help, "signature help", { buffer = bufnr } },
+		},
 	}
 	map_table(mapping)
 end
