@@ -1,4 +1,4 @@
-local lazy = require("aiecee.config.lazy")
+local setup = require("aiecee.setup")
 
-require("aiecee.options")
-lazy.setup()
+require("aiecee.opts")
+setup()
