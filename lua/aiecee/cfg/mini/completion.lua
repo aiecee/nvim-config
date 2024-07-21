@@ -1,6 +1,5 @@
 return function()
 	local completion = require("mini.completion")
-	local old_process_items = completion.config.lsp_completion.process_items
 
 	completion.setup({
 		window = {
@@ -13,20 +12,26 @@ return function()
 		},
 		lsp_completion = {
 			source_func = "omnifunc",
-			process_items = function(items, base)
-				local res = old_process_items(items, base)
-				print(vim.inspect(res))
-				return res
-			end,
 		},
 	})
 
+	-- Setup tab navigation in completion
 	local imap_expr = function(lhs, rhs)
 		vim.keymap.set("i", lhs, rhs, { expr = true })
 	end
 	imap_expr("<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]])
 	imap_expr("<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]])
 
+	-- Force open completion
+	local force_completion = vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true)
+	imap_expr("<C-c>", function()
+		vim.api.nvim_feedkeys(force_completion, "n", false)
+	end)
+	imap_expr("<C-Space>", function()
+		vim.api.nvim_feedkeys(force_completion, "n", false)
+	end)
+
+	-- Fix <CR> to select completion item
 	local keycode = vim.keycode or function(x)
 		return vim.api.nvim_replace_termcodes(x, true, true, true)
 	end
@@ -36,7 +41,7 @@ return function()
 		["ctrl-y_cr"] = keycode("<C-y><CR>"),
 	}
 
-	_G.cr_action = function()
+	local cr_action = function()
 		if vim.fn.pumvisible() ~= 0 then
 			-- If popup is visible, confirm selected item or add new line otherwise
 			local item_selected = vim.fn.complete_info()["selected"] ~= -1
@@ -49,5 +54,5 @@ return function()
 		end
 	end
 
-	vim.keymap.set("i", "<CR>", "v:lua._G.cr_action()", { expr = true })
+	vim.keymap.set("i", "<CR>", cr_action, { expr = true })
 end
