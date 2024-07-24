@@ -1,8 +1,6 @@
 local keymap = require("aiecee.utils.keymaps")
 
-local M = {}
-
-local function setup_code_keymap(bufnr)
+local function on_attach(_, bufnr)
 	local extras = require("mini.extra")
 
 	local mapping = {
@@ -85,12 +83,45 @@ local function setup_code_keymap(bufnr)
 	keymap.map_table(mapping)
 end
 
-function M.on_attach_code(_, bufnr)
-	setup_code_keymap(bufnr)
-end
-
-function M.on_attach(_, bufnr)
-	setup_code_keymap(bufnr)
-end
-
-return M
+return {
+	cssls = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	eslint = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	gopls = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	html = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	jsonls = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	lua_ls = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	tailwindcss = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	theme_check = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	tsserver = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	volar = {
+		settings = {},
+		on_attach = on_attach,
+	},
+}

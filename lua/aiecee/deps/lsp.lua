@@ -1,43 +1,17 @@
 return {
+	{
+		"folke/lazydev.nvim",
+		ft = "lua", -- only load on lua files
+		opts = {
+			cmp = false,
+		},
+		config = true,
+	},
 	{ "williamboman/mason.nvim", opts = { ui = { border = "rounded" } }, config = true },
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "neovim/nvim-lspconfig", "folke/neodev.nvim" },
-		opts = function()
-			local neo_dev = require("neodev")
-			neo_dev.setup()
-
-			local cssls = require("aiecee.cfg.lsp.cssls")
-			local eslint = require("aiecee.cfg.lsp.eslint")
-			local gopls = require("aiecee.cfg.lsp.go")
-			local html = require("aiecee.cfg.lsp.html")
-			local jsonls = require("aiecee.cfg.lsp.jsonls")
-			local lua_ls = require("aiecee.cfg.lsp.lua-ls")
-			local tailwindcss = require("aiecee.cfg.lsp.tailwindcss")
-			local theme_check = require("aiecee.cfg.lsp.theme-check")
-			local tsserver = require("aiecee.cfg.lsp.tsserver")
-			local volar = require("aiecee.cfg.lsp.vue")
-
-			local function add_server(table, server)
-				table[server.mason_name] = {
-					settings = server.settings,
-					on_attach = server.on_attach,
-				}
-			end
-
-			local servers = {}
-			add_server(servers, cssls)
-			add_server(servers, eslint)
-			add_server(servers, gopls)
-			add_server(servers, html)
-			add_server(servers, jsonls)
-			add_server(servers, lua_ls)
-			add_server(servers, tailwindcss)
-			add_server(servers, theme_check)
-			add_server(servers, tsserver)
-			add_server(servers, volar)
-			return servers
-		end,
+		dependencies = { "neovim/nvim-lspconfig" },
+		opts = require("aiecee.cfg.lsps"),
 		config = function(_, servers)
 			local mason_lspconfig = require("mason-lspconfig")
 			local lsp_config = require("lspconfig")
