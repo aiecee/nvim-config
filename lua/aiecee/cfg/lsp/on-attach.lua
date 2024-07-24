@@ -1,4 +1,4 @@
-local map_table = require("aiecee.utils.keymaps")
+local keymap = require("aiecee.utils.keymaps")
 
 local M = {}
 
@@ -82,7 +82,7 @@ local function setup_code_keymap(bufnr)
 			{ "C-s", vim.lsp.buf.signature_help, "signature help", { buffer = bufnr } },
 		},
 	}
-	map_table(mapping)
+	keymap.map_table(mapping)
 end
 
 function M.on_attach_code(_, bufnr)

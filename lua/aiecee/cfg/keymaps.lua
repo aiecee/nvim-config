@@ -1,4 +1,4 @@
-local map_table = require("aiecee.utils.keymaps")
+local keymap = require("aiecee.utils.keymaps")
 local files = require("mini.files")
 local harpoon = require("harpoon")
 local pickers = require("mini.pick")
@@ -57,4 +57,4 @@ local global_mappings = {
 	},
 }
 
-map_table(global_mappings)
+keymap.map_table(global_mappings)

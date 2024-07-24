@@ -1,4 +1,6 @@
-local function map_table(table)
+local M = {}
+
+function M.map_table(table)
 	for mode, mappings in pairs(table) do
 		for _, mapping in pairs(mappings) do
 			vim.keymap.set(
@@ -11,4 +13,4 @@ local function map_table(table)
 	end
 end
 
-return map_table
+return M
