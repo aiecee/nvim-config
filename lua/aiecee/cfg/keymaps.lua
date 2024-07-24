@@ -54,6 +54,28 @@ local global_mappings = {
 			end,
 			"previous",
 		},
+		{
+			"<Leader>ml",
+			function()
+				local harpoon_list = harpoon:list():display()
+				local selected_item = pickers.start({
+					source = {
+						items = harpoon_list,
+					},
+					name = "Harpoon",
+				})
+				local _, idx = harpoon:list():get_by_value(selected_item)
+				harpoon:list():select(idx)
+			end,
+			"list",
+		},
+		{
+			"<Leader>mc",
+			function()
+				harpoon:list():clear()
+			end,
+			"clear",
+		},
 	},
 }
 
