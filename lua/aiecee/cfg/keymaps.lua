@@ -1,8 +1,9 @@
 local keymap = require("aiecee.utils.keymaps")
-local files = require("mini.files")
 local harpoon = require("harpoon")
-local pickers = require("mini.pick")
 local extra = require("mini.extra")
+local files = require("mini.files")
+local pickers = require("mini.pick")
+local sessions = require("ace.sessions")
 
 local global_mappings = {
 	n = {
@@ -75,6 +76,39 @@ local global_mappings = {
 				harpoon:list():clear()
 			end,
 			"clear",
+		},
+		-- sessions
+		{
+			"<Leader>Ss",
+			function()
+				sessions:save()
+			end,
+			"save",
+		},
+		{
+			"<Leader>SS",
+			function()
+				vim.ui.input({ prompt = "Session file: ", default = "session.vim" }, function(input)
+					sessions:save(input)
+				end)
+			end,
+			"save named",
+		},
+		{
+			"<Leader>Sl",
+			function()
+				vim.ui.select(sessions:list(), {}, function(item, _)
+					sessions:load(item)
+				end)
+			end,
+			"load",
+		},
+		{
+			"<Leader>SL",
+			function()
+				sessions:load()
+			end,
+			"load default",
 		},
 	},
 }

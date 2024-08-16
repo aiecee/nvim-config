@@ -108,19 +108,27 @@ return {
 		settings = {},
 		on_attach = on_attach,
 	},
+	marksman = {
+		settings = {},
+		on_attach = on_attach,
+	},
 	tailwindcss = {
 		settings = {},
 		on_attach = on_attach,
 	},
-	theme_check = {
+	shopify_theme_ls = {
 		settings = {},
 		on_attach = on_attach,
 	},
-	tsserver = {
-		settings = {},
-		on_attach = on_attach,
-	},
+	-- tsserver = {
+	-- 	settings = {},
+	-- 	on_attach = on_attach,
+	-- },
 	volar = {
+		settings = {},
+		on_attach = on_attach,
+	},
+	vtsls = {
 		settings = {},
 		on_attach = on_attach,
 	},
