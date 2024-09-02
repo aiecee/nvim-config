@@ -48,59 +48,27 @@ return {
 		end,
 	},
 	{
-		"nvimtools/none-ls.nvim",
-		opts = function()
-			local builtins = require("null-ls").builtins
-			local augroup = vim.api.nvim_create_augroup("lsp_formatting", {})
-			return {
-				sources = {
-					-- prettierd
-					builtins.formatting.prettierd,
-					-- Stylua
-					builtins.formatting.stylua,
-					-- black
-					builtins.formatting.black,
-					-- pylint
-					builtins.diagnostics.pylint,
-				},
-				on_attach = function(client, bufnr)
-					local filepath = vim.api.nvim_buf_get_name(bufnr)
-					local file_extension = vim.fn.fnamemodify(filepath, ":e")
-					if file_extension == "kts" then
-						return
-					end
+		"nvimdev/guard.nvim",
+		dependencies = { "nvimdev/guard-collection", "aiecee/ace.nvim" },
+		opts = {},
+		config = function()
+			local guard_tools = require("ace.mason-guard")
+			guard_tools.setup({
+				ensure_installed = { "prettier", "stylua", "selene", "codespell" },
+			})
 
-					if client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = augroup,
-							buffer = bufnr,
-							callback = function()
-								vim.lsp.buf.format({
-									formatting_options = nil,
-									timeout_ms = 5000,
-									filter = function(cli)
-										return cli.name == "null-ls"
-									end,
-								})
-							end,
-						})
-					end
-				end,
-			}
-		end,
-		config = true,
-	},
-	{
-		"jay-babu/mason-null-ls.nvim",
-		opts = {
-			ensure_installed = { "prettierd", "stylua", "black", "pylint", "tsc" },
-			automatic_installation = true,
-			automatic_setup = true,
-		},
-		config = function(_, opts)
-			local mason_null_ls = require("mason-null-ls")
-			mason_null_ls.setup(opts)
+			local ft = require("guard.filetype")
+			-- lua
+			ft("lua"):fmt("lsp"):append("stylua"):lint("selene")
+			-- node
+			ft("typescript,javascript,typescriptreact,javascriptreact"):fmt("prettier")
+			-- spelling
+			ft("*"):lint("codespell")
+
+			require("guard").setup({
+				fmt_on_save = true,
+				lsp_as_default_formatter = true,
+			})
 		end,
 	},
 }

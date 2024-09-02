@@ -15,7 +15,7 @@ return function()
 		local rhs = function()
 			local new_target_window
 			---@diagnostic disable-next-line: param-type-mismatch
-			vim.api.nvim_win_call(files.get_target_window(), function()
+			vim.api.nvim_win_call(files.get_explorer_state().target_window, function()
 				vim.cmd(direction .. " split")
 				new_target_window = vim.api.nvim_get_current_win()
 			end)
@@ -33,10 +33,10 @@ return function()
 		pattern = "MiniFilesBufferCreate",
 		callback = function(args)
 			local buf_id = args.data.buf_id
-			map_split(buf_id, "gv", "belowright horizontal", false)
-			map_split(buf_id, "gs", "belowright vertical", false)
-			map_split(buf_id, "gV", "belowright horizontal", true)
-			map_split(buf_id, "gS", "belowright vertical", true)
+			map_split(buf_id, "s", "belowright horizontal", false)
+			map_split(buf_id, "v", "belowright vertical", false)
+			map_split(buf_id, "S", "belowright horizontal", true)
+			map_split(buf_id, "V", "belowright vertical", true)
 		end,
 	})
 end

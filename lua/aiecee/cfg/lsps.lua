@@ -1,6 +1,6 @@
 local keymap = require("aiecee.utils.keymaps")
 
-local function on_attach(_, bufnr)
+local function on_attach(client, bufnr)
 	local extras = require("mini.extra")
 
 	local mapping = {
@@ -81,6 +81,12 @@ local function on_attach(_, bufnr)
 		},
 	}
 	keymap.map_table(mapping)
+
+	if
+		client.server_capabilities.inlayHintProvider and client.server_capabilities.inlayHintProvider.resolveProvider
+	then
+		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+	end
 end
 
 return {
@@ -120,10 +126,6 @@ return {
 		settings = {},
 		on_attach = on_attach,
 	},
-	-- tsserver = {
-	-- 	settings = {},
-	-- 	on_attach = on_attach,
-	-- },
 	volar = {
 		settings = {},
 		on_attach = on_attach,
