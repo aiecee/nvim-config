@@ -64,6 +64,8 @@ return {
 			ft("typescript,javascript,typescriptreact,javascriptreact"):fmt("prettier")
 			-- spelling
 			ft("*"):lint("codespell")
+			-- config files
+			ft("yaml,json,toml"):fmt("prettier")
 
 			require("guard").setup({
 				fmt_on_save = true,

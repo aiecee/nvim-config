@@ -82,9 +82,7 @@ local function on_attach(client, bufnr)
 	}
 	keymap.map_table(mapping)
 
-	if
-		client.server_capabilities.inlayHintProvider and client.server_capabilities.inlayHintProvider.resolveProvider
-	then
+	if client.server_capabilities.inlayHintProvider then
 		vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
 	end
 end
@@ -130,6 +128,10 @@ return {
 		settings = {},
 		on_attach = on_attach,
 	},
+	-- ts_ls = {
+	-- 	settings = {},
+	-- 	on_attach = on_attach,
+	-- },
 	vtsls = {
 		settings = {},
 		on_attach = on_attach,

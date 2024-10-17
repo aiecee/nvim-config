@@ -3,7 +3,7 @@ return function()
 	local themes = require("aiecee.cfg.themes")
 
 	base16.setup({
-		palette = themes.everforest,
+		palette = themes.jabuti,
 		use_cterm = true,
 	})
 

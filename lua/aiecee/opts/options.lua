@@ -18,7 +18,7 @@ return {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = "ComicShannsMono Nerd Font Mono:h13",
+	guifont = "GeistMono NFM:h12",
 	foldmethod = "expr",
 	foldexpr = "v:lua.vim.treesitter.foldexpr()",
 	foldtext = "",

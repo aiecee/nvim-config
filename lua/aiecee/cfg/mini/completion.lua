@@ -2,6 +2,11 @@ return function()
 	local completion = require("mini.completion")
 
 	completion.setup({
+		delay = {
+			completion = 50,
+			info = 50,
+			signature = 50,
+		},
 		window = {
 			info = {
 				border = "rounded",
