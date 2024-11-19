@@ -3,5 +3,5 @@ return function()
 
 	pick.setup()
 
-	vim.ui.select = pick.ui_select
+	-- vim.ui.select = pick.ui_select
 end

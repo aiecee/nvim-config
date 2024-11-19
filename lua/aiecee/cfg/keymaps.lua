@@ -1,29 +1,29 @@
 local keymap = require("aiecee.utils.keymaps")
 local harpoon = require("harpoon")
-local extra = require("mini.extra")
 local files = require("mini.files")
-local pickers = require("mini.pick")
 local sessions = require("ace.sessions")
+
+local telescope_builtins = require("telescope.builtin")
 
 local global_mappings = {
 	n = {
 		-- commands
-		{ "<Leader>-", extra.pickers.commands, "commands" },
+		{ "<Leader>-", telescope_builtins.commands, "commands" },
 		-- files
 		{ "<Leader>t", files.open, "file tree" },
-		{ "<Leader>ff", pickers.builtin.files, "find" },
+		{ "<Leader>ff", telescope_builtins.find_files, "find" },
 		-- search
-		{ "<Leader>sw", pickers.builtin.grep_live, "current working dir" },
+		{ "<Leader>sw", telescope_builtins.live_grep, "current working dir" },
+		{ "<Leader>sf", telescope_builtins.grep_string, "word under cursor" },
 		-- git
-		{ "<Leader>gcc", extra.pickers.git_commits, "commits" },
+		{ "<Leader>gcc", telescope_builtins.git_commits, "commits" },
+		-- {
 		{
 			"<Leader>gcb",
-			function()
-				extra.pickers.git_commits({ path = vim.fn.expand("%") })
-			end,
+			telescope_builtins.git_bcommits,
 			"buffer commits",
 		},
-		{ "<Leader>gb", extra.pickers.git_branches, "branches" },
+		{ "<Leader>gb", telescope_builtins.git_branches, "branches" },
 		-- windows
 		{ "<Leader>w=", "<cmd>wincmd =<cr>", "format" },
 		{ "<Leader>wh", "<cmd>wincmd h<cr>", "go left" },
@@ -58,15 +58,22 @@ local global_mappings = {
 		{
 			"<Leader>ml",
 			function()
-				local harpoon_list = harpoon:list():display()
-				local selected_item = pickers.start({
-					source = {
-						items = harpoon_list,
-					},
-					name = "Harpoon",
-				})
-				local _, idx = harpoon:list():get_by_value(selected_item)
-				harpoon:list():select(idx)
+				local conf = require("telescope.config").values
+				local file_paths = {}
+				for _, item in ipairs(harpoon:list().items) do
+					table.insert(file_paths, item.value)
+				end
+
+				require("telescope.pickers")
+					.new({}, {
+						prompt_title = "Harpoon",
+						finder = require("telescope.finders").new_table({
+							results = file_paths,
+						}),
+						previewer = conf.file_previewer({}),
+						sorter = conf.generic_sorter({}),
+					})
+					:find()
 			end,
 			"list",
 		},
@@ -109,6 +116,13 @@ local global_mappings = {
 				sessions:load()
 			end,
 			"load default",
+		},
+	},
+	v = {
+		{
+			"gf",
+			telescope_builtins.grep_string,
+			"search selection",
 		},
 	},
 }

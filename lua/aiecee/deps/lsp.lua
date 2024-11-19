@@ -66,11 +66,13 @@ return {
 			ft("*"):lint("codespell")
 			-- config files
 			ft("yaml,json,toml"):fmt("prettier")
+			-- zig
+			ft("zig"):fmt("zigfmt")
 
-			require("guard").setup({
+			vim.g.guard_config = {
 				fmt_on_save = true,
 				lsp_as_default_formatter = true,
-			})
+			}
 		end,
 	},
 }

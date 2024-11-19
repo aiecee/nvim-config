@@ -18,7 +18,6 @@ return function()
 	require("aiecee.cfg.mini.move")()
 	require("aiecee.cfg.mini.notify")()
 	require("aiecee.cfg.mini.pick")()
-	-- require("aiecee.cfg.mini.sessions")()
 	require("aiecee.cfg.mini.statusline")()
 	require("aiecee.cfg.mini.surround")()
 end

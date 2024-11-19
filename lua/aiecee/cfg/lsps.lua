@@ -1,24 +1,20 @@
 local keymap = require("aiecee.utils.keymaps")
 
 local function on_attach(client, bufnr)
-	local extras = require("mini.extra")
+	local telescope_builtins = require("telescope.builtin")
 
 	local mapping = {
 		n = {
 			{ "ga", vim.lsp.buf.code_action, "[LSP] code actions", { buffer = bufnr } },
 			{
 				"gr",
-				function()
-					extras.pickers.lsp({ scope = "references" })
-				end,
+				telescope_builtins.lsp_references,
 				"[LSP] references",
 				{ buffer = bufnr },
 			},
 			{
 				"gb",
-				function()
-					extras.pickers.lsp({ scope = "definition" })
-				end,
+				telescope_builtins.lsp_definitions,
 				"[LSP] definitions",
 				{ buffer = bufnr },
 			},
@@ -34,32 +30,26 @@ local function on_attach(client, bufnr)
 			},
 			{
 				"<Leader>cb",
-				function()
-					extras.pickers.lsp({ scope = "definition" })
-				end,
+				telescope_builtins.lsp_definitions,
 				"go to definition",
 				{ buffer = bufnr },
 			},
 			{
 				"<Leader>ci",
-				function()
-					extras.pickers.lsp({ scope = "implementation" })
-				end,
+				telescope_builtins.lsp_implementations,
 				"go to implementations",
 				{ buffer = bufnr },
 			},
 			{
 				"<Leader>cr",
-				function()
-					extras.pickers.lsp({ scope = "references" })
-				end,
+				telescope_builtins.lsp_references,
 				"all references",
 				{ buffer = bufnr },
 			},
 			{
 				"<Leader>cd",
 				function()
-					extras.pickers.diagnostic()
+					vim.diagnostic.open_float({ border = "rounded" })
 				end,
 				"diagnostics",
 				{ buffer = bufnr },
@@ -128,11 +118,35 @@ return {
 		settings = {},
 		on_attach = on_attach,
 	},
-	-- ts_ls = {
-	-- 	settings = {},
-	-- 	on_attach = on_attach,
-	-- },
-	vtsls = {
+	ts_ls = {
+		settings = {
+			javascript = {
+				inlayHints = {
+					includeInlayEnumMemberValueHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayVariableTypeHints = false,
+				},
+			},
+
+			typescript = {
+				inlayHints = {
+					includeInlayEnumMemberValueHints = true,
+					includeInlayFunctionLikeReturnTypeHints = true,
+					includeInlayFunctionParameterTypeHints = true,
+					includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+					includeInlayPropertyDeclarationTypeHints = true,
+					includeInlayVariableTypeHints = false,
+				},
+			},
+		},
+		on_attach = on_attach,
+	},
+	zls = {
 		settings = {},
 		on_attach = on_attach,
 	},
