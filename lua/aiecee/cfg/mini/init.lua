@@ -10,7 +10,7 @@ return function()
 
 	require("aiecee.cfg.mini.base16")()
 	require("aiecee.cfg.mini.clues")()
-	require("aiecee.cfg.mini.completion")()
+	-- require("aiecee.cfg.mini.completion")()
 	require("aiecee.cfg.mini.files")()
 	require("aiecee.cfg.mini.hipatterns")()
 	require("aiecee.cfg.mini.icons")()

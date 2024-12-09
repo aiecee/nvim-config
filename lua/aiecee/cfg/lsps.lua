@@ -118,29 +118,72 @@ return {
 		settings = {},
 		on_attach = on_attach,
 	},
-	ts_ls = {
+	-- ts_ls = {
+	-- 	settings = {
+	-- 		javascript = {
+	-- 			inlayHints = {
+	-- 				includeInlayEnumMemberValueHints = true,
+	-- 				includeInlayFunctionLikeReturnTypeHints = true,
+	-- 				includeInlayFunctionParameterTypeHints = true,
+	-- 				includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+	-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+	-- 				includeInlayPropertyDeclarationTypeHints = true,
+	-- 				includeInlayVariableTypeHints = false,
+	-- 			},
+	-- 		},
+	--
+	-- 		typescript = {
+	-- 			inlayHints = {
+	-- 				includeInlayEnumMemberValueHints = true,
+	-- 				includeInlayFunctionLikeReturnTypeHints = true,
+	-- 				includeInlayFunctionParameterTypeHints = true,
+	-- 				includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+	-- 				includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+	-- 				includeInlayPropertyDeclarationTypeHints = true,
+	-- 				includeInlayVariableTypeHints = false,
+	-- 			},
+	-- 		},
+	-- 	},
+	-- 	on_attach = on_attach,
+	-- },
+	vtsls = {
 		settings = {
-			javascript = {
-				inlayHints = {
-					includeInlayEnumMemberValueHints = true,
-					includeInlayFunctionLikeReturnTypeHints = true,
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayVariableTypeHints = false,
-				},
-			},
-
 			typescript = {
 				inlayHints = {
-					includeInlayEnumMemberValueHints = true,
-					includeInlayFunctionLikeReturnTypeHints = true,
-					includeInlayFunctionParameterTypeHints = true,
-					includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-					includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-					includeInlayPropertyDeclarationTypeHints = true,
-					includeInlayVariableTypeHints = false,
+					parameterNames = {
+						enabled = "none",
+					},
+					parameterTypes = {
+						enabled = false,
+					},
+					variableTypes = {
+						enabled = false,
+					},
+					propertyDeclarationTypes = {
+						enabled = false,
+					},
+					functionLikeReturnTypes = {
+						enabled = false,
+					},
+				},
+			},
+			javascript = {
+				inlayHints = {
+					parameterNames = {
+						enabled = "all",
+					},
+					parameterTypes = {
+						enabled = true,
+					},
+					variableTypes = {
+						enabled = false,
+					},
+					propertyDeclarationTypes = {
+						enabled = false,
+					},
+					functionLikeReturnTypes = {
+						enabled = false,
+					},
 				},
 			},
 		},
