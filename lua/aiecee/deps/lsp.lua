@@ -8,15 +8,31 @@ return {
 		config = true,
 	},
 	{
+		"zbirenbaum/copilot.lua",
+		opts = {
+			suggestion = { enabled = false },
+			panel = { enabled = false },
+		},
+	},
+	{
+		"giuxtaposition/blink-cmp-copilot",
+		dependencies = {
+			"zbirenbaum/copilot.lua",
+		},
+	},
+	{
 		"saghen/blink.cmp",
-		dependencies = "rafamadriz/friendly-snippets",
-		version = "v0.6.2",
+		dependencies = { "rafamadriz/friendly-snippets", "giuxtaposition/blink-cmp-copilot" },
+		version = "v0.*",
 		opts = {
 			keymap = {
 				["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
+				["<Esc>"] = { "hide", "fallback" },
 				["<CR>"] = {
 					function(cmp)
-						if cmp.is_in_snippet() then
+						print(vim.inspect(cmp))
+						print(vim.inspect(cmp.snippet_active()))
+						if cmp.snippet_active() then
 							return cmp.accept()
 						else
 							return cmp.select_and_accept()
@@ -25,26 +41,89 @@ return {
 					"snippet_forward",
 					"fallback",
 				},
-				["<S-Tab>"] = { "select_prev", "fallback" },
-				["<Tab>"] = { "select_next", "fallback" },
+				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+				["<Up>"] = { "select_prev", "fallback" },
+				["<Down>"] = { "select_next", "fallback" },
 				["<C-k>"] = { "scroll_documentation_up", "fallback" },
 				["<C-j>"] = { "scroll_documentation_down", "fallback" },
 			},
-
-			highlight = {
-				use_nvim_cmp_as_default = true,
-			},
-			nerd_font_variant = "mono",
-			sources = {
-				completion = {
-					enabled_providers = { "lsp", "path", "snippets", "buffer" },
+			completion = {
+				accept = { auto_brackets = { enabled = true } },
+				menu = {
+					auto_show = function(ctx)
+						return ctx.mode ~= "cmdline"
+					end,
+					border = "single",
 				},
-			},
-			accept = { auto_brackets = { enabled = true } },
-			trigger = { signature_help = { enabled = true } },
-			windows = {
 				documentation = {
 					auto_show = true,
+					window = { border = "single" },
+				},
+				list = {
+					selection = "auto_insert",
+				},
+			},
+			signature = {
+				enabled = true,
+				window = { border = "single" },
+			},
+			sources = {
+				default = { "lsp", "path", "snippets", "buffer", "copilot" },
+				providers = {
+					copilot = {
+						name = "copilot",
+						module = "blink-cmp-copilot",
+						score_offset = 100,
+						transform_items = function(_, items)
+							local CompletionItemKind = require("blink.cmp.types").CompletionItemKind
+							local kind_idx = #CompletionItemKind + 1
+							CompletionItemKind[kind_idx] = "Copilot"
+							for _, item in ipairs(items) do
+								item.kind = kind_idx
+							end
+							return items
+						end,
+						async = true,
+					},
+				},
+			},
+			appearance = {
+				nerd_font_variant = "mono",
+				use_nvim_cmp_as_default = true,
+				-- Blink does not expose its default kind icons so you must copy them all (or set your custom ones) and add Copilot
+				kind_icons = {
+					Copilot = "",
+					Text = "󰉿",
+					Method = "󰊕",
+					Function = "󰊕",
+					Constructor = "󰒓",
+
+					Field = "󰜢",
+					Variable = "󰆦",
+					Property = "󰖷",
+
+					Class = "󱡠",
+					Interface = "󱡠",
+					Struct = "󱡠",
+					Module = "󰅩",
+
+					Unit = "󰪚",
+					Value = "󰦨",
+					Enum = "󰦨",
+					EnumMember = "󰦨",
+
+					Keyword = "󰻾",
+					Constant = "󰏿",
+
+					Snippet = "󱄽",
+					Color = "󰏘",
+					File = "󰈔",
+					Reference = "󰬲",
+					Folder = "󰉋",
+					Event = "󱐋",
+					Operator = "󰪚",
+					TypeParameter = "󰬛",
 				},
 			},
 		},
@@ -62,6 +141,7 @@ return {
 
 			mason_lspconfig.setup({
 				ensure_installed = vim.tbl_keys(servers),
+				automatic_installation = true,
 			})
 
 			mason_lspconfig.setup_handlers({
@@ -93,31 +173,24 @@ return {
 		end,
 	},
 	{
-		"nvimdev/guard.nvim",
-		dependencies = { "nvimdev/guard-collection", "aiecee/ace.nvim" },
-		opts = {},
-		config = function()
-			local guard_tools = require("ace.mason-guard")
-			guard_tools.setup({
-				ensure_installed = { "prettier", "stylua", "selene", "codespell" },
-			})
-
-			local ft = require("guard.filetype")
-			-- lua
-			ft("lua"):fmt("lsp"):append("stylua"):lint("selene")
-			-- node
-			ft("typescript,javascript,typescriptreact,javascriptreact"):fmt("prettier")
-			-- spelling
-			ft("*"):lint("codespell")
-			-- config files
-			ft("yaml,json,toml"):fmt("prettier")
-			-- zig
-			ft("zig"):fmt("zigfmt")
-
-			vim.g.guard_config = {
-				fmt_on_save = true,
-				lsp_as_default_formatter = true,
-			}
-		end,
+		"stevearc/conform.nvim",
+		opts = {
+			formatters_by_ft = {
+				lua = { "stylua" },
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
+				javascript = { "prettier" },
+				javascriptreact = { "prettier" },
+				yaml = { "prettier" },
+				json = { "prettier" },
+				toml = { "prettier" },
+				zig = { "zigfmt" },
+				-- ["*"] = { "codespell" },
+			},
+			format_on_save = {
+				lsp_format = "fallback",
+				timeout_ms = 1000,
+			},
+		},
 	},
 }
