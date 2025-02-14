@@ -1,20 +1,20 @@
 local keymap = require("aiecee.utils.keymaps")
 
 local function on_attach(client, bufnr)
-	local telescope_builtins = require("telescope.builtin")
+	local snacks_pickers = require("snacks.picker")
 
 	local mapping = {
 		n = {
 			{ "ga", vim.lsp.buf.code_action, "[LSP] code actions", { buffer = bufnr } },
 			{
 				"gr",
-				telescope_builtins.lsp_references,
+				snacks_pickers.lsp_references,
 				"[LSP] references",
 				{ buffer = bufnr },
 			},
 			{
 				"gb",
-				telescope_builtins.lsp_definitions,
+				snacks_pickers.lsp_definitions,
 				"[LSP] definitions",
 				{ buffer = bufnr },
 			},
@@ -30,27 +30,25 @@ local function on_attach(client, bufnr)
 			},
 			{
 				"<Leader>cb",
-				telescope_builtins.lsp_definitions,
+				snacks_pickers.lsp_definitions,
 				"go to definition",
 				{ buffer = bufnr },
 			},
 			{
 				"<Leader>ci",
-				telescope_builtins.lsp_implementations,
+				snacks_pickers.lsp_implementations,
 				"go to implementations",
 				{ buffer = bufnr },
 			},
 			{
 				"<Leader>cr",
-				telescope_builtins.lsp_references,
+				snacks_pickers.lsp_references,
 				"all references",
 				{ buffer = bufnr },
 			},
 			{
 				"<Leader>cd",
-				function()
-					vim.diagnostic.open_float({ border = "rounded" })
-				end,
+				snacks_pickers.diagnostics_buffer,
 				"diagnostics",
 				{ buffer = bufnr },
 			},
@@ -78,6 +76,10 @@ local function on_attach(client, bufnr)
 end
 
 return {
+	astro = {
+		settings = {},
+		on_attach = on_attach,
+	},
 	cssls = {
 		settings = {},
 		on_attach = on_attach,

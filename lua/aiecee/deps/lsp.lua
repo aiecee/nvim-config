@@ -30,8 +30,6 @@ return {
 				["<Esc>"] = { "hide", "fallback" },
 				["<CR>"] = {
 					function(cmp)
-						print(vim.inspect(cmp))
-						print(vim.inspect(cmp.snippet_active()))
 						if cmp.snippet_active() then
 							return cmp.accept()
 						else
@@ -59,9 +57,6 @@ return {
 				documentation = {
 					auto_show = true,
 					window = { border = "single" },
-				},
-				list = {
-					selection = "auto_insert",
 				},
 			},
 			signature = {
@@ -181,6 +176,7 @@ return {
 				typescriptreact = { "prettier" },
 				javascript = { "prettier" },
 				javascriptreact = { "prettier" },
+				astro = { "prettier" },
 				yaml = { "prettier" },
 				json = { "prettier" },
 				toml = { "prettier" },

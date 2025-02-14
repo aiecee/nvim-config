@@ -17,6 +17,7 @@ return function()
 			"liquid",
 			"vue",
 			"yaml",
+			"astro",
 		},
 		highlight = {
 			enable = true,
