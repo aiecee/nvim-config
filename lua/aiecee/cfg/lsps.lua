@@ -5,6 +5,13 @@ local function on_attach(client, bufnr)
 
 	local mapping = {
 		n = {
+			{
+				"gl",
+				function()
+					require("snacks.words").jump(1, true)
+				end,
+				"next word",
+			},
 			{ "ga", vim.lsp.buf.code_action, "[LSP] code actions", { buffer = bufnr } },
 			{
 				"gr",

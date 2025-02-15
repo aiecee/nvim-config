@@ -8,7 +8,7 @@ return {
 				sources = {
 					explorer = {
 						auto_close = true,
-						layout = "dropdown",
+						layout = "top",
 						follow_file = true,
 					},
 				},
@@ -20,10 +20,28 @@ return {
 			input = {
 				enabled = true,
 			},
+			indent = {
+				enabled = true,
+			},
+			notify = {
+				enabled = true,
+			},
 			notifier = {
 				enabled = true,
 			},
 			image = {
+				enabled = true,
+			},
+			words = {
+				enabled = true,
+			},
+			scroll = {
+				enabled = true,
+			},
+			animate = {
+				enabled = true,
+			},
+			statuscolumn = {
 				enabled = true,
 			},
 		},
