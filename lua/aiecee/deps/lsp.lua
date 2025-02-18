@@ -49,9 +49,6 @@ return {
 			completion = {
 				accept = { auto_brackets = { enabled = true } },
 				menu = {
-					auto_show = function(ctx)
-						return ctx.mode ~= "cmdline"
-					end,
 					border = "single",
 				},
 				documentation = {
