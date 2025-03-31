@@ -8,6 +8,7 @@ local global_mappings = {
 		-- files
 		{ "<Leader>t", require("snacks.explorer").open, "file tree" },
 		{ "<Leader>ff", require("snacks.picker").smart, "find" },
+		{ "<Leader>fr", require("snacks.picker").recent, "recent" },
 		-- search
 		{ "<Leader>sw", require("snacks.picker").grep, "current working dir" },
 		{ "<Leader>sf", require("snacks.picker").grep_word, "word under cursor" },

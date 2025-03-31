@@ -26,7 +26,9 @@ return function()
 		defaults = {
 			lazy = true,
 		},
-		install = true,
+		install = {
+			missing = true,
+		},
 		ui = {
 			border = "rounded",
 		},

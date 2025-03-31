@@ -8,7 +8,7 @@ return {
 				sources = {
 					explorer = {
 						auto_close = true,
-						layout = "top",
+						layout = "default",
 						follow_file = true,
 					},
 				},
