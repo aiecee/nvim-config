@@ -1,6 +1,6 @@
 return {
 	shell = "zsh",
-	completeopt = { "menu", "menuone", "preview", "noselect" },
+	completeopt = { "fuzzy", "menu", "menuone", "preview", "noselect" },
 	number = true,
 	relativenumber = true,
 	scrolloff = 10,
@@ -29,4 +29,6 @@ return {
 	clipboard = "unnamedplus",
 	updatetime = 750,
 	title = true,
+	winborder = "rounded",
+	pumheight = 10,
 }
