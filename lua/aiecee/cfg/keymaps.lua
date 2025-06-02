@@ -10,7 +10,13 @@ local global_mappings = {
 		{ "<Leader>ff", require("snacks.picker").smart, "find" },
 		{ "<Leader>fr", require("snacks.picker").recent, "recent" },
 		-- search
-		{ "<Leader>sw", require("snacks.picker").grep, "current working dir" },
+		{
+			"<Leader>sw",
+			function()
+				require("snacks.picker").grep({ hidden = true, ignored = true, exclude = { "\\.node_modules" } })
+			end,
+			"current working dir",
+		},
 		{ "<Leader>sf", require("snacks.picker").grep_word, "word under cursor" },
 		-- git
 		{ "<Leader>gcc", require("snacks.picker").git_log, "commits" },

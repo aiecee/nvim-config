@@ -15,7 +15,7 @@ return {
 	},
 	{
 		"neovim/nvim-lspconfig",
-		dependencies = { "folke/snacks.nvim", "onsails/lspkind.nvim", "folke/lazydev.nvim" },
+		dependencies = { "folke/snacks.nvim", "onsails/lspkind.nvim", "folke/lazydev.nvim", "stevearc/conform.nvim" },
 		config = function()
 			require("aiecee.config.code.lsps")
 			require("aiecee.config.code.diagnostics")
@@ -35,6 +35,7 @@ return {
 				json = { "prettier" },
 				toml = { "prettier" },
 				zig = { "zigfmt" },
+				go = { "gofmt", "goimports", "golangci-lint" },
 			},
 			format_on_save = {
 				lsp_format = "fallback",

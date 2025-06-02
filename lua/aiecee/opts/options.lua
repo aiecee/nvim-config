@@ -1,6 +1,6 @@
 return {
 	shell = "zsh",
-	completeopt = { "fuzzy", "menu", "menuone", "preview", "noselect" },
+	completeopt = { "fuzzy", "menu", "menuone", "noselect" },
 	number = true,
 	relativenumber = true,
 	scrolloff = 10,

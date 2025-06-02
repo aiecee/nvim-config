@@ -8,6 +8,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	group = lsp_augroup,
 	callback = function(args)
 		local snacks_picker = require("snacks.picker")
+		local conform = require("conform")
 
 		vim.keymap.set("n", "gl", function()
 			require("snacks.words").jump(1, true)
@@ -25,6 +26,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<Leader>cb", snacks_picker.lsp_definitions, { buffer = args.buf, desc = "definitions" })
 		vim.keymap.set("n", "<Leader>cR", vim.lsp.buf.rename, { buffer = args.buf, desc = "rename" })
 		vim.keymap.set("n", "<Leader>ch", vim.lsp.buf.hover, { buffer = args.buf, desc = "hover" })
+		vim.keymap.set("n", "<Leader>cf", function()
+			conform.format({ bufnr = args.buf })
+		end, { buffer = args.buf, desc = "format" })
 
 		vim.keymap.set(
 			"n",
@@ -49,7 +53,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local client =
 			assert(vim.lsp.get_client_by_id(args.data.client_id), "Can not find client for id: " .. args.data.client_id)
 		if client:supports_method("textDocument/completion") then
-			vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
+			-- vim.lsp.completion.enable(true, client.id, args.buf, { autotrigger = true })
 
 			vim.keymap.set("i", "<Tab>", function()
 				return vim.fn.pumvisible() == 1 and "<C-n>" or "<Tab>"
@@ -67,11 +71,22 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				return vim.fn.pumvisible() == 1 and "<C-e>" or "<Esc>"
 			end, { expr = true, buffer = args.buf })
 
-			vim.keymap.set("i", "<C-Space>", function()
-				vim.lsp.completion.get()
-			end, { expr = true, buffer = args.buf })
+			-- vim.keymap.set("i", "<C-Space>", function()
+			-- 	vim.lsp.completion.get()
+			-- end, { expr = true, buffer = args.buf })
 		end
 	end,
 })
 
-vim.lsp.enable({ "lua_ls", "vtsls", "cssls", "html", "jsonls", "tailwindcss", "eslint", "ansiblels" })
+vim.lsp.enable({
+	"lua_ls",
+	"vtsls",
+	"cssls",
+	"html",
+	"jsonls",
+	"tailwindcss",
+	"eslint",
+	"ansiblels",
+	"gopls",
+	"golangci_lint_ls",
+})
