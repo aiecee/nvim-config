@@ -1,4 +1,3 @@
----@diagnostic disable: missing-fields
 return function()
 	local install = require("nvim-treesitter.install")
 	local config = require("nvim-treesitter.configs")
@@ -18,6 +17,7 @@ return function()
 			"vue",
 			"yaml",
 			"astro",
+			"python",
 		},
 		highlight = {
 			enable = true,
@@ -39,4 +39,12 @@ return function()
 		},
 	})
 	install.update({ with_sync = true })
+
+	vim.filetype.add({
+		extension = {
+			mdc = "mdc",
+		},
+	})
+
+	vim.treesitter.language.register("markdown", "mdc")
 end

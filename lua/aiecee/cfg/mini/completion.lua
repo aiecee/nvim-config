@@ -59,4 +59,11 @@ return function()
 	end
 
 	vim.keymap.set("i", "<CR>", cr_action, { expr = true })
+
+	vim.api.nvim_create_autocmd("FileType", {
+		pattern = "snacks_picker_input",
+		callback = function()
+			vim.b.minicompletion_disable = true
+		end,
+	})
 end

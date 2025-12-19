@@ -1,6 +1,19 @@
+function _G.pretty_fold_text()
+	local s = vim.v.foldstart
+	local e = vim.v.foldend
+
+	local indent = string.rep(" ", vim.fn.indent(vim.v.foldstart))
+	local first = vim.fn.getline(s):gsub("^%s*", "")
+	local last = vim.fn.getline(e):gsub("^%s*", "")
+	local count = e - s + 1
+	local text = string.format("%s … %s (%d lines)", first, last, count)
+
+	return indent .. text
+end
+
 return {
 	shell = "zsh",
-	completeopt = { "fuzzy", "menu", "menuone", "noselect" },
+	completeopt = { "menu", "menuone", "noselect", "noinsert" },
 	number = true,
 	relativenumber = true,
 	scrolloff = 10,
@@ -18,11 +31,17 @@ return {
 	timeoutlen = 250,
 	autoread = true,
 	termguicolors = true,
-	guifont = "0xProto Nerd Font Mono:h13",
+	guifont = "EnvyCodeR Nerd Font Mono:h14",
 	foldmethod = "expr",
 	foldexpr = "v:lua.vim.treesitter.foldexpr()",
-	foldtext = "",
-	fillchars = "fold:·,foldopen:▾,foldclose:▸",
+	foldtext = "v:lua.pretty_fold_text()",
+	fillchars = {
+		fold = "-",
+		foldopen = "",
+		foldclose = "",
+		foldsep = "│",
+	},
+	foldcolumn = "auto",
 	foldlevelstart = 99,
 	fileformat = "unix",
 	laststatus = 3,

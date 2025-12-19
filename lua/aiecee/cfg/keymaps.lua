@@ -13,7 +13,11 @@ local global_mappings = {
 		{
 			"<Leader>sw",
 			function()
-				require("snacks.picker").grep({ hidden = true, ignored = true, exclude = { "\\.node_modules" } })
+				require("snacks.picker").grep({
+					hidden = true,
+					ignored = true,
+					exclude = { "**/node_modules/*", "**/dist/*" },
+				})
 			end,
 			"current working dir",
 		},

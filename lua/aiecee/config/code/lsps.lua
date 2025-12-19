@@ -2,13 +2,36 @@ vim.keymap.del("n", "gra")
 vim.keymap.del("n", "gri")
 vim.keymap.del("n", "grn")
 vim.keymap.del("n", "grr")
+vim.keymap.del("n", "grt")
 
-local lsp_augroup = vim.api.nvim_create_augroup("AieCeeLsp", {})
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "qf",
+	callback = function()
+		local remove_qf_item = function()
+			local current_line = vim.fn.line(".")
+			local qf = vim.fn.getqflist()
+			table.remove(qf, current_line)
+			vim.fn.setqflist(qf, "r")
+			-- this refreshes the qf list window
+			vim.cmd("copen")
+
+			-- restore cursor
+			local new_length = #qf
+			if new_length == 0 then
+				return
+			end
+
+			local new_line_idx = math.min(current_line, new_length)
+			vim.api.nvim_win_set_cursor(0, { new_line_idx, 0 })
+		end
+
+		vim.keymap.set("n", "dd", remove_qf_item, { buffer = true })
+	end,
+})
+
 vim.api.nvim_create_autocmd("LspAttach", {
-	group = lsp_augroup,
 	callback = function(args)
 		local snacks_picker = require("snacks.picker")
-		local conform = require("conform")
 
 		vim.keymap.set("n", "gl", function()
 			require("snacks.words").jump(1, true)
@@ -26,9 +49,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<Leader>cb", snacks_picker.lsp_definitions, { buffer = args.buf, desc = "definitions" })
 		vim.keymap.set("n", "<Leader>cR", vim.lsp.buf.rename, { buffer = args.buf, desc = "rename" })
 		vim.keymap.set("n", "<Leader>ch", vim.lsp.buf.hover, { buffer = args.buf, desc = "hover" })
-		vim.keymap.set("n", "<Leader>cf", function()
-			conform.format({ bufnr = args.buf })
-		end, { buffer = args.buf, desc = "format" })
 
 		vim.keymap.set(
 			"n",
@@ -71,9 +91,9 @@ vim.api.nvim_create_autocmd("LspAttach", {
 				return vim.fn.pumvisible() == 1 and "<C-e>" or "<Esc>"
 			end, { expr = true, buffer = args.buf })
 
-			-- vim.keymap.set("i", "<C-Space>", function()
-			-- 	vim.lsp.completion.get()
-			-- end, { expr = true, buffer = args.buf })
+			vim.keymap.set("i", "<C-Space>", function()
+				vim.lsp.completion.get()
+			end, { expr = true, buffer = args.buf })
 		end
 	end,
 })
@@ -89,4 +109,7 @@ vim.lsp.enable({
 	"ansiblels",
 	"gopls",
 	"golangci_lint_ls",
+	"ruff",
+	"ty",
+	"biome",
 })
