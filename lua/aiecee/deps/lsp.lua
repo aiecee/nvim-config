@@ -21,26 +21,4 @@ return {
 			require("aiecee.config.code.diagnostics")
 		end,
 	},
-	{
-		"stevearc/conform.nvim",
-		opts = {
-			formatters_by_ft = {
-				lua = { "stylua" },
-				typescript = { "prettier" },
-				typescriptreact = { "prettier" },
-				javascript = { "prettier" },
-				javascriptreact = { "prettier" },
-				astro = { "prettier" },
-				yaml = { "prettier" },
-				json = { "prettier" },
-				toml = { "prettier" },
-				zig = { "zigfmt" },
-				go = { "gofmt", "goimports", "golangci-lint" },
-			},
-			format_on_save = {
-				lsp_format = "fallback",
-				timeout_ms = 1000,
-			},
-		},
-	},
 }
