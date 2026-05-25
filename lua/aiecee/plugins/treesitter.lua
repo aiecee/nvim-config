@@ -4,7 +4,6 @@ return {
 		branch = "main",
 		build = ":TSUpdate",
 		dependencies = {
-			"nvim-treesitter/nvim-treesitter-context",
 			"windwp/nvim-ts-autotag",
 		},
 		opts = {

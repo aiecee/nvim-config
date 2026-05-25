@@ -40,50 +40,6 @@ local global_mappings = {
 		{ "<Leader>ws", "<cmd>wincmd w<cr>", "split" },
 		{ "<Leader>wv", "<cmd>wincmd v<cr>", "split vertically" },
 		{ "<Leader>wx", "<cmd>wincmd x<cr>", "swap" },
-		-- marks
-		{
-			"<Leader>ma",
-			function()
-				require("harpoon"):list():add()
-			end,
-			"add",
-		},
-		{
-			"<Leader>mn",
-			function()
-				require("harpoon"):list():next()
-			end,
-			"next",
-		},
-		{
-			"<Leader>mp",
-			function()
-				require("harpoon"):list():prev()
-			end,
-			"previous",
-		},
-		{
-			"<Leader>ml",
-			function()
-				local harpoon = require("harpoon")
-				local file_paths = {}
-				for _, item in ipairs(harpoon:list().items) do
-					table.insert(file_paths, item.value)
-				end
-
-				vim.ui.select(file_paths, {}, function(_, idx)
-					harpoon:list():select(idx)
-				end)
-			end,
-			"list",
-		},
-		{
-			"<Leader>mc",
-			function()
-				require("harpoon"):list():clear()
-			end,
-			"clear",
-		},
 		-- sessions
 		{
 			"<Leader>Ss",
