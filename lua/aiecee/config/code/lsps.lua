@@ -98,10 +98,31 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+vim.lsp.config("lua_ls", {
+	cmd = {
+		"lua-language-server",
+		"--logpath=" .. vim.fn.stdpath("cache") .. "/lua-language-server/log",
+		"--metapath=" .. vim.fn.stdpath("cache") .. "/lua-language-server/meta",
+	},
+	settings = {
+		Lua = {
+			runtime = {
+				version = "LuaJIT",
+			},
+			diagnostics = {
+				globals = { "vim" },
+			},
+			workspace = {
+				checkThirdParty = false,
+			},
+		},
+	},
+})
+
 vim.lsp.enable({
 	"lua_ls",
 	-- "vtsls",
-  "tsgo",
+	"tsgo",
 	"cssls",
 	"html",
 	"jsonls",
