@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+function M.setup()
 	local clue = require("mini.clue")
 
 	clue.setup({
@@ -36,5 +38,8 @@ return function()
 		},
 	})
 
-	require("aiecee.cfg.keymaps")
+	require("aiecee.core.keymaps").setup()
+
 end
+
+return M

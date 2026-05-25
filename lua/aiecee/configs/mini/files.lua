@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+function M.setup()
 	local files = require("mini.files")
 
 	files.setup({
@@ -40,3 +42,5 @@ return function()
 		end,
 	})
 end
+
+return M

@@ -1,5 +1,6 @@
+local M = {}
+
 local keymap = require("aiecee.utils.keymaps")
-local sessions = require("ace.sessions")
 
 local global_mappings = {
 	n = {
@@ -87,6 +88,7 @@ local global_mappings = {
 		{
 			"<Leader>Ss",
 			function()
+				local sessions = require("ace.sessions")
 				sessions:save()
 			end,
 			"save",
@@ -94,6 +96,7 @@ local global_mappings = {
 		{
 			"<Leader>SS",
 			function()
+				local sessions = require("ace.sessions")
 				vim.ui.input({ prompt = "Session file: ", default = "session.vim" }, function(input)
 					sessions:save(input)
 				end)
@@ -103,6 +106,7 @@ local global_mappings = {
 		{
 			"<Leader>Sl",
 			function()
+				local sessions = require("ace.sessions")
 				vim.ui.select(sessions:list(), {}, function(item, _)
 					sessions:load(item)
 				end)
@@ -112,6 +116,7 @@ local global_mappings = {
 		{
 			"<Leader>SL",
 			function()
+				local sessions = require("ace.sessions")
 				sessions:load()
 			end,
 			"load default",
@@ -126,4 +131,8 @@ local global_mappings = {
 	},
 }
 
-keymap.map_table(global_mappings)
+function M.setup()
+	keymap.map_table(global_mappings)
+end
+
+return M

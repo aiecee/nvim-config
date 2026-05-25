@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+function M.setup()
 	local statusline = require("mini.statusline")
 
 	statusline.setup({
@@ -10,3 +12,5 @@ return function()
 		set_vim_settings = false,
 	})
 end
+
+return M

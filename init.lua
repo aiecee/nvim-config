@@ -1,4 +1,1 @@
-local setup = require("aiecee.setup")
-
-require("aiecee.opts")
-setup()
+require("aiecee").setup()

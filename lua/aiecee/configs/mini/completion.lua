@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+function M.setup()
 	local completion = require("mini.completion")
 
 	completion.setup({
@@ -67,3 +69,5 @@ return function()
 		end,
 	})
 end
+
+return M

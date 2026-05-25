@@ -1,3 +1,5 @@
+local M = {}
+
 local init_lazy = function()
 	-- Bootstrap lazy.nvim
 	local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -18,11 +20,13 @@ local init_lazy = function()
 	vim.opt.rtp:prepend(lazypath)
 end
 
-return function()
+function M.setup()
 	init_lazy()
 
 	require("lazy").setup({
-		import = "aiecee.deps",
+		spec = {
+			{ import = "aiecee.plugins" },
+		},
 		defaults = {
 			lazy = true,
 		},
@@ -34,3 +38,5 @@ return function()
 		},
 	})
 end
+
+return M

@@ -9,8 +9,9 @@ return {
 	},
 	{
 		"onsails/lspkind.nvim",
-		config = function()
-			require("lspkind").init({})
+		opts = {},
+		config = function(_, opts)
+			require("lspkind").init(opts)
 		end,
 	},
 	{
@@ -18,8 +19,8 @@ return {
 		lazy = false,
 		dependencies = { "folke/snacks.nvim", "onsails/lspkind.nvim", "folke/lazydev.nvim", "stevearc/conform.nvim" },
 		config = function()
-			require("aiecee.config.code.lsps")
-			require("aiecee.config.code.diagnostics")
+			require("aiecee.configs.lsp").setup()
+			require("aiecee.configs.lsp.diagnostics").setup()
 		end,
 	},
 }

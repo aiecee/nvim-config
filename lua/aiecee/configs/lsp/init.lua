@@ -1,3 +1,6 @@
+local M = {}
+
+function M.setup()
 vim.keymap.del("n", "gra")
 vim.keymap.del("n", "gri")
 vim.keymap.del("n", "grn")
@@ -135,3 +138,6 @@ vim.lsp.enable({
 	"ty",
 	"biome",
 })
+end
+
+return M

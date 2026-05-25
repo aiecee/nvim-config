@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+function M.setup()
 	local move = require("mini.move")
 
 	move.setup({
@@ -14,3 +16,5 @@ return function()
 		},
 	})
 end
+
+return M

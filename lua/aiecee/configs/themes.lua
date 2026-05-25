@@ -1,4 +1,6 @@
-return {
+local M = {}
+
+local palettes = {
 	rose_pine_moon = {
 		base00 = "#232136",
 		base01 = "#2a273f",
@@ -126,3 +128,11 @@ return {
 		base0F = "#8b8da9",
 	},
 }
+
+function M.setup()
+	-- Theme palettes are static data; setup is intentionally a no-op.
+end
+
+M.palettes = palettes
+
+return M

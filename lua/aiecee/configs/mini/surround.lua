@@ -1,4 +1,6 @@
-return function()
+local M = {}
+
+function M.setup()
 	local surround = require("mini.surround")
 
 	surround.setup({
@@ -14,3 +16,5 @@ return function()
 		},
 	})
 end
+
+return M

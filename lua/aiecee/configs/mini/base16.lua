@@ -1,11 +1,15 @@
-return function()
+local M = {}
+
+function M.setup()
 	local base16 = require("mini.base16")
-	local themes = require("aiecee.cfg.themes")
+	local themes = require("aiecee.configs.themes")
 
 	base16.setup({
-		palette = themes.jabuti,
+		palette = themes.palettes.jabuti,
 		use_cterm = true,
 	})
 
 	vim.cmd([[highlight link FloatBorder FloatTitle]])
 end
+
+return M

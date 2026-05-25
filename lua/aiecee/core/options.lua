@@ -1,3 +1,5 @@
+local M = {}
+
 function _G.pretty_fold_text()
 	local s = vim.v.foldstart
 	local e = vim.v.foldend
@@ -11,7 +13,7 @@ function _G.pretty_fold_text()
 	return indent .. text
 end
 
-return {
+local options = {
 	shell = "zsh",
 	completeopt = { "menu", "menuone", "noselect", "noinsert" },
 	number = true,
@@ -51,3 +53,11 @@ return {
 	winborder = "rounded",
 	pumheight = 10,
 }
+
+function M.setup()
+	for key, value in pairs(options) do
+		vim.opt[key] = value
+	end
+end
+
+return M
