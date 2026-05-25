@@ -71,7 +71,7 @@ return {
 				typescriptreact = { "oxfmt", "oxlint", "biome-check", "prettier" },
 				javascript = { "oxfmt", "oxlint", "biome-check", "prettier" },
 				javascriptreact = { "oxfmt", "oxlint", "biome-check", "prettier" },
-        css = {"oxfmt", "oxlint" },
+				css = { "oxfmt", "oxlint" },
 				json = { "oxfmt", "oxlint", "biome-check", "prettier" },
 				astro = { "biome-check", "prettier" },
 				yaml = { "oxfmt", "oxlint", "biome-check", "prettier" },

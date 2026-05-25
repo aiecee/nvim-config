@@ -39,7 +39,6 @@ function M.setup()
 	})
 
 	require("aiecee.core.keymaps").setup()
-
 end
 
 return M
