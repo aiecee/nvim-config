@@ -1,6 +1,30 @@
 local M = {}
 
 function M.setup()
+	local fold_refresh_group = vim.api.nvim_create_augroup("aiecee_fold_refresh", { clear = true })
+	local pending_fold_refresh = {}
+
+	local schedule_fold_refresh = function(bufnr)
+		if not vim.api.nvim_buf_is_valid(bufnr) then
+			return
+		end
+		if pending_fold_refresh[bufnr] then
+			return
+		end
+
+		pending_fold_refresh[bufnr] = true
+		vim.schedule(function()
+			pending_fold_refresh[bufnr] = nil
+			if not vim.api.nvim_buf_is_valid(bufnr) then
+				return
+			end
+			if vim.api.nvim_get_current_buf() ~= bufnr then
+				return
+			end
+			pcall(vim.cmd.normal, { args = { "zx" }, bang = true })
+		end)
+	end
+
 	vim.keymap.del("n", "gra")
 	vim.keymap.del("n", "gri")
 	vim.keymap.del("n", "grn")
@@ -34,6 +58,8 @@ function M.setup()
 
 	vim.api.nvim_create_autocmd("LspAttach", {
 		callback = function(args)
+			schedule_fold_refresh(args.buf)
+
 			local snacks_picker = require("snacks.picker")
 
 			vim.keymap.set("n", "gl", function()
@@ -110,6 +136,13 @@ function M.setup()
 					vim.lsp.completion.get()
 				end, { expr = true, buffer = args.buf })
 			end
+		end,
+	})
+
+	vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI", "InsertLeave", "BufEnter", "LspDetach" }, {
+		group = fold_refresh_group,
+		callback = function(args)
+			schedule_fold_refresh(args.buf)
 		end,
 	})
 

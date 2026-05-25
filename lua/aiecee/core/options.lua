@@ -13,6 +13,26 @@ function _G.pretty_fold_text()
 	return indent .. text
 end
 
+function _G.smart_foldexpr()
+	local clients = vim.lsp.get_clients({ bufnr = 0 })
+	for _, client in ipairs(clients) do
+		if client:supports_method("textDocument/foldingRange") then
+			local ok, result = pcall(vim.lsp.foldexpr)
+			if ok and result then
+				return result
+			end
+			break
+		end
+	end
+
+	local ok, result = pcall(vim.treesitter.foldexpr)
+	if ok and result then
+		return result
+	end
+
+	return "0"
+end
+
 local options = {
 	shell = "zsh",
 	completeopt = { "menu", "menuone", "noselect", "noinsert" },
@@ -35,13 +55,14 @@ local options = {
 	termguicolors = true,
 	guifont = "EnvyCodeR Nerd Font Mono:h14",
 	foldmethod = "expr",
-	foldexpr = "v:lua.vim.treesitter.foldexpr()",
+	foldexpr = "v:lua.smart_foldexpr()",
 	foldtext = "v:lua.pretty_fold_text()",
 	fillchars = {
-		fold = "-",
+		fold = " ",
 		foldopen = "",
 		foldclose = "",
-		foldsep = "│",
+		foldsep = " ",
+		eob = " ",
 	},
 	foldcolumn = "auto",
 	foldlevelstart = 99,
