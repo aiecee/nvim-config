@@ -62,7 +62,7 @@ function M.setup()
 				"n",
 				"<Leader>cd",
 				snacks_picker.diagnostics_buffer,
-				{ buffer = args.buffer, desc = "buffer diagnostics" }
+				{ buffer = args.buf, desc = "buffer diagnostics" }
 			)
 			vim.keymap.set(
 				"n",
@@ -74,7 +74,7 @@ function M.setup()
 				"n",
 				"<Leader>cD",
 				snacks_picker.diagnostics,
-				{ buffer = args.buffer, desc = "project diagnostics" }
+				{ buffer = args.buf, desc = "project diagnostics" }
 			)
 			vim.keymap.set(
 				"n",

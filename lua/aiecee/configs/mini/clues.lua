@@ -19,7 +19,6 @@ function M.setup()
 			{ mode = "n", keys = "<Leader>f", desc = "+Files" },
 			{ mode = "n", keys = "<Leader>g", desc = "+Git" },
 			{ mode = "n", keys = "<Leader>m", desc = "+Marks" },
-			{ mode = "n", keys = "<Leader>m", desc = "+Marks" },
 			{ mode = "n", keys = "<Leader>r", desc = "+Refactor" },
 			{ mode = "x", keys = "<Leader>r", desc = "+Refactor" },
 			{ mode = "n", keys = "<Leader>s", desc = "+Search" },
