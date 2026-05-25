@@ -1,41 +1,69 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
+		build = ":TSUpdate",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter-context",
-      "windwp/nvim-ts-autotag"
+			"windwp/nvim-ts-autotag",
 		},
-    opts = {
-      parsers = {
-        "lua",
-        "typescript",
-        "javascript",
-        "tsx",
-        "markdown",
-        "json",
-        "css",
-        "scss",
-        "html",
-        "liquid",
-        "vue",
-        "yaml",
-        "astro",
-        "python",
-      }
-    },
-		config = function(opts)
-      local ts = require("nvim-treesitter")
-      ts.setup()
-      ts.install(opts.parsers)
-    end,
+		opts = {
+			parsers = {
+				"bash",
+				"css",
+				"go",
+				"html",
+				"javascript",
+				"json",
+				"lua",
+				"markdown",
+				"markdown_inline",
+				"rust",
+				"tsx",
+				"typescript",
+				"vim",
+				"vimdoc",
+			},
+		},
+		config = function(_, opts)
+			local ts = require("nvim-treesitter")
+			ts.setup({})
+			ts.install(opts.parsers)
+
+			-- Main branch API: explicitly start treesitter highlighting on target filetypes.
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = {
+					"sh",
+					"bash",
+					"css",
+					"go",
+					"html",
+					"javascript",
+					"javascriptreact",
+					"json",
+					"lua",
+					"markdown",
+					"rust",
+					"typescript",
+					"typescriptreact",
+					"vim",
+					"help",
+				},
+				callback = function(args)
+					pcall(vim.treesitter.start, args.buf)
+				end,
+			})
+		end,
 	},
-  {
-	  "windwp/nvim-ts-autotag",
-    opts = {
-      enable_close = true,
-      enable_rename = true,
-      enable_close_on_slash = false
-    },
-    config = true
-  }
+	{
+		"windwp/nvim-ts-autotag",
+		opts = {
+			opts = {
+				enable_close = true,
+				enable_rename = true,
+				enable_close_on_slash = false,
+			},
+		},
+		config = true,
+	},
 }
