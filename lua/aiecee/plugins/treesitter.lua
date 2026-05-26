@@ -3,6 +3,13 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		branch = "main",
 		build = ":TSUpdate",
+		cmd = {
+			"TSInstall",
+			"TSInstallFromGrammar",
+			"TSUpdate",
+			"TSUninstall",
+			"TSLog",
+		},
 		dependencies = {
 			"windwp/nvim-ts-autotag",
 		},

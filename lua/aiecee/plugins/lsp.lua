@@ -17,6 +17,13 @@ return {
 	{
 		"neovim/nvim-lspconfig",
 		lazy = false,
+		cmd = {
+			"LspInfo",
+			"LspLog",
+			"LspStart",
+			"LspRestart",
+			"LspStop",
+		},
 		dependencies = { "folke/snacks.nvim", "onsails/lspkind.nvim", "folke/lazydev.nvim", "stevearc/conform.nvim" },
 		config = function()
 			require("aiecee.configs.lsp").setup()
