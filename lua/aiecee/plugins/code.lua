@@ -10,11 +10,20 @@ return {
 		config = true,
 	},
 	{
-		"lewis6991/gitsigns.nvim",
-		opts = {
-			current_line_blame = true,
+		"sindrets/diffview.nvim",
+		cmd = {
+			"DiffviewOpen",
+			"DiffviewFileHistory",
+			"DiffviewClose",
+			"DiffviewRefresh",
+			"DiffviewToggleFiles",
+			"DiffviewFocusFiles",
+			"DiffviewLog",
 		},
-		config = true,
+		opts = {},
+		config = function(_, opts)
+			require("aiecee.configs.diffview").setup(opts)
+		end,
 	},
 	{
 		"stevearc/conform.nvim",
