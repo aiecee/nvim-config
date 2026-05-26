@@ -4,14 +4,14 @@ local keymap = require("aiecee.utils.keymaps")
 
 local do_current_hunk = function(action)
 	local line = vim.fn.line(".")
-	MiniDiff.do_hunks(0, action, { line_start = line, line_end = line })
+	require("mini.diff").do_hunks(0, action, { line_start = line, line_end = line })
 end
 
 local do_visual_hunks = function(action)
 	local line_start = vim.fn.line("'<")
 	local line_end = vim.fn.line("'>")
 
-	MiniDiff.do_hunks(0, action, {
+	require("mini.diff").do_hunks(0, action, {
 		line_start = math.min(line_start, line_end),
 		line_end = math.max(line_start, line_end),
 	})
@@ -53,7 +53,7 @@ local global_mappings = {
 		{ "<Leader>gdr", "<cmd>DiffviewRefresh<cr>", "refresh diff" },
 		{ "<Leader>gdt", "<cmd>DiffviewToggleFiles<cr>", "toggle diff files" },
 		{ "<Leader>gho", function()
-			MiniDiff.toggle_overlay(0)
+			require("mini.diff").toggle_overlay(0)
 		end, "toggle hunk overlay" },
 		{ "<Leader>ghs", function()
 			do_current_hunk("apply")
