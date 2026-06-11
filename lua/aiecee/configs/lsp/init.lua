@@ -21,6 +21,9 @@ function M.setup()
 			if vim.api.nvim_get_current_buf() ~= bufnr then
 				return
 			end
+			if vim.api.nvim_get_mode().mode:match("^[iRsS]") then
+				return
+			end
 			pcall(vim.cmd.normal, { args = { "zx" }, bang = true })
 		end)
 	end
