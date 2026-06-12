@@ -185,6 +185,7 @@ function M.setup()
 		"ruff",
 		"ty",
 		"biome",
+    "rust_analyzer",
 	})
 end
 
