@@ -17,6 +17,7 @@ return {
 			parsers = {
 				"bash",
 				"css",
+				"gdscript",
 				"go",
 				"html",
 				"javascript",
@@ -42,6 +43,7 @@ return {
 					"sh",
 					"bash",
 					"css",
+					"gdscript",
 					"go",
 					"html",
 					"javascript",

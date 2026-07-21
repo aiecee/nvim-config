@@ -185,7 +185,10 @@ function M.setup()
 		"ruff",
 		"ty",
 		"biome",
-    "rust_analyzer",
+		"oxfmt",
+		"oxlint",
+		"gdscript",
+		"rust_analyzer",
 	})
 end
 
