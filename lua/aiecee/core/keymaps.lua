@@ -52,15 +52,27 @@ local global_mappings = {
 		{ "<Leader>gdc", "<cmd>DiffviewClose<cr>", "close diff" },
 		{ "<Leader>gdr", "<cmd>DiffviewRefresh<cr>", "refresh diff" },
 		{ "<Leader>gdt", "<cmd>DiffviewToggleFiles<cr>", "toggle diff files" },
-		{ "<Leader>gho", function()
-			require("mini.diff").toggle_overlay(0)
-		end, "toggle hunk overlay" },
-		{ "<Leader>ghs", function()
-			do_current_hunk("apply")
-		end, "stage hunk" },
-		{ "<Leader>ghr", function()
-			do_current_hunk("reset")
-		end, "reset hunk" },
+		{
+			"<Leader>gho",
+			function()
+				require("mini.diff").toggle_overlay(0)
+			end,
+			"toggle hunk overlay",
+		},
+		{
+			"<Leader>ghs",
+			function()
+				do_current_hunk("apply")
+			end,
+			"stage hunk",
+		},
+		{
+			"<Leader>ghr",
+			function()
+				do_current_hunk("reset")
+			end,
+			"reset hunk",
+		},
 		{ "<Leader>gl", require("snacks.git").blame_line, "line blame" },
 		-- windows
 		{ "<Leader>w=", "<cmd>wincmd =<cr>", "format" },
@@ -117,12 +129,20 @@ local global_mappings = {
 		},
 	},
 	x = {
-		{ "<Leader>ghS", function()
-			do_visual_hunks("apply")
-		end, "stage hunks" },
-		{ "<Leader>ghR", function()
-			do_visual_hunks("reset")
-		end, "reset hunks" },
+		{
+			"<Leader>ghS",
+			function()
+				do_visual_hunks("apply")
+			end,
+			"stage hunks",
+		},
+		{
+			"<Leader>ghR",
+			function()
+				do_visual_hunks("reset")
+			end,
+			"reset hunks",
+		},
 	},
 }
 
