@@ -16,6 +16,7 @@ return {
 		opts = {
 			parsers = {
 				"bash",
+        "c_sharp",
 				"css",
 				"gdscript",
 				"go",

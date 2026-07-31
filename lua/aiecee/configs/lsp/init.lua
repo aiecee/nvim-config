@@ -189,6 +189,7 @@ function M.setup()
 		"oxlint",
 		"gdscript",
 		"rust_analyzer",
+    "roslyn_ls",
 	})
 end
 

@@ -51,6 +51,7 @@ return {
 				toml = { "oxfmt", "biome-check", "prettier", stop_after_first = true },
 				zig = { "zigfmt" },
 				go = { "gofmt", "goimports", "golangci-lint" },
+        cs = { "csharpier" },
 			},
 			format_on_save = {
 				lsp_format = "fallback",
