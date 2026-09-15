@@ -188,6 +188,7 @@ function M.setup()
 		"oxfmt",
 		"oxlint",
 		"gdscript",
+		"ols",
 		"rust_analyzer",
     "roslyn_ls",
 	})
